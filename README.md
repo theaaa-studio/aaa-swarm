@@ -12,10 +12,20 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 
 > **Recorded live on [theaaa.pro.bd](https://theaaa.pro.bd)**
 
-![AAA Swarm Guided Tour Preview](assets/swarm-demo.gif)
+https://github.com/user-attachments/assets/swarm-demo.mp4
 
-* **Animated GIF**: [`assets/swarm-demo.gif`](assets/swarm-demo.gif) (auto-playing preview for GitHub).
-* **Lightweight H.264 MP4**: [`assets/swarm-demo.mp4`](assets/swarm-demo.mp4) (2.5 MB, 720p 25fps — ready for instant social media sharing on X / Twitter, LinkedIn, Instagram, Discord, and YouTube).
+<div align="center">
+  <video src="assets/swarm-demo.mp4" poster="assets/swarm-preview.png" controls autoplay loop muted playsinline width="100%"></video>
+  <p>
+    <a href="assets/swarm-demo.mp4">▶ Play Video (H.264 MP4, 1.5 MB)</a> • 
+    <a href="assets/swarm-demo.webm">🌐 WebM Format (2.8 MB)</a> • 
+    <a href="https://theaaa.pro.bd" target="_blank" rel="noopener">🚀 Live Interactive Demo on theaaa.pro.bd</a>
+  </p>
+</div>
+
+* **Web-Optimized MP4**: [`assets/swarm-demo.mp4`](assets/swarm-demo.mp4) (only **1.55 MB**, 720p 25fps — featherlight, crisp, universally compatible with GitHub, mobile browsers, and social media).
+* **Native WebM**: [`assets/swarm-demo.webm`](assets/swarm-demo.webm) (2.8 MB, high-fidelity VP8 for web engines).
+* **Cover Poster**: [`assets/swarm-preview.png`](assets/swarm-preview.png) (197 KB snapshot of flocking cursors & blueprint grid).
 
 ---
 
@@ -44,12 +54,13 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 ```text
 aaa-swarm/
 ├── assets/
-│   ├── swarm-demo.mp4 # Lightweight 720p H.264 video (2.5 MB, social media ready)
-│   ├── swarm-demo.gif # Animated visual preview for README
-│   ├── swarm.css      # Core styles, blueprint grid, agent badges, toolbars
-│   └── swarm.js       # Vanilla JS engine (flocking, scheduler, tour, API)
-├── SKILL.md           # Antigravity agent skill definition & rules
-└── README.md          # Project guide and documentation
+│   ├── swarm-demo.mp4    # Featherlight 720p H.264 video (1.5 MB, web & social ready)
+│   ├── swarm-demo.webm   # Native WebM video stream (2.8 MB)
+│   ├── swarm-preview.png # Video poster & cover snapshot (197 KB)
+│   ├── swarm.css         # Core styles, blueprint grid, agent badges, toolbars
+│   └── swarm.js          # Vanilla JS engine (flocking, scheduler, tour, API)
+├── SKILL.md              # Antigravity agent skill definition & rules
+└── README.md             # Project guide and documentation
 ```
 
 ---
