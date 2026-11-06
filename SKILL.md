@@ -16,19 +16,25 @@ description: Implements or ports the multiplayer cursors 'Swarm Rebuild' guided 
 ---
 
 ## Bundled Assets & Reference Files
-Ready-to-use drop-in implementations are stored alongside this skill:
-- **CSS Stylesheet**: [`assets/swarm.css`](file:///C:/Users/AAA/.gemini/config/skills/aaa-swarm/assets/swarm.css)
-- **Engine Script**: [`assets/swarm.js`](file:///C:/Users/AAA/.gemini/config/skills/aaa-swarm/assets/swarm.js)
+Ready-to-use drop-in implementations are stored alongside this skill in `assets/`:
+- **CSS Stylesheet**: `assets/swarm.css`
+- **Engine Script**: `assets/swarm.js`
 
 ---
 
 ## Integration Guide
 
 ### Step 1: Copy Assets into Project
-Copy the CSS and JS files into the target project's public or asset directories:
+Copy the CSS and JS files from this skill's `assets/` folder into the target project's public or asset directories:
 ```powershell
-Copy-Item "C:\Users\AAA\.gemini\config\skills\aaa-swarm\assets\swarm.css" "path/to/project/assets/css/swarm.css"
-Copy-Item "C:\Users\AAA\.gemini\config\skills\aaa-swarm\assets\swarm.js" "path/to/project/assets/js/swarm.js"
+# Windows PowerShell
+Copy-Item "assets/swarm.css" "path/to/project/css/swarm.css"
+Copy-Item "assets/swarm.js" "path/to/project/js/swarm.js"
+```
+```bash
+# Bash / Linux / macOS
+cp assets/swarm.css path/to/project/css/swarm.css
+cp assets/swarm.js path/to/project/js/swarm.js
 ```
 
 ### Step 2: Link in HTML

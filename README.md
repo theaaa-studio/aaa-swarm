@@ -46,9 +46,44 @@ aaa-swarm/
 │   ├── swarm-preview.png # Visual preview screenshot (197 KB)
 │   ├── swarm.css         # Core styles, blueprint grid, agent badges, toolbars (6.5 KB)
 │   └── swarm.js          # Vanilla JS engine (flocking, scheduler, tour, API) (26 KB)
-├── SKILL.md              # Antigravity agent skill definition & rules
+├── SKILL.md              # Open Agent Skills standard specification (Claude Code, Codex, Antigravity)
+├── AGENTS.md             # Multi-agent guideline specification (OpenCode, Codex, Aider)
 └── README.md             # Project guide and documentation
 ```
+
+---
+
+## 🤖 Universal AI Agent Compatibility
+
+`aaa-swarm` is built on the open **Agent Skills specification** (`SKILL.md` format), making it natively cross-compatible with all major AI coding agents:
+
+| AI Coding Assistant | Configuration Location | How to Invoke |
+|---|---|---|
+| **Claude Code** (Anthropic) | `~/.claude/skills/aaa-swarm` or `.claude/skills/` | Type `/aaa-swarm` or ask Claude to "add swarm guided tour" |
+| **Codex** (OpenAI) | `~/.codex/skills/aaa-swarm` or `.codex/skills/` | Prompt Codex to "implement swarm guided rebuild tour" |
+| **OpenCode & OpenHands** | `~/.agents/skills/aaa-swarm` or reads `AGENTS.md` | Auto-detected via skill loader or `AGENTS.md` |
+| **Google Antigravity / Gemini** | `~/.gemini/config/skills/aaa-swarm` | Type `/aaa-swarm` |
+| **Cursor & Windsurf** | Referenced in `.cursorrules` or `.windsurfrules` | Prompt Composer/Cascade: "implement aaa-swarm tour" |
+
+### ⚡ 1-Liner Installation Across Any Agent
+
+Install globally for your favorite agent:
+
+```bash
+# Claude Code (Anthropic)
+git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.claude/skills/aaa-swarm
+
+# OpenAI Codex
+git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.codex/skills/aaa-swarm
+
+# Google Antigravity / Gemini
+git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.gemini/config/skills/aaa-swarm
+
+# OpenCode / OpenHands / Generic Agents
+git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.agents/skills/aaa-swarm
+```
+
+For project-level skills, drop `aaa-swarm/` into your project's `.claude/skills/`, `.codex/skills/`, or `.agents/skills/` folder. Any AI agent reading your repository will immediately know how to inspect, adapt, and build the tour!
 
 ---
 
