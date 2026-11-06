@@ -8,6 +8,17 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 
 ---
 
+## 🎬 Live Showcase
+
+> **Recorded live on [theaaa.pro.bd](https://theaaa.pro.bd)**
+
+![AAA Swarm Guided Tour Preview](assets/swarm-demo.gif)
+
+* **Animated GIF**: [`assets/swarm-demo.gif`](assets/swarm-demo.gif) (auto-playing preview for GitHub).
+* **Lightweight H.264 MP4**: [`assets/swarm-demo.mp4`](assets/swarm-demo.mp4) (2.5 MB, 720p 25fps — ready for instant social media sharing on X / Twitter, LinkedIn, Instagram, Discord, and YouTube).
+
+---
+
 ## ✨ Features
 
 - **🤖 Autonomous Multi-Agent Flocking**: Smooth physics-driven cursor motion with velocity damping, jitter reduction, and collision separation.
@@ -33,6 +44,8 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 ```text
 aaa-swarm/
 ├── assets/
+│   ├── swarm-demo.mp4 # Lightweight 720p H.264 video (2.5 MB, social media ready)
+│   ├── swarm-demo.gif # Animated visual preview for README
 │   ├── swarm.css      # Core styles, blueprint grid, agent badges, toolbars
 │   └── swarm.js       # Vanilla JS engine (flocking, scheduler, tour, API)
 ├── SKILL.md           # Antigravity agent skill definition & rules
