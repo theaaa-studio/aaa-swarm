@@ -12,20 +12,16 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 
 > **Recorded live on [theaaa.pro.bd](https://theaaa.pro.bd)**
 
-https://github.com/user-attachments/assets/swarm-demo.mp4
-
 <div align="center">
   <video src="assets/swarm-demo.mp4" poster="assets/swarm-preview.png" controls autoplay loop muted playsinline width="100%"></video>
   <p>
-    <a href="assets/swarm-demo.mp4">▶ Play Video (H.264 MP4, 1.5 MB)</a> • 
-    <a href="assets/swarm-demo.webm">🌐 WebM Format (2.8 MB)</a> • 
+    <a href="assets/swarm-demo.mp4">▶ Play Video (H.264 MP4, 1.55 MB)</a> • 
     <a href="https://theaaa.pro.bd" target="_blank" rel="noopener">🚀 Live Interactive Demo on theaaa.pro.bd</a>
   </p>
 </div>
 
-* **Web-Optimized MP4**: [`assets/swarm-demo.mp4`](assets/swarm-demo.mp4) (only **1.55 MB**, 720p 25fps — featherlight, crisp, universally compatible with GitHub, mobile browsers, and social media).
-* **Native WebM**: [`assets/swarm-demo.webm`](assets/swarm-demo.webm) (2.8 MB, high-fidelity VP8 for web engines).
-* **Cover Poster**: [`assets/swarm-preview.png`](assets/swarm-preview.png) (197 KB snapshot of flocking cursors & blueprint grid).
+* **Featherlight H.264 MP4**: [`assets/swarm-demo.mp4`](assets/swarm-demo.mp4) (only **1.55 MB**, 720p 25fps — crisp, universal playback across GitHub, web, mobile, and social media).
+* **Cover Snapshot**: [`assets/swarm-preview.png`](assets/swarm-preview.png) (197 KB poster thumbnail).
 
 ---
 
@@ -54,8 +50,7 @@ https://github.com/user-attachments/assets/swarm-demo.mp4
 ```text
 aaa-swarm/
 ├── assets/
-│   ├── swarm-demo.mp4    # Featherlight 720p H.264 video (1.5 MB, web & social ready)
-│   ├── swarm-demo.webm   # Native WebM video stream (2.8 MB)
+│   ├── swarm-demo.mp4    # Featherlight 720p H.264 video (1.55 MB, web & social ready)
 │   ├── swarm-preview.png # Video poster & cover snapshot (197 KB)
 │   ├── swarm.css         # Core styles, blueprint grid, agent badges, toolbars
 │   └── swarm.js          # Vanilla JS engine (flocking, scheduler, tour, API)
