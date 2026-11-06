@@ -12,16 +12,10 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 
 > **Recorded live on [theaaa.pro.bd](https://theaaa.pro.bd)**
 
-<div align="center">
-  <video src="assets/swarm-demo.mp4" poster="assets/swarm-preview.png" controls autoplay loop muted playsinline width="100%"></video>
-  <p>
-    <a href="assets/swarm-demo.mp4">▶ Play Video (H.264 MP4, 1.55 MB)</a> • 
-    <a href="https://theaaa.pro.bd" target="_blank" rel="noopener">🚀 Live Interactive Demo on theaaa.pro.bd</a>
-  </p>
-</div>
+![AAA Swarm Guided Tour Preview](assets/swarm-preview.png)
 
-* **Featherlight H.264 MP4**: [`assets/swarm-demo.mp4`](assets/swarm-demo.mp4) (only **1.55 MB**, 720p 25fps — crisp, universal playback across GitHub, web, mobile, and social media).
-* **Cover Snapshot**: [`assets/swarm-preview.png`](assets/swarm-preview.png) (197 KB poster thumbnail).
+* **Interactive Demo**: Experience it live at [theaaa.pro.bd](https://theaaa.pro.bd).
+* **Download Video**: [`assets/swarm-demo.mp4`](assets/swarm-demo.mp4) (1.55 MB, 720p H.264 video for social media sharing).
 
 ---
 
