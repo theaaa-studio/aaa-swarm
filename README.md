@@ -14,8 +14,7 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 
 ![AAA Swarm Guided Tour Preview](assets/swarm-preview.png)
 
-* **Interactive Demo**: Experience it live at [theaaa.pro.bd](https://theaaa.pro.bd).
-* **Download Video**: [`assets/swarm-demo.mp4`](assets/swarm-demo.mp4) (1.55 MB, 720p H.264 video for social media sharing).
+* **Interactive Live Demo**: Experience the full rebuild tour live at **[theaaa.pro.bd](https://theaaa.pro.bd)**.
 
 ---
 
@@ -44,10 +43,9 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 ```text
 aaa-swarm/
 ├── assets/
-│   ├── swarm-demo.mp4    # Featherlight 720p H.264 video (1.55 MB, web & social ready)
-│   ├── swarm-preview.png # Video poster & cover snapshot (197 KB)
-│   ├── swarm.css         # Core styles, blueprint grid, agent badges, toolbars
-│   └── swarm.js          # Vanilla JS engine (flocking, scheduler, tour, API)
+│   ├── swarm-preview.png # Visual preview screenshot (197 KB)
+│   ├── swarm.css         # Core styles, blueprint grid, agent badges, toolbars (6.5 KB)
+│   └── swarm.js          # Vanilla JS engine (flocking, scheduler, tour, API) (26 KB)
 ├── SKILL.md              # Antigravity agent skill definition & rules
 └── README.md             # Project guide and documentation
 ```
