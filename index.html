@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AAA Swarm — Autonomous Guided Tour (11 Industry Themes)</title>
+  <meta name="description" content="Experience autonomous multiplayer agent swarms assembling modern websites live in 11 industry themes with zero external dependencies.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <meta property="og:title" content="AAA Swarm — Guided Website Tour & Physics Reconstruction">
+  <meta property="og:description" content="Multiplayer cursor & physics builder effects across 11 authentic industry themes. Works with Vanilla HTML, React, Vue, Svelte, and Astro.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AAA Swarm — Guided Tour & Physics Reconstruction">
+  <meta name="twitter:description" content="Multiplayer cursor & physics builder effects across 11 authentic industry themes.">
+
+  <!-- Core Swarm Stylesheet -->
+  <link rel="stylesheet" href="assets/swarm.css">
+
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f9fafb;
+      --text-muted: #94a3b8;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Fixed Top Header */
+    .showcase-nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .showcase-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .showcase-brand span {
+      background: linear-gradient(135deg, var(--primary) 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .showcase-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid var(--card-border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Floating Bottom Dock (Theme Switcher) */
+    .theme-strip-wrap {
+      position: fixed;
+      bottom: 16px;
+      top: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10025;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 5px 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      max-width: min(96vw, 1080px);
+      transition: all 0.25s ease;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .theme-strip-wrap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .theme-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      height: 38px;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .theme-chip:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .theme-chip.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .chip-icon {
+      font-size: 16px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Icon-based by default: label expands on hover or active */
+    .chip-label {
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-left: 0;
+      transition: max-width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.2s ease,
+                  margin-left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      font-size: 12px;
+    }
+
+    .theme-chip:hover .chip-label,
+    .theme-chip.active .chip-label {
+      max-width: 150px;
+      opacity: 1;
+      margin-left: 6px;
+      pointer-events: auto;
+    }
+
+    /* Live Hero Mechanics Pill */
+    .hero-mechanics-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      max-width: 900px;
+      margin: 6px auto 0;
+      overflow: visible;
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .mech-badge-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--text);
+      font-size: 11.5px;
+      font-weight: 700;
+      margin-right: 2px;
+    }
+
+    .mech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .mech-badge strong {
+      color: var(--primary);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Main Sections */
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 20px 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+    }
+
+    section {
+      position: relative;
+    }
+
+    /* Hero */
+    #hero {
+      text-align: center;
+      padding: 40px 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 4.2vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      max-width: 820px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--primary) 0%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 650px;
+    }
+
+    .product-visual {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 820px;
+      height: 280px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .product-visual svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Section Headings */
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    /* Bento Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Metrics Strip */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .metric-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--primary);
+      font-family: var(--mono);
+      line-height: 1.1;
+    }
+
+    .metric-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* Media Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .media-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .media-art {
+      height: 160px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .media-art svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .media-body {
+      padding: 16px;
+    }
+
+    .media-body h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .media-body p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Code Block */
+    .code-box {
+      background: #080c14;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 18px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: #a5b4fc;
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+
+    /* ================================================================== */
+    /* Interactive Configurator Studio                                    */
+    /* ================================================================== */
+    .builder-studio {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .studio-card {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px;
+      transition: border-color 0.2s ease;
+    }
+    .studio-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+    .studio-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .studio-step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .studio-step-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .studio-step-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .mode-pills {
+      margin-left: auto;
+      display: inline-flex;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+    }
+    .mode-pill {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .mode-pill:hover {
+      color: #fff;
+    }
+    .mode-pill.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+    }
+    .studio-theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 10px;
+    }
+    .theme-picker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+    .theme-picker-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+    .theme-picker-item.selected {
+      background: rgba(99, 102, 241, 0.14);
+      border-color: var(--primary);
+    }
+    .theme-picker-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: transparent;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .theme-picker-item.selected .theme-picker-check {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .theme-picker-emoji {
+      font-size: 18px;
+      line-height: 1;
+    }
+    .theme-picker-text {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .theme-picker-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .theme-picker-role {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .studio-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+    .studio-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .studio-opt:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .studio-opt input[type="checkbox"] {
+      display: none;
+    }
+    .opt-custom-box {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+    .studio-opt input[type="checkbox"]:checked + .opt-custom-box {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .studio-opt input[type="checkbox"]:checked + .opt-custom-box::after {
+      content: "✓";
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .opt-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .opt-info strong {
+      font-size: 13px;
+      color: #fff;
+    }
+    .opt-info small {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .studio-opt-select-group {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+    .studio-opt-select-group label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+    .studio-opt-select-group label strong {
+      color: #fff;
+    }
+    .studio-select {
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .studio-tabs-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .studio-tabs {
+      display: inline-flex;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+    .studio-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .studio-tab:hover {
+      color: #fff;
+    }
+    .studio-tab.active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+    }
+    .studio-tab-ai {
+      color: #c084fc;
+    }
+    .studio-tab-ai.active {
+      background: rgba(168, 85, 247, 0.25);
+      color: #f3e8ff;
+    }
+    .studio-actions {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .btn-studio {
+      border: none;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .btn-studio.btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-studio.btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    .btn-studio.btn-copy {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-studio.btn-copy:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .studio-code-box {
+      min-height: 200px;
+      max-height: 420px;
+      overflow-y: auto;
+      white-space: pre;
+      tab-size: 2;
+    }
+    .studio-footer-downloads {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--card-border);
+      font-size: 12.5px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+    .download-link {
+      color: var(--accent, #38bdf8);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 5px 12px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .download-link:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 30px 20px 100px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive Mobile Overhaul (< 768px & < 480px) */
+    @media (max-width: 768px) {
+      .showcase-nav {
+        padding: 8px 14px;
+      }
+      .showcase-brand {
+        font-size: 0.95rem;
+      }
+      .showcase-actions {
+        gap: 6px;
+      }
+      .btn-action {
+        padding: 5px 9px;
+        font-size: 11px;
+      }
+      main {
+        padding: 24px 14px 150px;
+        gap: 64px;
+      }
+      #hero {
+        padding: 20px 0 0;
+        gap: 14px;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+      }
+      .hero-sub {
+        font-size: 0.95rem;
+      }
+      .product-visual {
+        height: 200px;
+        margin-top: 14px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .metrics-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .metric-card {
+        padding: 14px 10px;
+      }
+      .metric-num {
+        font-size: 1.7rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .theme-strip-wrap {
+        bottom: 12px;
+        max-width: calc(100vw - 16px);
+        padding: 4px 6px;
+        gap: 3px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .theme-strip-wrap::-webkit-scrollbar {
+        display: none;
+      }
+      .theme-chip {
+        height: 34px;
+        padding: 0 8px;
+      }
+      .chip-icon {
+        font-size: 15px;
+      }
+      .theme-chip:hover .chip-label,
+      .theme-chip.active .chip-label {
+        max-width: 120px;
+        font-size: 11px;
+      }
+      .hero-mechanics-pill {
+        border-radius: 14px;
+        padding: 8px 10px;
+        gap: 5px 6px;
+      }
+      .mech-badge {
+        font-size: 10.5px;
+        padding: 2px 7px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      .product-visual {
+        height: 170px;
+      }
+      .showcase-brand small {
+        display: none;
+      }
+      .hero-mechanics-pill {
+        border-radius: 12px;
+        padding: 6px 8px;
+        gap: 4px;
+      }
+      .mech-badge-header {
+        font-size: 11px;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 2px;
+      }
+      .mech-badge {
+        font-size: 10px;
+        padding: 2px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed Top Header -->
+  <header class="showcase-nav swarm-no-tour">
+    <div class="showcase-brand" id="brandWrap">
+      <span id="brandName">🐝 AAA Swarm</span>
+      <small id="brandNiche" style="color:var(--text-muted);font-weight:500;">v2.0 // 11 Themes</small>
+    </div>
+
+    <div class="showcase-actions">
+      <button type="button" class="btn-action btn-primary" onclick="window.Swarm && window.Swarm.replay()">
+        🔄 Rebuild Tour
+      </button>
+      <button type="button" class="btn-action" onclick="window.Swarm && window.Swarm.skip()">
+        ⏩ Skip (Esc)
+      </button>
+      <a href="https://github.com/theaaa-studio/aaa-swarm" target="_blank" rel="noreferrer" class="btn-action">
+        ⭐ GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- Floating Bottom Dock (11 Industry Theme Chips) -->
+  <div class="theme-strip-wrap swarm-no-tour" id="themeStrip">
+    <!-- Populated dynamically by JS -->
+  </div>
+
+  <main id="main">
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="hero-badge" id="heroBadge">Autonomous Guided Tour Engine</div>
+      <h1 class="hero-title" id="heroTitle">Watch websites construct <span>in real time.</span></h1>
+      <p class="hero-sub" id="heroSub">Autonomous multi-agent swarms draft layouts, weld borders, pour concrete, weave threads, decipher matrix glyphs, and unbox media across 11 industry themes.</p>
+
+      <!-- Active Theme Mechanics Pill -->
+      <div class="hero-mechanics-pill" id="heroMechanicsPill">
+        <!-- Populated dynamically by JS -->
+      </div>
+
+      <div class="hero-cta" style="margin-top:6px;">
+        <button type="button" class="btn-action btn-primary" onclick="window.Swarm && window.Swarm.replay()" style="padding:9px 20px;font-size:13px;">
+          🚀 Run Rebuild Tour
+        </button>
+      </div>
+
+      <!-- Hero Visual (Tests dropImage) -->
+      <div class="product-visual" id="heroVisual">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- Features Bento Grid -->
+    <section id="features">
+      <div class="section-header">
+        <span class="section-tag" id="featuresTag">Core Architecture</span>
+        <h2 class="section-title" id="featuresTitle">Engineered for Physical Progression</h2>
+        <p class="section-desc" id="featuresDesc">Every component demonstrates real-world physical construction dynamics.</p>
+      </div>
+
+      <div class="features-grid" id="featuresGrid">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metrics">
+      <div class="section-header">
+        <span class="section-tag" id="metricsTag">Telemetry</span>
+        <h2 class="section-title" id="metricsTitle">Operational Benchmarks</h2>
+        <p class="section-desc" id="metricsDesc">Real-time parameters and high-performance physics telemetry.</p>
+      </div>
+
+      <div class="metrics-row" id="metricsRow">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- Visual Showcase Section -->
+    <section id="gallery">
+      <div class="section-header">
+        <span class="section-tag" id="galleryTag">Artifact Gallery</span>
+        <h2 class="section-title" id="galleryTitle">Media Container Unboxing</h2>
+        <p class="section-desc" id="galleryDesc">Physical media unboxing choreography tailored to each industry theme.</p>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section id="integration">
+      <div class="section-header">
+        <span class="section-tag">Interactive Studio & Configurator</span>
+        <h2 class="section-title">Manual Build & Framework Studio</h2>
+        <p class="section-desc">Customize themes (single locked or multi-dock), configure runtime options, choose your framework, test live, or copy production-ready code.</p>
+      </div>
+
+      <div class="builder-studio swarm-no-tour" id="builderStudio">
+        <!-- Step 1: Themes -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <span class="studio-step-badge">1</span>
+            <div>
+              <h3 class="studio-step-title">Choose Theme(s)</h3>
+              <p class="studio-step-sub">Select 1 theme to lock to your brand, or pick multiple themes for the floating bottom dock.</p>
+            </div>
+            <div class="mode-pills" id="modePills">
+              <button type="button" class="mode-pill active" data-mode="single">Single Theme (Locked)</button>
+              <button type="button" class="mode-pill" data-mode="multi">Multi-Theme Dock</button>
+              <button type="button" class="mode-pill" data-mode="all">All 11 Themes</button>
+            </div>
+          </div>
+          <div class="studio-theme-grid" id="studioThemeGrid">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Step 2: Options -->
+        <div class="studio-card">
+          <div class="studio-card-header">
+            <span class="studio-step-badge">2</span>
+            <div>
+              <h3 class="studio-step-title">Configure Options</h3>
+              <p class="studio-step-sub">Fine-tune UI visibility, rebuild speed, agent count, and visitor session caching.</p>
+            </div>
+          </div>
+          <div class="studio-options-grid">
+            <label class="studio-opt">
+              <input type="checkbox" id="optDock" checked>
+              <span class="opt-custom-box"></span>
+              <span class="opt-info">
+                <strong>Floating Theme Dock (showDock)</strong>
+                <small>Auto-mounts bottom icon dock when multiple themes are selected</small>
+              </span>
+            </label>
+            <label class="studio-opt">
+              <input type="checkbox" id="optToolbar" checked>
+              <span class="opt-custom-box"></span>
+              <span class="opt-info">
+                <strong>Status Toolbar (showToolbar)</strong>
+                <small>Floating speed, skip, replay, and status pill</small>
+              </span>
+            </label>
+            <label class="studio-opt">
+              <input type="checkbox" id="optOnce">
+              <span class="opt-custom-box"></span>
+              <span class="opt-info">
+                <strong>Once Per Session (oncePerSession)</strong>
+                <small>Stores completion in sessionStorage so returning visitors aren't interrupted</small>
+              </span>
+            </label>
+            <div class="studio-opt-select-group">
+              <label for="optSpeed">
+                <strong>Tour Speed</strong>
+                <select id="optSpeed" class="studio-select">
+                  <option value="1" selected>1× (Standard Physics)</option>
+                  <option value="2">2× (Brisk Animation)</option>
+                  <option value="3">3× (Turbo Build)</option>
+                </select>
+              </label>
+              <label for="optAgents">
+                <strong>Agent Workers</strong>
+                <select id="optAgents" class="studio-select">
+                  <option value="auto" selected>Auto (8 desktop / 4 mobile)</option>
+                  <option value="4">4 Workers</option>
+                  <option value="8">8 Workers</option>
+                  <option value="12">12 Workers (Maximum)</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Framework Tabs & Code -->
+        <div class="studio-card">
+          <div class="studio-tabs-bar">
+            <div class="studio-tabs" id="frameworkTabs">
+              <button type="button" class="studio-tab active" data-fw="html">HTML / CDN</button>
+              <button type="button" class="studio-tab" data-fw="react">React / Next.js</button>
+              <button type="button" class="studio-tab" data-fw="vue">Vue 3 / Nuxt</button>
+              <button type="button" class="studio-tab" data-fw="svelte">Svelte / SvelteKit</button>
+              <button type="button" class="studio-tab" data-fw="astro">Astro</button>
+              <button type="button" class="studio-tab studio-tab-ai" data-fw="ai">🤖 AI Agent Prompt</button>
+            </div>
+            <div class="studio-actions">
+              <button type="button" class="btn-studio btn-primary" id="btnTestLive">
+                ▶️ Test Live
+              </button>
+              <button type="button" class="btn-studio btn-copy" id="btnCopyCode">
+                📋 Copy Code
+              </button>
+            </div>
+          </div>
+
+          <pre class="code-box studio-code-box" id="studioCodeBox"></pre>
+
+          <div class="studio-footer-downloads">
+            <span>Direct Asset Downloads:</span>
+            <a href="assets/swarm.js" download="swarm.js" class="download-link">⬇️ swarm.js (UMD / SSR Safe)</a>
+            <a href="assets/swarm.css" download="swarm.css" class="download-link">⬇️ swarm.css (Complete Theme Pack)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="swarm-no-tour">
+    <p>AAA Swarm — Open source under MIT License. Inspired by Dhvanil Patel.</p>
+  </footer>
+
+  <!-- Swarm Engine Script -->
+  <script defer src="assets/swarm.js"></script>
+
+  <script>
+    /* ================================================================== */
+    /* 11 Deeply Personalized Industry Website Themes                      */
+    /* ================================================================== */
+
+    const THEME_SITES = {
+      default: {
+        brand: "<span>🖱️ AAA Studio</span>",
+        niche: "SaaS & Digital Design Systems",
+        palette: {
+          "--bg": "#090d16",
+          "--card-bg": "#111827",
+          "--card-border": "rgba(99, 102, 241, 0.2)",
+          "--primary": "#6366f1",
+          "--primary-hover": "#4f46e5",
+          "--text": "#f9fafb",
+          "--text-muted": "#94a3b8"
+        },
+        heroBadge: "Design Systems & Multiplayer Presence",
+        heroTitle: "Collaborative Interfaces <span>Built in Real Time.</span>",
+        heroSub: "Autonomous agent flocking, vector bounding frames, and millisecond cursor synchronization for modern software teams.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#0f172a"/>
+          <circle cx="400" cy="140" r="90" stroke="#6366f1" stroke-width="2" stroke-dasharray="8 6"/>
+          <circle cx="400" cy="140" r="54" fill="#6366f1" opacity="0.3"/>
+          <path d="M240 140h320M400 30v220" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+          <text x="400" y="146" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="15" font-weight="800" letter-spacing="2">SWARM MULTIPLAYER ENGINE</text>
+        </svg>`,
+        features: [
+          { icon: "🖱️", title: "Flocking Multiplayer Presence", desc: "Collaborative agent cursors with velocity damping and collision avoidance." },
+          { icon: "📐", title: "Precision Vector Pens", desc: "Live SVG bounding rectangles with corner crosshairs and pixel badges." },
+          { icon: "⌨️", title: "Streaming Typography", desc: "Characters stream in character-by-character with pulsing terminal carets." }
+        ],
+        metrics: [
+          { num: "60 FPS", label: "Velocity Damping" },
+          { num: "12", label: "Presence Cursors" },
+          { num: "< 35KB", label: "Zero-Dependency Footprint" },
+          { num: "100%", label: "Pure Vanilla JS & CSS" }
+        ],
+        gallery: [
+          {
+            title: "Vector Analytics Engine",
+            desc: "High-contrast metrics curves drawn with clean SVG strokes.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#1e293b"/><path d="M40 120 L110 50 L170 100 L230 35 L260 70" stroke="#6366f1" stroke-width="4" stroke-linecap="round"/><circle cx="230" cy="35" r="5" fill="#6366f1"/></svg>`
+          },
+          {
+            title: "Design Token Matrix",
+            desc: "Dynamic color tokens and typography scales aligned across components.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#1e293b"/><rect x="60" y="30" width="180" height="100" rx="8" stroke="#818cf8" stroke-width="2" stroke-dasharray="6 4"/><text x="150" y="85" fill="#818cf8" font-family="monospace" font-size="12" font-weight="700" text-anchor="middle">DESIGN TOKENS</text></svg>`
+          },
+          {
+            title: "Spatial Canvas View",
+            desc: "Responsive canvas layers keeping DOM geometry 100% stable during rebuilds.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#1e293b"/><polygon points="150,25 240,135 60,135" stroke="#c084fc" stroke-width="3" fill="rgba(192,132,252,0.15)"/></svg>`
+          }
+        ]
+      },
+
+      construction: {
+        brand: "<span>🏗️ APEX Structural</span>",
+        niche: "Heavy Civil, Crane & Steel Engineering",
+        palette: {
+          "--bg": "#0c111c",
+          "--card-bg": "#151d2a",
+          "--card-border": "rgba(245, 158, 11, 0.25)",
+          "--primary": "#f59e0b",
+          "--primary-hover": "#d97706",
+          "--text": "#fef3c7",
+          "--text-muted": "#94a3b8"
+        },
+        heroBadge: "Heavy Civil & Structural Bureau",
+        heroTitle: "Erecting Megastructures <span>Steel & Concrete.</span>",
+        heroSub: "Rising scaffolding vertical poles, hydraulic wet concrete pours, and automated arc-welded steel trusses with tower crane cargo deliveries.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#0b111c"/>
+          <path d="M100 240 L350 40 L600 240 Z" stroke="#f59e0b" stroke-width="4" stroke-dasharray="10 6"/>
+          <line x1="350" y1="40" x2="350" y2="240" stroke="#f59e0b" stroke-width="3"/>
+          <line x1="200" y1="160" x2="500" y2="160" stroke="#f59e0b" stroke-width="2.5"/>
+          <text x="350" y="210" text-anchor="middle" fill="#f59e0b" font-family="monospace" font-size="14" font-weight="900" letter-spacing="3">APEX HEAVY CRANE FAB</text>
+        </svg>`,
+        features: [
+          { icon: "🏗️", title: "Rising Scaffolding Poles", desc: "Poles shoot upward from base to header with cross-ledger reinforcement struts." },
+          { icon: "🔥", title: "Blowtorch Arc Welding", desc: "Perimeters seal under white-hot welder torches showering molten orange sparks." },
+          { icon: "📦", title: "Crane Cargo Crate Drops", desc: "Tower crane cables lower wooden shipping crates that shatter open with shudder." }
+        ],
+        metrics: [
+          { num: "420t", label: "Tower Crane Lift Capacity" },
+          { num: "100%", label: "Ultrasonic Weld Integrity" },
+          { num: "24.5m", label: "Truss Clear-Span" },
+          { num: "0.0mm", label: "Laser Level Deviation" }
+        ],
+        gallery: [
+          {
+            title: "High-Load Truss Assembly",
+            desc: "Industrial steel I-beam girders reinforced with diagonal web ties.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#151d2a"/><path d="M30 130 L150 30 L270 130" stroke="#f59e0b" stroke-width="4"/><line x1="30" y1="130" x2="270" y2="130" stroke="#f59e0b" stroke-width="3"/></svg>`
+          },
+          {
+            title: "Hydraulic Foundation Pour",
+            desc: "Heavy aggregate slurry poured into reinforced footing trenches.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#151d2a"/><rect x="50" y="60" width="200" height="60" fill="#78350f" stroke="#f59e0b" stroke-width="2"/><text x="150" y="96" fill="#fef3c7" font-family="monospace" font-size="12" text-anchor="middle">CONCRETE FOOTING</text></svg>`
+          },
+          {
+            title: "Cargo Crate Deployment",
+            desc: "Timber pallet crate unboxed on site with hydraulic pry bars.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#151d2a"/><rect x="80" y="40" width="140" height="80" stroke="#d97706" stroke-width="3" fill="#451a03"/><text x="150" y="86" fill="#fbbf24" font-family="monospace" font-size="12" text-anchor="middle">📦 CARGO CRATE</text></svg>`
+          }
+        ]
+      },
+
+      beehive: {
+        brand: "<span>🍯 Apis BioLabs</span>",
+        niche: "Organic Honey, Apiary & Biotech Ecology",
+        palette: {
+          "--bg": "#150f06",
+          "--card-bg": "#22180a",
+          "--card-border": "rgba(217, 119, 6, 0.3)",
+          "--primary": "#d97706",
+          "--primary-hover": "#b45309",
+          "--text": "#fef3c7",
+          "--text-muted": "#d97706"
+        },
+        heroBadge: "Biological Apiary Architecture",
+        heroTitle: "Hexagonal Honeycombs <span>Nectar & Wax.</span>",
+        heroSub: "Worker bees fly in figure-8 harmonic loops, secreting golden wax cells and sealing perimeter borders with pure propolis.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#150f06"/>
+          <polygon points="400,60 480,105 480,195 400,240 320,195 320,105" stroke="#d97706" stroke-width="4" fill="rgba(217,119,6,0.18)"/>
+          <circle cx="400" cy="150" r="30" fill="#f59e0b" opacity="0.6"/>
+          <text x="400" y="156" text-anchor="middle" fill="#fff" font-family="system-ui" font-size="14" font-weight="900">APIS WAX MATRIX</text>
+        </svg>`,
+        features: [
+          { icon: "🐝", title: "Figure-8 Wax Bloom", desc: "Worker bees fly looping figure-8 paths while central wax hex lattices expand." },
+          { icon: "🍯", title: "Propolis Honey Borders", desc: "Perimeters seal with thick amber propolis drops that elongate downward." },
+          { icon: "🌼", title: "Waggle Dance Typography", desc: "Scout bees oscillate along baselines, depositing glowing pollen letterforms." }
+        ],
+        metrics: [
+          { num: "84,000", label: "Active Forager Bees" },
+          { num: "100%", label: "Raw Organic Honey" },
+          { num: "600g", label: "Wax Comb Density" },
+          { num: "38°C", label: "Hive Core Stability" }
+        ],
+        gallery: [
+          {
+            title: "Microscopic Hex Lattice",
+            desc: "Mathematical 120-degree cell geometry optimizing storage volume.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#22180a"/><circle cx="150" cy="80" r="50" stroke="#d97706" stroke-width="3" stroke-dasharray="8 4"/></svg>`
+          },
+          {
+            title: "Amber Honey Reservoir",
+            desc: "Liquid amber honey crystallizing into high-energy card matrices.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#22180a"/><rect x="60" y="40" width="180" height="80" rx="10" fill="#b45309" stroke="#f59e0b" stroke-width="2"/></svg>`
+          },
+          {
+            title: "Wax Seal Uncapping",
+            desc: "Golden comb caps unsealed with pollen bursts to unveil media.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#22180a"/><circle cx="150" cy="80" r="40" fill="#d97706"/><text x="150" y="85" text-anchor="middle" fill="#fff" font-size="11" font-weight="800">WAX SEAL</text></svg>`
+          }
+        ]
+      },
+
+      "ant-colony": {
+        brand: "<span>🐜 Myrmex Logistics</span>",
+        niche: "Distributed DevOps, Microservices & Haulage",
+        palette: {
+          "--bg": "#08120b",
+          "--card-bg": "#102115",
+          "--card-border": "rgba(34, 197, 94, 0.25)",
+          "--primary": "#15803d",
+          "--primary-hover": "#166534",
+          "--text": "#dcfce7",
+          "--text-muted": "#86efac"
+        },
+        heroBadge: "Decentralized Swarm Routing",
+        heroTitle: "Subterranean Supply Lines <span>Pheromone Mesh.</span>",
+        heroSub: "Forager ants excavate tunnels, lock mandibles to build living structural bridges, and haul heavy bio-containers in unison.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#08120b"/>
+          <path d="M100 140 Q 250 80, 400 140 T 700 140" stroke="#22c55e" stroke-width="4" stroke-dasharray="8 6"/>
+          <circle cx="400" cy="140" r="45" fill="#15803d"/>
+          <text x="400" y="145" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13" font-weight="800">PHEROMONE BUS</text>
+        </svg>`,
+        features: [
+          { icon: "🐜", title: "Pheromone Trench Trails", desc: "Card frames are hauled smoothly from subterranean depths along glowing trails." },
+          { icon: "🌿", title: "Mandible Bridge Walls", desc: "Head-to-tail marching ant chains lock mandibles into structural borders." },
+          { icon: "🏗️", title: "8-Ant Heavy Cargo Lift", desc: "Teams of ants haul heavy bio-slabs in synchronized formation." }
+        ],
+        metrics: [
+          { num: "1.25M", label: "Forager Worker Nodes" },
+          { num: "0.4ms", label: "Pheromone Route Latency" },
+          { num: "50×", label: "Bodyweight Lifting Ratio" },
+          { num: "99.99%", label: "Trail Redundancy" }
+        ],
+        gallery: [
+          {
+            title: "Subterranean Tunnel Mesh",
+            desc: "Soil excavated and packed into stabilized transport corridors.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#102115"/><path d="M30 80 Q150 20 270 80" stroke="#22c55e" stroke-width="4"/></svg>`
+          },
+          {
+            title: "Mandible Lock Perimeter",
+            desc: "Living structural boundaries formed by interconnected workers.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#102115"/><rect x="50" y="40" width="200" height="80" stroke="#15803d" stroke-width="3" stroke-dasharray="6 6"/></svg>`
+          },
+          {
+            title: "Heavy Bio-Slab Dispatch",
+            desc: "Reinforced organic cargo containers delivered and unlatched.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#102115"/><rect x="70" y="45" width="160" height="70" fill="#14532d" stroke="#22c55e" stroke-width="2"/></svg>`
+          }
+        ]
+      },
+
+      "cyber-nanobots": {
+        brand: "<span>⚡ Nexus-9 AI</span>",
+        niche: "Cybersecurity, Cloud Infrastructure & Neural Fab",
+        palette: {
+          "--bg": "#030811",
+          "--card-bg": "#091322",
+          "--card-border": "rgba(6, 182, 212, 0.28)",
+          "--primary": "#06b6d4",
+          "--primary-hover": "#0891b2",
+          "--text": "#cffafe",
+          "--text-muted": "#67e8f9"
+        },
+        heroBadge: "Autonomous Nanoscale Fabrication",
+        heroTitle: "Photolithography Drones <span>Matrix Decrypt.</span>",
+        heroSub: "Dual micro-drones project vertical laser scanbars, route high-frequency PCB copper traces, and unscramble matrix hex hashes.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#030811"/>
+          <line x1="0" y1="140" x2="800" y2="140" stroke="#06b6d4" stroke-width="3"/>
+          <circle cx="400" cy="140" r="70" stroke="#22d3ee" stroke-width="2"/>
+          <text x="400" y="145" text-anchor="middle" fill="#22d3ee" font-family="monospace" font-size="14" font-weight="900" letter-spacing="4">[0x8F4A :: NEURAL FAB]</text>
+        </svg>`,
+        features: [
+          { icon: "🛸", title: "Dual Laser Scanbars", desc: "Micro-drones sweep neon cyan scanbars downward, projecting wireframes." },
+          { icon: "💡", title: "PCB Solder Node Routing", desc: "High-speed copper traces route with illuminated solder pads at corners." },
+          { icon: "🔐", title: "Matrix Hex Decryption", desc: "Random hex glyphs rapidly resolve into cleartext characters." }
+        ],
+        metrics: [
+          { num: "1,024", label: "Qubit Cores" },
+          { num: "0.02ms", label: "PCB Routing Latency" },
+          { num: "128 Gbps", label: "Neural Interconnect" },
+          { num: "0x8F4A", label: "Real-Time Hash State" }
+        ],
+        gallery: [
+          {
+            title: "High-Density Copper Traces",
+            desc: "Micro-routing traces with illuminated 45-degree corner solder pads.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#091322"/><path d="M40 120 L120 40 L260 40" stroke="#06b6d4" stroke-width="3"/></svg>`
+          },
+          {
+            title: "Laser 3D Sinter Print",
+            desc: "Horizontal sintering beam sweeping left-to-right to materialize imagery.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#091322"/><rect x="50" y="40" width="200" height="80" stroke="#22d3ee" stroke-width="2" fill="rgba(6,182,212,0.1)"/></svg>`
+          },
+          {
+            title: "Encrypted Quantum Pipeline",
+            desc: "Matrix glitch materialization from 0% to 100% opacity.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#091322"/><text x="150" y="85" text-anchor="middle" fill="#06b6d4" font-family="monospace" font-size="14">0x4F89#$!%</text></svg>`
+          }
+        ]
+      },
+
+      atelier: {
+        brand: "<span>✂️ Maison Lumière</span>",
+        niche: "Haute Couture, Luxury Craft & Tailoring",
+        palette: {
+          "--bg": "#140b10",
+          "--card-bg": "#21121b",
+          "--card-border": "rgba(225, 29, 72, 0.28)",
+          "--primary": "#e11d48",
+          "--primary-hover": "#be123c",
+          "--text": "#ffe4e6",
+          "--text-muted": "#f43f5e"
+        },
+        heroBadge: "Haute Couture & Bespoke Drapery",
+        heroTitle: "Hand-Stitched Silks <span>Bespoke Tailoring.</span>",
+        heroSub: "Cylindrical fabric bolts unroll across tailor cutting mats, while silver needles bob along borders leaving dashed silk threads.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#140b10"/>
+          <path d="M100 200 C 250 60, 550 220, 700 80" stroke="#e11d48" stroke-width="4" stroke-dasharray="10 5"/>
+          <circle cx="400" cy="140" r="40" fill="#9f1239"/>
+          <text x="400" y="145" text-anchor="middle" fill="#ffe4e6" font-family="Georgia" font-size="14" font-style="italic">Haute Couture Atelier</text>
+        </svg>`,
+        features: [
+          { icon: "✂️", title: "Fabric Bolt Unrolls", desc: "Cylindrical textile rolls unroll across the cutting mat with tailor tape ticks." },
+          { icon: "🪡", title: "Needle Running Stitches", desc: "Sewing needles bob vertically leaving colored silk dashed thread trails." },
+          { icon: "📌", title: "Polaroid Brass Pushpins", desc: "Media moodboard photos drop and pin to canvas with metallic spring bounce." }
+        ],
+        metrics: [
+          { num: "120cm", label: "Silk Bolt Weave Width" },
+          { num: "100%", label: "Raw Cashmere & Silk" },
+          { num: "48", label: "Master Fitting Hours" },
+          { num: "0.2mm", label: "Stitch Pitch Accuracy" }
+        ],
+        gallery: [
+          {
+            title: "Draped Tweed Fabric Swatch",
+            desc: "Textile cascades unfurling smoothly over structural wireframes.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#21121b"/><path d="M40 40 Q 150 120 260 40" stroke="#e11d48" stroke-width="4"/></svg>`
+          },
+          {
+            title: "Silk Running Stitch Border",
+            desc: "Dashed embroidery line tracing perimeters with vertical needle bobs.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#21121b"/><rect x="50" y="35" width="200" height="90" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="8 5"/></svg>`
+          },
+          {
+            title: "Polaroid Moodboard Pinning",
+            desc: "Pinned photo prints stabilized with brass pushpin impacts.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#21121b"/><rect x="80" y="40" width="140" height="80" fill="#fffdf5" stroke="#e2e8f0" stroke-width="2"/></svg>`
+          }
+        ]
+      },
+
+      warehouse: {
+        brand: "<span>📦 KivaFlow Logistics</span>",
+        niche: "E-Commerce Fulfillment, AGV Robots & Pallets",
+        palette: {
+          "--bg": "#130f0a",
+          "--card-bg": "#211912",
+          "--card-border": "rgba(234, 88, 12, 0.28)",
+          "--primary": "#ea580c",
+          "--primary-hover": "#c2410c",
+          "--text": "#ffedd5",
+          "--text-muted": "#fb923c"
+        },
+        heroBadge: "Autonomous AGV Distribution",
+        heroTitle: "High-Throughput Cross-Dock <span>Pallet Logistics.</span>",
+        heroSub: "Top-down AGV forklifts deploy, kraft tape dispensers seal cardboard flaps, and red laser barcode scanners verify shipments.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#130f0a"/>
+          <rect x="250" y="80" width="300" height="120" stroke="#ea580c" stroke-width="3" fill="#78350f" opacity="0.4"/>
+          <line x1="250" y1="140" x2="550" y2="140" stroke="#ea580c" stroke-width="2.5"/>
+          <text x="400" y="145" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="14" font-weight="900">KRAFT DISPATCH #4812</text>
+        </svg>`,
+        features: [
+          { icon: "📦", title: "Kraft Tape Carton Sealing", desc: "Tape dispensers roll brown reinforced tape horizontally along box seams." },
+          { icon: "🏷️", title: "Barcode Scanner Laser QA", desc: "Red horizontal laser beams sweep borders and slam FRAGILE stamps." },
+          { icon: "🚜", title: "Forklift Pallet Delivery", desc: "Mini forklifts drive wooden pallets into position and unstrap cargo." }
+        ],
+        metrics: [
+          { num: "48,000", label: "Daily Dispatches" },
+          { num: "99.98%", label: "Sorting Accuracy" },
+          { num: "45s", label: "Pallet Turnaround" },
+          { num: "ISO-9001", label: "Certified Warehouse" }
+        ],
+        gallery: [
+          {
+            title: "Sealed Shipping Carton",
+            desc: "Cardboard carton body sealed with horizontal kraft packaging tape.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#211912"/><rect x="50" y="35" width="200" height="90" stroke="#ea580c" stroke-width="2.5"/><line x1="50" y1="80" x2="250" y2="80" stroke="#d97706" stroke-width="8"/></svg>`
+          },
+          {
+            title: "Barcode Scanner Inspection",
+            desc: "Red laser scanner verification stamped with QA pass codes.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#211912"/><line x1="40" y1="80" x2="260" y2="80" stroke="#ef4444" stroke-width="3"/></svg>`
+          },
+          {
+            title: "Heavy Palletized Freight",
+            desc: "Shrink-wrapped cargo pallets lowered and unstrapped on floor.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#211912"/><rect x="70" y="45" width="160" height="70" fill="#854d0e" stroke="#ca8a04" stroke-width="2"/></svg>`
+          }
+        ]
+      },
+
+      "voxel-craft": {
+        brand: "<span>⛏️ BlockForge Engine</span>",
+        niche: "8-Bit Voxel Worlds, Indie Games & EdTech",
+        palette: {
+          "--bg": "#09120b",
+          "--card-bg": "#122015",
+          "--card-border": "rgba(22, 163, 74, 0.3)",
+          "--primary": "#16a34a",
+          "--primary-hover": "#15803d",
+          "--text": "#dcfce7",
+          "--text-muted": "#86efac"
+        },
+        heroBadge: "Procedural Voxel Engine",
+        heroTitle: "8-Bit Pixel Realities <span>Block by Block.</span>",
+        heroSub: "Pixelated pickaxes swing as 16x16 stone voxel blocks snap into place, Redstone wire pulses, and treasure chests drop from the sky.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#09120b"/>
+          <rect x="340" y="80" width="120" height="120" stroke="#16a34a" stroke-width="4" fill="#14532d"/>
+          <text x="400" y="145" text-anchor="middle" fill="#facc15" font-family="monospace" font-size="14" font-weight="900">16x16 VOXEL</text>
+        </svg>`,
+        features: [
+          { icon: "⛏️", title: "16×16 Voxel Block Snapping", desc: "Retro blocks pop into grid positions with bounce and pixelated sound." },
+          { icon: "🔴", title: "Pulsing Redstone Wire", desc: "Perimeters route with redstone dust that pulses bright red on completion." },
+          { icon: "📦", title: "Treasure Chest Drops", desc: "Pixel chests bounce on impact and lids swing open 90 degrees with golden rays." }
+        ],
+        metrics: [
+          { num: "60 FPS", label: "Voxel Raymarching" },
+          { num: "16×16", label: "Block Chunk Size" },
+          { num: "256", label: "Redstone Ticks/Sec" },
+          { num: "100%", label: "Procedural Generation" }
+        ],
+        gallery: [
+          {
+            title: "Isometric Voxel Dungeon",
+            desc: "Stepped pixel terrain rendered with hard edge lighting.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#122015"/><polygon points="150,30 240,75 150,120 60,75" stroke="#16a34a" stroke-width="3"/></svg>`
+          },
+          {
+            title: "Redstone Logic Circuit",
+            desc: "Pulsing signal lines powering door mechanisms and traps.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#122015"/><rect x="50" y="40" width="200" height="80" stroke="#dc2626" stroke-width="3" stroke-dasharray="4 4"/></svg>`
+          },
+          {
+            title: "Gilded Treasure Chest",
+            desc: "Bouncing treasure chest unsealed to unveil high-tier media.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#122015"/><rect x="80" y="45" width="140" height="70" fill="#854d0e" stroke="#3f2203" stroke-width="3"/></svg>`
+          }
+        ]
+      },
+
+      kitchen: {
+        brand: "<span>🍽️ L'Étoile Dorée</span>",
+        niche: "Artisanal Boulangerie & Grand Bistro",
+        palette: {
+          "--bg": "#140b0b",
+          "--card-bg": "#221313",
+          "--card-border": "rgba(244, 63, 94, 0.28)",
+          "--primary": "#f43f5e",
+          "--primary-hover": "#e11d48",
+          "--text": "#ffe4e6",
+          "--text-muted": "#fb7185"
+        },
+        heroBadge: "Artisanal Culinary Patisserie",
+        heroTitle: "Hand-Laminated Brioche <span>Culinary Art.</span>",
+        heroSub: "Wooden rolling pins flatten buttery dough blobs, pastry bags squeeze fluted cream dollops, and culinary blowtorches caramelize crusts.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#140b0b"/>
+          <ellipse cx="400" cy="140" rx="140" ry="60" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+          <text x="400" y="145" text-anchor="middle" fill="#78350f" font-family="Georgia" font-size="14" font-weight="700">BRIOCHE FLATTENING</text>
+        </svg>`,
+        features: [
+          { icon: "🥐", title: "Rolling Pin Dough Flattening", desc: "Dough blobs squash outward into card rectangles under rolling pins." },
+          { icon: "🧁", title: "Fluted Cream Piping", desc: "Pastry piping bags squeeze decorative cream rosettes along card edges." },
+          { icon: "🍽️", title: "Silver Cloche Dome Lifts", desc: "Elegant silver cloches lift with rising steam puffs to reveal platters." }
+        ],
+        metrics: [
+          { num: "3 Star", label: "Michelin Standard" },
+          { num: "320g", label: "Pure Brioche Dough" },
+          { num: "240°C", label: "Torch Flame Heat" },
+          { num: "18", label: "Tasting Menu Courses" }
+        ],
+        gallery: [
+          {
+            title: "Golden Brioche Crust",
+            desc: "Rich butter dough baked to deep golden flake perfection.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#221313"/><ellipse cx="150" cy="80" rx="90" ry="45" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/></svg>`
+          },
+          {
+            title: "Piped Chantilly Rosettes",
+            desc: "Fluted cream borders piped with pastry bag nozzles.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#221313"/><rect x="50" y="35" width="200" height="90" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/></svg>`
+          },
+          {
+            title: "Silver Cloche Presentation",
+            desc: "Lifted cloche dome releasing aromatic steam over platters.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#221313"/><path d="M70 120 C 70 60, 230 60, 230 120 Z" fill="#94a3b8" stroke="#475569" stroke-width="3"/></svg>`
+          }
+        ]
+      },
+
+      "street-art": {
+        brand: "<span>🎨 KRYLON Syndicate</span>",
+        niche: "Urban Murals, Graffiti Collective & Streetwear",
+        palette: {
+          "--bg": "#100b14",
+          "--card-bg": "#1d1224",
+          "--card-border": "rgba(236, 72, 153, 0.3)",
+          "--primary": "#ec4899",
+          "--primary-hover": "#db2777",
+          "--text": "#fdf2f8",
+          "--text-muted": "#f472b6"
+        },
+        heroBadge: "Urban Murals & Guerilla Art",
+        heroTitle: "Raw Wheatpaste Strokes <span>Fat-Cap Neon.</span>",
+        heroSub: "Heavy paint rollers slap diagonal wheatpaste glue, fat-cap aerosol cans spray dripping neon outlines, and slap-stickers slam onto brick.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#100b14"/>
+          <line x1="100" y1="80" x2="700" y2="200" stroke="#ec4899" stroke-width="8" stroke-linecap="round"/>
+          <line x1="100" y1="200" x2="700" y2="80" stroke="#a855f7" stroke-width="6" stroke-linecap="round"/>
+          <text x="400" y="145" text-anchor="middle" fill="#fff" font-family="system-ui" font-size="16" font-weight="900">WHEATPASTE & AEROSOL</text>
+        </svg>`,
+        features: [
+          { icon: "🎨", title: "Diagonal Wheatpaste Strokes", desc: "Paint rollers slap criss-cross diagonal glue swaths across the wall." },
+          { icon: "🥫", title: "Fat-Cap Aerosol Spray", desc: "Neon paint blasts along perimeter borders with vertical dripping paint runs." },
+          { icon: "🏷️", title: "Squeegeed Slap-Stickers", desc: "Vinyl slap-stickers hit at angles and flatten straight under rubber squeegees." }
+        ],
+        metrics: [
+          { num: "100%", label: "Wet Wheatpaste Glue" },
+          { num: "24", label: "City Murals Completed" },
+          { num: "400ml", label: "Aerosol Can Pressure" },
+          { num: "0", label: "Permits Requested" }
+        ],
+        gallery: [
+          {
+            title: "Wheatpaste Poster Run",
+            desc: "Multi-panel paper prints glued directly over raw brick.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#1d1224"/><rect x="60" y="30" width="180" height="100" fill="rgba(236,72,153,0.2)" stroke="#ec4899" stroke-width="3"/></svg>`
+          },
+          {
+            title: "Neon Aerosol Drips",
+            desc: "Heavy fat-cap pigment runs dripping down the lower card boundary.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#1d1224"/><path d="M50 40 L250 40" stroke="#ec4899" stroke-width="5"/><line x1="90" y1="40" x2="90" y2="90" stroke="#ec4899" stroke-width="4"/><line x1="170" y1="40" x2="170" y2="110" stroke="#ec4899" stroke-width="4"/></svg>`
+          },
+          {
+            title: "Vinyl Slap-Sticker Slam",
+            desc: "High-tack slap-stickers applied at slight angles with firm force.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#1d1224"/><rect x="80" y="45" width="140" height="70" fill="#ec4899" stroke="#ffffff" stroke-width="3" transform="rotate(-4 150 80)"/></svg>`
+          }
+        ]
+      },
+
+      "press-room": {
+        brand: "<span>📰 The Daily Chronicle</span>",
+        niche: "Broadsheet Journalism, Legal & Archival Print",
+        palette: {
+          "--bg": "#0b0f16",
+          "--card-bg": "#141b24",
+          "--card-border": "rgba(100, 116, 139, 0.3)",
+          "--primary": "#38bdf8",
+          "--primary-hover": "#0284c7",
+          "--text": "#f1f5f9",
+          "--text-muted": "#94a3b8"
+        },
+        heroBadge: "Broadsheet Archive & Movable Type",
+        heroTitle: "Movable Iron Chase <span>CMYK Halftone.</span>",
+        heroSub: "Heavy steel chase bars clamp with precision corner crop-marks, weighted brayer rollers ink newsprint, and CMYK halftone plates align.",
+        heroSvg: `<svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#0b0f16"/>
+          <rect x="250" y="60" width="300" height="160" stroke="#64748b" stroke-width="3"/>
+          <text x="242" y="56" fill="#38bdf8" font-family="monospace" font-size="16">┼</text>
+          <text x="546" y="56" fill="#38bdf8" font-family="monospace" font-size="16">┼</text>
+          <text x="242" y="226" fill="#38bdf8" font-family="monospace" font-size="16">┼</text>
+          <text x="546" y="226" fill="#38bdf8" font-family="monospace" font-size="16">┼</text>
+          <text x="400" y="145" text-anchor="middle" fill="#f1f5f9" font-family="Georgia" font-size="14" font-weight="700">CHASE LOCKUP // QUARTO</text>
+        </svg>`,
+        features: [
+          { icon: "📰", title: "Movable-Type Chase Lock ┼", desc: "Four steel bars slide inward and clamp shut with authentic corner crop-marks." },
+          { icon: "✒️", title: "Technical Fountain Ruling", desc: "Drafting pens rule razor-sharp borders with crisp ink crop-marks." },
+          { icon: "🗞️", title: "CMYK Halftone Alignment", desc: "Cyan, Magenta, Yellow, and blacK plates slide into perfect registration." }
+        ],
+        metrics: [
+          { num: "1892", label: "Archive Founded" },
+          { num: "4-Color", label: "CMYK Halftone Plates" },
+          { num: "1,200", label: "DPI Print Resolution" },
+          { num: "75,000", label: "Morning Broadsheet Run" }
+        ],
+        gallery: [
+          {
+            title: "Clamped Chase Frame",
+            desc: "Heavy steel quarto furniture locked with mechanical quoin keys.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#141b24"/><rect x="50" y="30" width="200" height="100" stroke="#64748b" stroke-width="3"/></svg>`
+          },
+          {
+            title: "CMYK Halftone Mesh",
+            desc: "Four misaligned color plates sliding into precise registration.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#141b24"/><circle cx="140" cy="75" r="35" stroke="#06b6d4" stroke-width="2"/><circle cx="160" cy="85" r="35" stroke="#ec4899" stroke-width="2"/></svg>`
+          },
+          {
+            title: "Fresh Ink Broadsheet",
+            desc: "Crisp newsprint transferred smoothly under ink brayer rollers.",
+            svg: `<svg viewBox="0 0 300 160" fill="none"><rect width="300" height="160" fill="#141b24"/><rect x="70" y="35" width="160" height="90" fill="#f8fafc" stroke="#334155" stroke-width="2"/><line x1="85" y1="55" x2="215" y2="55" stroke="#0f172a" stroke-width="3"/></svg>`
+          }
+        ]
+      }
+    };
+
+    /* ================================================================== */
+    /* UI Rendering & Theme Switching Logic                               */
+    /* ================================================================== */
+
+    function renderThemeChips() {
+      const strip = document.getElementById("themeStrip");
+      if (!strip || !window.Swarm) return;
+
+      const themes = window.Swarm.getThemes();
+      const currentTheme = window.Swarm.getTheme();
+
+      strip.innerHTML = themes
+        .map(
+          (t) =>
+            `<button type="button" class="theme-chip ${t.id === currentTheme ? "active" : ""}" data-theme="${t.id}" title="${t.label} — ${t.subtitle}" aria-label="${t.label}">
+              <span class="chip-icon">${t.emoji}</span>
+              <span class="chip-label">${t.label}</span>
+            </button>`
+        )
+        .join("");
+    }
+
+    function applyThemeSite(themeId) {
+      const site = THEME_SITES[themeId] || THEME_SITES.default;
+
+      // 1. Update CSS Variables
+      for (const [key, val] of Object.entries(site.palette)) {
+        document.documentElement.style.setProperty(key, val);
+      }
+      document.body.setAttribute("data-swarm-theme", themeId);
+
+      // 2. Update Header Brand
+      const brandName = document.getElementById("brandName");
+      const brandNiche = document.getElementById("brandNiche");
+      if (brandName) brandName.innerHTML = site.brand;
+      if (brandNiche) brandNiche.textContent = site.niche;
+
+      // 3. Update Hero Section
+      const heroBadge = document.getElementById("heroBadge");
+      const heroTitle = document.getElementById("heroTitle");
+      const heroSub = document.getElementById("heroSub");
+      const heroVisual = document.getElementById("heroVisual");
+      if (heroBadge) heroBadge.textContent = site.heroBadge;
+      if (heroTitle) heroTitle.innerHTML = site.heroTitle;
+      if (heroSub) heroSub.textContent = site.heroSub;
+      if (heroVisual) heroVisual.innerHTML = site.heroSvg;
+
+      // 4. Update Features Bento Grid
+      const featuresGrid = document.getElementById("featuresGrid");
+      if (featuresGrid) {
+        featuresGrid.innerHTML = site.features
+          .map(
+            (f) =>
+              `<div class="card">
+                <div class="card-icon">${f.icon}</div>
+                <h3>${f.title}</h3>
+                <p>${f.desc}</p>
+              </div>`
+          )
+          .join("");
+      }
+
+      // 5. Update Metrics
+      const metricsRow = document.getElementById("metricsRow");
+      if (metricsRow) {
+        metricsRow.innerHTML = site.metrics
+          .map(
+            (m) =>
+              `<div class="metric-card">
+                <div class="metric-num">${m.num}</div>
+                <div class="metric-label">${m.label}</div>
+              </div>`
+          )
+          .join("");
+      }
+
+      // 6. Update Gallery
+      const galleryGrid = document.getElementById("galleryGrid");
+      if (galleryGrid) {
+        galleryGrid.innerHTML = site.gallery
+          .map(
+            (g) =>
+              `<div class="media-card">
+                <div class="media-art">${g.svg}</div>
+                <div class="media-body">
+                  <h4>${g.title}</h4>
+                  <p>${g.desc}</p>
+                </div>
+              </div>`
+          )
+          .join("");
+      }
+
+      // 7. Update Mechanics Pill
+      const pill = document.getElementById("heroMechanicsPill");
+      if (pill && window.Swarm) {
+        const themes = window.Swarm.getThemes();
+        const t = themes.find((x) => x.id === themeId);
+        if (t && t.mechanics) {
+          pill.innerHTML = `
+            <span class="mech-badge-header">${t.emoji} <strong>${t.label}:</strong></span>
+            <span class="mech-badge"><strong>Framing</strong> ${t.mechanics.layout}</span>
+            <span class="mech-badge"><strong>Border</strong> ${t.mechanics.border}</span>
+            <span class="mech-badge"><strong>Fill</strong> ${t.mechanics.fill}</span>
+            <span class="mech-badge"><strong>Media</strong> ${t.mechanics.media}</span>
+          `;
+        }
+      }
+
+      // 8. Sync with Studio
+      if (typeof syncStudioWithTheme === "function") {
+        syncStudioWithTheme(themeId);
+      }
+    }
+
+    /* ================================================================== */
+    /* Interactive Configurator Studio Engine                             */
+    /* ================================================================== */
+
+    const studioState = {
+      mode: "single", // "single" | "multi" | "all"
+      selectedThemes: new Set(["construction"]),
+      primaryTheme: "construction",
+      showDock: true,
+      showToolbar: true,
+      oncePerSession: false,
+      speed: 1,
+      agents: "auto",
+      framework: "html" // "html" | "react" | "vue" | "svelte" | "astro" | "ai"
+    };
+
+    function renderStudioThemeGrid() {
+      const grid = document.getElementById("studioThemeGrid");
+      if (!grid || !window.Swarm) return;
+
+      const allThemes = window.Swarm.getThemes();
+      grid.innerHTML = allThemes.map(t => {
+        const isSelected = studioState.selectedThemes.has(t.id);
+        return `<div class="theme-picker-item ${isSelected ? 'selected' : ''}" data-theme="${t.id}">
+          <div class="theme-picker-check">${isSelected ? '✓' : ''}</div>
+          <span class="theme-picker-emoji">${t.emoji}</span>
+          <div class="theme-picker-text">
+            <span class="theme-picker-name">${t.label}</span>
+            <span class="theme-picker-role">${t.subtitle}</span>
+          </div>
+        </div>`;
+      }).join("");
+    }
+
+    function syncStudioWithTheme(themeId) {
+      studioState.primaryTheme = themeId;
+      if (studioState.mode === "single") {
+        studioState.selectedThemes = new Set([themeId]);
+        renderStudioThemeGrid();
+        updateStudioCode();
+      }
+    }
+
+    function getSelectedThemesArray() {
+      const arr = Array.from(studioState.selectedThemes);
+      return arr.length > 0 ? arr : [studioState.primaryTheme || "default"];
+    }
+
+    function updateStudioCode() {
+      const box = document.getElementById("studioCodeBox");
+      if (!box) return;
+
+      const themes = getSelectedThemesArray();
+      const primary = studioState.primaryTheme || themes[0];
+      const isSingle = themes.length === 1;
+      const showDock = isSingle ? false : studioState.showDock;
+      const showToolbar = studioState.showToolbar;
+      const once = studioState.oncePerSession;
+      const speed = studioState.speed;
+      const agents = studioState.agents === "auto" ? "undefined /* auto 8/4 */" : studioState.agents;
+
+      let code = "";
+
+      switch (studioState.framework) {
+        case "html":
+          code = `<!-- 1. Include Swarm Stylesheet -->
+<link rel="stylesheet" href="assets/swarm.css">
+
+<!-- 2. Include Swarm Engine Script (UMD / SSR Safe) -->
+<script defer src="assets/swarm.js"><\/script>
+
+<!-- 3. Initialize Swarm Tour on DOM Ready -->
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (window.Swarm) {
+      window.Swarm.init({
+        root: "main",
+        theme: "${primary}",
+        themes: ${JSON.stringify(themes)},
+        showDock: ${showDock},
+        showToolbar: ${showToolbar},
+        speed: ${speed},` + (studioState.agents !== "auto" ? `
+        agents: ${agents},` : "") + `
+        oncePerSession: ${once}
+      });
+    }
+  });
+<\/script>`;
+          break;
+
+        case "react":
+          code = `"use client";
+
+import { useEffect, useRef } from "react";
+// In Next.js / React: include assets/swarm.css in your layout or import here
+// import "./assets/swarm.css";
+
+export default function SwarmTour() {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    let tourInstance = null;
+
+    // SSR-Safe Dynamic Import
+    import("./assets/swarm.js").then((mod) => {
+      const Swarm = mod.default || window.Swarm;
+      if (Swarm) {
+        tourInstance = Swarm.init({
+          root: rootRef.current || "main",
+          theme: "${primary}",
+          themes: ${JSON.stringify(themes)},
+          showDock: ${showDock},
+          showToolbar: ${showToolbar},
+          speed: ${speed},` + (studioState.agents !== "auto" ? `
+          agents: ${agents},` : "") + `
+          oncePerSession: ${once}
+        });
+      }
+    });
+
+    // Clean up animation & overlays on route unmount
+    return () => {
+      if (tourInstance && typeof tourInstance.destroy === "function") {
+        tourInstance.destroy();
+      }
+    };
+  }, []);
+
+  return null; // Or wrap your sections: <main ref={rootRef}>{children}</main>
+}`;
+          break;
+
+        case "vue":
+          code = `<script setup>
+import { onMounted, onUnmounted, ref } from "vue";
+// import "./assets/swarm.css";
+
+const mainRef = ref(null);
+let tourInstance = null;
+
+onMounted(async () => {
+  // SSR-Safe Dynamic Import
+  const { default: Swarm } = await import("./assets/swarm.js");
+  if (Swarm) {
+    tourInstance = Swarm.init({
+      root: mainRef.value || "main",
+      theme: "${primary}",
+      themes: ${JSON.stringify(themes)},
+      showDock: ${showDock},
+      showToolbar: ${showToolbar},
+      speed: ${speed},` + (studioState.agents !== "auto" ? `
+      agents: ${agents},` : "") + `
+      oncePerSession: ${once}
+    });
+  }
+});
+
+onUnmounted(() => {
+  if (tourInstance && typeof tourInstance.destroy === "function") {
+    tourInstance.destroy();
+  }
+});
+<\/script>
+
+<template>
+  <main ref="mainRef">
+    <!-- Your semantic <section> elements here -->
+  </main>
+</template>`;
+          break;
+
+        case "svelte":
+          code = `<script>
+  import { onMount, onDestroy } from "svelte";
+  // import "./assets/swarm.css";
+
+  let mainEl;
+  let tourInstance;
+
+  onMount(async () => {
+    const mod = await import("./assets/swarm.js");
+    const Swarm = mod.default || window.Swarm;
+    if (Swarm) {
+      tourInstance = Swarm.init({
+        root: mainEl || "main",
+        theme: "${primary}",
+        themes: ${JSON.stringify(themes)},
+        showDock: ${showDock},
+        showToolbar: ${showToolbar},
+        speed: ${speed},` + (studioState.agents !== "auto" ? `
+        agents: ${agents},` : "") + `
+        oncePerSession: ${once}
+      });
+    }
+  });
+
+  onDestroy(() => {
+    if (tourInstance && typeof tourInstance.destroy === "function") {
+      tourInstance.destroy();
+    }
+  });
+<\/script>
+
+<main bind:this={mainEl}>
+  <!-- Your semantic <section> elements here -->
+</main>`;
+          break;
+
+        case "astro":
+          code = `---
+// SwarmTour.astro
+---
+<script>
+  import Swarm from "../assets/swarm.js";
+  import "../assets/swarm.css";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (Swarm) {
+      Swarm.init({
+        root: "main",
+        theme: "${primary}",
+        themes: ${JSON.stringify(themes)},
+        showDock: ${showDock},
+        showToolbar: ${showToolbar},
+        speed: ${speed},` + (studioState.agents !== "auto" ? `
+        agents: ${agents},` : "") + `
+        oncePerSession: ${once}
+      });
+    }
+  });
+<\/script>`;
+          break;
+
+        case "ai":
+          code = `Integrate the aaa-swarm guided tour skill into this web app:
+- Framework: ${studioState.framework.toUpperCase()}
+- Theme(s): ${JSON.stringify(themes)} (Default starting theme: "${primary}")
+- Mode: ${isSingle ? "Single Theme Locked (No switcher dock)" : "Multi-Theme Dock enabled"}
+- Floating Status Toolbar: ${showToolbar ? "Enabled" : "Disabled"}
+- Speed: ${speed}×
+- Agent Workers: ${studioState.agents}
+- Session Caching: ${once ? "Run once per session (sessionStorage)" : "Run on every page load"}
+
+Implementation steps:
+1. Ensure assets/swarm.css and assets/swarm.js are copied to the project.
+2. Initialize Swarm on DOM mount / client hydration.
+3. Call Swarm.destroy() on unmount / navigation to prevent orphaned overlays.`;
+          break;
+      }
+
+      box.textContent = code;
+    }
+
+    function setupStudioEvents() {
+      // Mode Pills
+      document.getElementById("modePills")?.addEventListener("click", (e) => {
+        const btn = e.target.closest(".mode-pill");
+        if (!btn) return;
+        const mode = btn.dataset.mode;
+        studioState.mode = mode;
+
+        document.querySelectorAll(".mode-pill").forEach(p => p.classList.toggle("active", p === btn));
+
+        const allThemes = window.Swarm.getThemes().map(t => t.id);
+        if (mode === "single") {
+          studioState.selectedThemes = new Set([studioState.primaryTheme || allThemes[0]]);
+        } else if (mode === "all") {
+          studioState.selectedThemes = new Set(allThemes);
+        } else if (mode === "multi") {
+          if (studioState.selectedThemes.size <= 1) {
+            studioState.selectedThemes = new Set(["default", "construction", "cyber-nanobots"]);
+          }
+        }
+
+        renderStudioThemeGrid();
+        updateStudioCode();
+      });
+
+      // Theme Grid Clicks
+      document.getElementById("studioThemeGrid")?.addEventListener("click", (e) => {
+        const item = e.target.closest(".theme-picker-item");
+        if (!item) return;
+        const thId = item.dataset.theme;
+
+        if (studioState.mode === "single") {
+          studioState.selectedThemes = new Set([thId]);
+          studioState.primaryTheme = thId;
+          selectTheme(thId);
+        } else {
+          if (studioState.selectedThemes.has(thId)) {
+            if (studioState.selectedThemes.size > 1) {
+              studioState.selectedThemes.delete(thId);
+            }
+          } else {
+            studioState.selectedThemes.add(thId);
+          }
+          if (studioState.selectedThemes.has(thId)) {
+            studioState.primaryTheme = thId;
+            selectTheme(thId);
+          }
+        }
+
+        renderStudioThemeGrid();
+        updateStudioCode();
+      });
+
+      // Options
+      document.getElementById("optDock")?.addEventListener("change", (e) => {
+        studioState.showDock = e.target.checked;
+        updateStudioCode();
+      });
+      document.getElementById("optToolbar")?.addEventListener("change", (e) => {
+        studioState.showToolbar = e.target.checked;
+        updateStudioCode();
+      });
+      document.getElementById("optOnce")?.addEventListener("change", (e) => {
+        studioState.oncePerSession = e.target.checked;
+        updateStudioCode();
+      });
+      document.getElementById("optSpeed")?.addEventListener("change", (e) => {
+        studioState.speed = Number(e.target.value);
+        updateStudioCode();
+      });
+      document.getElementById("optAgents")?.addEventListener("change", (e) => {
+        studioState.agents = e.target.value === "auto" ? "auto" : Number(e.target.value);
+        updateStudioCode();
+      });
+
+      // Framework Tabs
+      document.getElementById("frameworkTabs")?.addEventListener("click", (e) => {
+        const tab = e.target.closest(".studio-tab");
+        if (!tab) return;
+        studioState.framework = tab.dataset.fw;
+        document.querySelectorAll(".studio-tab").forEach(t => t.classList.toggle("active", t === tab));
+        updateStudioCode();
+      });
+
+      // Copy Code Button
+      document.getElementById("btnCopyCode")?.addEventListener("click", async () => {
+        const box = document.getElementById("studioCodeBox");
+        if (!box) return;
+        try {
+          await navigator.clipboard.writeText(box.textContent);
+          const btn = document.getElementById("btnCopyCode");
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = "✓ Copied!";
+            btn.style.color = "#4ade80";
+            setTimeout(() => {
+              btn.innerHTML = orig;
+              btn.style.color = "";
+            }, 1800);
+          }
+        } catch (err) {
+          console.error("Clipboard write failed", err);
+        }
+      });
+
+      // Test Live Button
+      document.getElementById("btnTestLive")?.addEventListener("click", () => {
+        if (!window.Swarm) return;
+        const themes = getSelectedThemesArray();
+        const primary = studioState.primaryTheme || themes[0];
+        const isSingle = themes.length === 1;
+
+        const btn = document.getElementById("btnTestLive");
+        if (btn) {
+          const orig = btn.innerHTML;
+          btn.innerHTML = "🚀 Launching...";
+          setTimeout(() => (btn.innerHTML = orig), 1500);
+        }
+
+        window.Swarm.replay({
+          root: "main",
+          theme: primary,
+          themes: themes,
+          showDock: isSingle ? false : studioState.showDock,
+          showToolbar: studioState.showToolbar,
+          speed: studioState.speed,
+          agents: studioState.agents === "auto" ? undefined : studioState.agents,
+          oncePerSession: studioState.oncePerSession
+        });
+      });
+    }
+
+    function selectTheme(themeId) {
+      document.querySelectorAll(".theme-chip").forEach((btn) => {
+        const isActive = btn.dataset.theme === themeId;
+        btn.classList.toggle("active", isActive);
+        if (isActive && window.innerWidth <= 768) {
+          btn.scrollIntoView({ inline: "center", behavior: "smooth" });
+        }
+      });
+
+      applyThemeSite(themeId);
+
+      if (window.Swarm) {
+        window.Swarm.setTheme(themeId);
+      }
+    }
+
+    // Event Listeners
+    document.getElementById("themeStrip")?.addEventListener("click", (e) => {
+      const chip = e.target.closest(".theme-chip");
+      if (chip && chip.dataset.theme) {
+        selectTheme(chip.dataset.theme);
+      }
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (window.Swarm) {
+          renderThemeChips();
+          const cur = window.Swarm.getTheme() || "construction";
+          studioState.primaryTheme = cur;
+          studioState.selectedThemes = new Set([cur]);
+          applyThemeSite(cur);
+          renderStudioThemeGrid();
+          setupStudioEvents();
+          updateStudioCode();
+
+          window.Swarm.init({ root: "main", theme: cur });
+        }
+      }, 150);
+    });
+  </script>
+</body>
+</html>

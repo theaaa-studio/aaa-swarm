@@ -1,4 +1,4 @@
-/* Swarm Rebuild CSS */
+/* Swarm Rebuild CSS — 11 Industry Themes */
 
 body.swarm-active main {
   position: relative;
@@ -24,6 +24,7 @@ body.swarm-active main {
 .swarm-revealing {
   opacity: 1 !important;
   visibility: visible !important;
+  pointer-events: auto !important;
   position: relative;
   z-index: 2;
   animation: swarmFadeIn 0.35s ease forwards;
@@ -40,7 +41,10 @@ body.swarm-active main {
   }
 }
 
-/* Blueprint Canvas: placed in background at z-index 0 */
+/* ================================================================== */
+/* Blueprint Canvases across 11 Themes                                */
+/* ================================================================== */
+
 .swarm-canvas {
   position: fixed;
   inset: 0;
@@ -59,7 +63,121 @@ body.swarm-active main {
   opacity: 0;
 }
 
-/* Floating Layer for cursors, dimension badges, SVG pens, typing carets */
+/* 1. Construction CAD Blueprint */
+.swarm-canvas[data-theme="construction"] {
+  background-color: #0c1527;
+  background-image: 
+    linear-gradient(rgba(2, 132, 199, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(2, 132, 199, 0.15) 1px, transparent 1px),
+    linear-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 158, 11, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+}
+.swarm-canvas[data-theme="construction"]::after {
+  content: "HEAVY STRUCTURAL BLUEPRINT // CAD-REV 4.2";
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(2, 132, 199, 0.6);
+  pointer-events: none;
+}
+
+/* 2. Beehive Honeycomb Lattice */
+.swarm-canvas[data-theme="beehive"] {
+  background-color: #1a1205;
+  background-image: radial-gradient(circle, rgba(245, 158, 11, 0.22) 2px, transparent 2px), radial-gradient(circle, rgba(217, 119, 6, 0.15) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+}
+
+/* 3. Ant Colony Subterranean Contours */
+.swarm-canvas[data-theme="ant-colony"] {
+  background-color: #0b0f19;
+  background-image: 
+    radial-gradient(rgba(99, 102, 241, 0.18) 1.5px, transparent 1.5px),
+    linear-gradient(rgba(16, 185, 129, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px, 100% 40px;
+}
+
+/* 4. Cyber Nanobots PCB Matrix */
+.swarm-canvas[data-theme="cyber-nanobots"] {
+  background-color: #040814;
+  background-image: 
+    linear-gradient(rgba(6, 182, 212, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.18) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.swarm-canvas[data-theme="cyber-nanobots"]::after {
+  content: "SYNTH-OS // QUANTUM NEURAL MATRIX v9.0";
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #06b6d4;
+  opacity: 0.7;
+}
+
+/* 5. Couture Atelier Cutting Mat Grid */
+.swarm-canvas[data-theme="atelier"] {
+  background-color: #062419;
+  background-image: 
+    linear-gradient(rgba(244, 63, 94, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 63, 94, 0.18) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+
+/* 6. Warehouse Concrete Floor & Safety Lanes */
+.swarm-canvas[data-theme="warehouse"] {
+  background-color: #11141c;
+  background-image: 
+    repeating-linear-gradient(45deg, rgba(245, 158, 11, 0.06), rgba(245, 158, 11, 0.06) 20px, transparent 20px, transparent 40px);
+}
+
+/* 7. Voxel Craft Baseplate Grid */
+.swarm-canvas[data-theme="voxel-craft"] {
+  background-color: #0a1120;
+  background-image: 
+    radial-gradient(rgba(16, 185, 129, 0.25) 2.5px, transparent 2.5px);
+  background-size: 20px 20px;
+}
+
+/* 8. Grand Bistro Kitchen Grid */
+.swarm-canvas[data-theme="kitchen"] {
+  background-color: #1c0d0d;
+  background-image: 
+    repeating-linear-gradient(0deg, rgba(239, 68, 68, 0.07) 0px, rgba(239, 68, 68, 0.07) 24px, transparent 24px, transparent 48px),
+    repeating-linear-gradient(90deg, rgba(239, 68, 68, 0.07) 0px, rgba(239, 68, 68, 0.07) 24px, transparent 24px, transparent 48px);
+}
+
+/* 9. Street Art Brick & Urban Surface */
+.swarm-canvas[data-theme="street-art"] {
+  background-color: #120917;
+  background-image: 
+    linear-gradient(rgba(236, 72, 153, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.12) 1px, transparent 1px);
+  background-size: 60px 30px, 30px 60px;
+}
+
+/* 10. Vintage Press Room Ledger Paper */
+.swarm-canvas[data-theme="press-room"] {
+  background-color: #0b111e;
+  background-image: 
+    linear-gradient(rgba(203, 213, 225, 0.09) 1px, transparent 1px);
+  background-size: 100% 24px;
+}
+
+/* ================================================================== */
+/* Floating Layer, Agents, Wings & Rotation                           */
+/* ================================================================== */
+
 .swarm-layer {
   position: absolute;
   top: 0;
@@ -71,7 +189,6 @@ body.swarm-active main {
   overflow: visible;
 }
 
-/* Cursors and Agents */
 .swarm-agent {
   position: absolute;
   top: 0;
@@ -79,7 +196,7 @@ body.swarm-active main {
   pointer-events: none;
   z-index: 10020;
   will-change: transform;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
   transition: opacity 0.25s ease;
 }
 
@@ -87,9 +204,19 @@ body.swarm-active main {
   display: block;
 }
 
+/* Bee fluttering animation */
+.swarm-agent[data-theme="beehive"] .swarm-wing {
+  transform-origin: center;
+  animation: beeWingFlap 0.08s infinite alternate ease-in-out;
+}
+@keyframes beeWingFlap {
+  from { transform: rotate(0deg) scaleY(1); }
+  to { transform: rotate(20deg) scaleY(0.7); }
+}
+
 .swarm-tag {
   position: absolute;
-  left: 14px;
+  left: 18px;
   top: 14px;
   font-size: 11px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -99,57 +226,359 @@ body.swarm-active main {
   border-radius: 4px;
   white-space: nowrap;
   pointer-events: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
-.swarm-agent[data-tool="cross"]::after {
-  content: "";
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  border-left: 2px solid currentColor;
-  border-top: 2px solid currentColor;
-  top: 1px;
-  left: 1px;
+body[data-swarm-theme="construction"] .swarm-tag,
+body[data-swarm-theme="cyber-nanobots"] .swarm-tag,
+body[data-swarm-theme="warehouse"] .swarm-tag,
+body[data-swarm-theme="press-room"] .swarm-tag {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-/* Build Ghost Containers */
+/* ================================================================== */
+/* Bounding Box Ghosts across Themes (dragBox)                        */
+/* ================================================================== */
+
 .swarm-ghost {
   position: absolute;
-  border: 1.5px dashed var(--c, #6d28d9);
   pointer-events: none;
   z-index: 10010;
   box-sizing: border-box;
-  background: rgba(109, 40, 217, 0.05);
   transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.25s ease;
 }
 
-.swarm-ghost.is-filled {
-  border-style: solid;
-  border-color: rgba(15, 23, 42, 0.15);
+.swarm-ghost.is-wireframe {
+  border: 1.5px dashed var(--c, #6d28d9);
+  background: rgba(109, 40, 217, 0.06);
 }
 
-.swarm-ghost.is-image {
-  background: linear-gradient(135deg, rgba(109, 40, 217, 0.15) 0%, rgba(8, 145, 178, 0.15) 100%);
-  border: 2px solid var(--c, #6d28d9);
+.swarm-ghost.is-scaffold {
+  border: 2px dashed #f59e0b;
+  background: repeating-linear-gradient(-45deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.08) 12px, rgba(15, 23, 42, 0.12) 12px, rgba(15, 23, 42, 0.12) 24px);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.25);
+}
+
+.swarm-ghost.is-wax {
+  border: 2px solid #d97706;
+  background: rgba(245, 158, 11, 0.12);
+  border-radius: 8px;
+  box-shadow: inset 0 0 12px rgba(217, 119, 6, 0.3);
+}
+
+.swarm-ghost.is-tunnel {
+  border: 2px dashed #6366f1;
+  background: rgba(79, 70, 229, 0.08);
+}
+
+.swarm-ghost.is-hologram {
+  border: 1.5px solid #06b6d4;
+  background: rgba(6, 182, 212, 0.09);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.35), inset 0 0 8px rgba(6, 182, 212, 0.2);
+}
+
+.swarm-ghost.is-chalk {
+  border: 2px dashed #f43f5e;
+  background: rgba(244, 63, 94, 0.06);
+}
+
+.swarm-ghost.is-kraft-tape {
+  border: 3px solid #b45309;
+  background: rgba(180, 83, 9, 0.1);
+}
+
+.swarm-ghost.is-voxel-box {
+  border: 3px solid #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  image-rendering: pixelated;
+}
+
+.swarm-ghost.is-dough {
+  border: 2px solid #ea580c;
+  background: rgba(234, 88, 12, 0.08);
+  border-radius: 12px;
+}
+
+.swarm-ghost.is-wheatpaste {
+  border: 2px solid #ec4899;
+  background: rgba(236, 72, 153, 0.09);
+}
+
+.swarm-ghost.is-chase {
+  border: 2px solid #94a3b8;
+  background: rgba(148, 163, 184, 0.08);
 }
 
 .swarm-badge {
   position: absolute;
-  bottom: -22px;
+  bottom: -24px;
   right: 0;
   font-size: 10px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: ui-monospace, SFMono-Regular, monospace;
   font-weight: 700;
   color: #ffffff;
-  padding: 2px 6px;
+  padding: 2px 7px;
   border-radius: 4px;
   white-space: nowrap;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
   pointer-events: none;
 }
 
-/* Pen / Border SVG */
+/* ================================================================== */
+/* Fill Animations (fillBox)                                          */
+/* ================================================================== */
+
+.swarm-ghost.is-filled {
+  border-style: solid;
+}
+
+.swarm-ghost.is-pouring {
+  border-color: #f59e0b;
+  animation: concretePour 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes concretePour {
+  from { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+
+.swarm-ghost.is-honey-fill {
+  border-color: #f59e0b;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+}
+
+.swarm-ghost.is-glitch-fill {
+  border-color: #06b6d4;
+  animation: glitchFill 0.3s ease forwards;
+}
+@keyframes glitchFill {
+  0% { opacity: 0.3; transform: scale(0.97); }
+  50% { opacity: 0.9; transform: scale(1.01); filter: hue-rotate(90deg); }
+  100% { opacity: 1; transform: scale(1); filter: none; }
+}
+
+.swarm-ghost.is-brick-fill {
+  border-color: #10b981;
+  animation: brickStack 0.3s steps(4) forwards;
+}
+@keyframes brickStack {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.swarm-ghost.is-torch-fill {
+  border-color: #ef4444;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
+}
+
+/* ================================================================== */
+/* Particle System Keyframes                                          */
+/* ================================================================== */
+
+.swarm-spark,
+.swarm-pollen,
+.swarm-dirt,
+.swarm-steam,
+.swarm-spray-dot {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10025;
+}
+
+.swarm-spark {
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  box-shadow: 0 0 6px var(--c, #f59e0b), 0 0 12px #f59e0b;
+  border-radius: 50%;
+  animation: particleBurst 0.32s ease-out forwards;
+}
+
+.swarm-pollen {
+  width: 4px;
+  height: 4px;
+  background: #fde047;
+  box-shadow: 0 0 8px #f59e0b;
+  border-radius: 50%;
+  animation: particleBurst 0.35s ease-out forwards;
+}
+
+.swarm-dirt {
+  width: 3.5px;
+  height: 3.5px;
+  background: #78350f;
+  border-radius: 1px;
+  animation: particleBurst 0.3s ease-out forwards;
+}
+
+.swarm-steam {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: steamRise 0.36s ease-out forwards;
+}
+@keyframes steamRise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0.8; }
+  100% { transform: translateY(-30px) scale(1.6); opacity: 0; }
+}
+
+.swarm-spray-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--c, #ec4899);
+  border-radius: 50%;
+  animation: particleBurst 0.3s ease-out forwards;
+}
+
+@keyframes particleBurst {
+  0% { transform: translate(0, 0) scale(1.4); opacity: 1; }
+  100% { transform: translate(var(--dx, 20px), var(--dy, 20px)) scale(0.2); opacity: 0; }
+}
+
+/* ================================================================== */
+/* Media Drop & Unpack Elements (dropImage)                          */
+/* ================================================================== */
+
+/* 1. Construction Crane Crate */
+.swarm-crate-wrap {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10015;
+}
+.swarm-crane-cable {
+  position: absolute;
+  top: -140px;
+  left: 50%;
+  width: 2.5px;
+  height: 140px;
+  background: repeating-linear-gradient(to bottom, #f59e0b, #f59e0b 5px, #1e293b 5px, #1e293b 10px);
+  transform: translateX(-50%);
+}
+.swarm-crate {
+  width: 100%;
+  height: 100%;
+  background: #b45309;
+  border: 3px solid #78350f;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+.swarm-crate-stamp {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 13px;
+  font-weight: 900;
+  color: #fef3c7;
+  letter-spacing: 0.12em;
+  border: 2px dashed #fde68a;
+  padding: 4px 10px;
+  transform: rotate(-4deg);
+}
+.swarm-crate.is-shattering {
+  animation: crateShatter 0.28s ease-out forwards;
+}
+@keyframes crateShatter {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.92); opacity: 0; filter: blur(4px); }
+}
+
+/* 2. Beehive Wax Cover */
+.swarm-wax-cover {
+  position: absolute;
+  background: #d97706;
+  border: 3px solid #92400e;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10015;
+}
+.swarm-wax-seal {
+  font-family: system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.08em;
+}
+.swarm-wax-cover.is-uncapping {
+  animation: waxMelt 0.28s ease-out forwards;
+}
+@keyframes waxMelt {
+  to { transform: scale(0.9); opacity: 0; filter: blur(6px); }
+}
+
+/* 3. Bistro Cloche Dome */
+.swarm-cloche {
+  position: absolute;
+  background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+  border: 2px solid #475569;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10015;
+  color: #1e293b;
+  font-weight: 800;
+  font-size: 13px;
+}
+.swarm-cloche.is-lifting {
+  animation: clocheLift 0.3s ease-out forwards;
+}
+@keyframes clocheLift {
+  to { transform: translateY(-40px) scale(1.05); opacity: 0; }
+}
+
+/* 4. Voxel Chest */
+.swarm-chest {
+  position: absolute;
+  background: #854d0e;
+  border: 3px solid #3f2203;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fef08a;
+  font-weight: 900;
+  font-size: 13px;
+  z-index: 10015;
+}
+.swarm-chest.is-opening {
+  animation: chestOpen 0.28s ease-out forwards;
+}
+@keyframes chestOpen {
+  to { transform: scale(1.08); opacity: 0; filter: brightness(1.8); }
+}
+
+/* 5. Street Art Sticker */
+.swarm-sticker {
+  position: absolute;
+  background: #ec4899;
+  border: 3px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 900;
+  transform: rotate(-5deg);
+  z-index: 10015;
+}
+.swarm-sticker.is-slammed {
+  animation: stickerSlam 0.25s ease-out forwards;
+}
+@keyframes stickerSlam {
+  0% { transform: scale(1.2) rotate(-8deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 0; }
+}
+
+/* ================================================================== */
+/* Border Pens & Typography Carets                                    */
+/* ================================================================== */
+
 .swarm-pen {
   position: absolute;
   pointer-events: none;
@@ -160,11 +589,24 @@ body.swarm-active main {
 
 .swarm-pen rect {
   fill: none;
-  stroke-width: 2px;
+  stroke-width: 2.2px;
   stroke-linecap: round;
 }
 
-/* Text Typing Ghost: dark, crisp, and high-contrast */
+.swarm-pen.theme-construction rect {
+  stroke-width: 2.8px;
+  filter: drop-shadow(0 0 5px #f59e0b);
+}
+
+.swarm-pen.theme-cyber-nanobots rect {
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 6px #06b6d4);
+}
+
+.swarm-pen.theme-atelier rect {
+  stroke-dasharray: 6 4 !important;
+}
+
 .swarm-text {
   position: absolute;
   pointer-events: none;
@@ -174,6 +616,11 @@ body.swarm-active main {
   word-break: break-word;
   color: var(--text, #0f172a);
   transition: opacity 0.25s ease;
+}
+
+body[data-swarm-theme="cyber-nanobots"] .swarm-text {
+  color: #22d3ee;
+  text-shadow: 0 0 4px rgba(6, 182, 212, 0.4);
 }
 
 .swarm-caret {
@@ -191,26 +638,29 @@ body.swarm-active main {
   50%, 100% { opacity: 0; }
 }
 
-/* Fade out helpers */
 .is-leaving {
   opacity: 0 !important;
   transition: opacity 0.35s ease !important;
 }
 
-/* Swarm Floating Controls Toolbar */
+/* ================================================================== */
+/* Floating Controls Toolbar                                          */
+/* ================================================================== */
+
 .swarm-toolbar {
   position: fixed;
-  top: 24px;
+  bottom: 74px;
+  top: auto;
   left: 50%;
-  transform: translateX(-50%) translateY(-30px);
+  transform: translateX(-50%) translateY(24px);
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 16px;
-  background: rgba(17, 24, 39, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(17, 24, 39, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #f3f4f6;
@@ -219,7 +669,7 @@ body.swarm-active main {
   z-index: 10030;
   opacity: 0;
   pointer-events: auto;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
 .swarm-toolbar.is-on {
@@ -229,7 +679,127 @@ body.swarm-active main {
 
 .swarm-toolbar.is-leaving {
   opacity: 0;
-  transform: translateX(-50%) translateY(-20px);
+  transform: translateX(-50%) translateY(20px);
+}
+
+/* 11 Theme Personalized Toolbar Styles */
+body[data-swarm-theme="default"] .swarm-toolbar {
+  background: rgba(15, 23, 42, 0.94);
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+}
+body[data-swarm-theme="default"] .swarm-dot { background: #6366f1; box-shadow: 0 0 10px #6366f1; }
+
+body[data-swarm-theme="construction"] .swarm-toolbar {
+  background: #18181b;
+  border: 1.5px dashed #f59e0b;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+body[data-swarm-theme="construction"] .swarm-dot { background: #f59e0b; box-shadow: 0 0 10px #f59e0b; border-radius: 2px; }
+
+body[data-swarm-theme="beehive"] .swarm-toolbar {
+  background: rgba(24, 18, 7, 0.96);
+  border: 1.5px solid #d97706;
+  box-shadow: 0 8px 24px rgba(217, 119, 6, 0.35);
+}
+body[data-swarm-theme="beehive"] .swarm-dot { background: #f59e0b; box-shadow: 0 0 10px #f59e0b; }
+
+body[data-swarm-theme="ant-colony"] .swarm-toolbar {
+  background: rgba(9, 20, 14, 0.96);
+  border: 1.5px dotted #22c55e;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+}
+body[data-swarm-theme="ant-colony"] .swarm-dot { background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+
+body[data-swarm-theme="cyber-nanobots"] .swarm-toolbar {
+  background: rgba(4, 10, 18, 0.96);
+  border: 1px solid #06b6d4;
+  box-shadow: 0 0 24px rgba(6, 182, 212, 0.4);
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  letter-spacing: 0.04em;
+}
+body[data-swarm-theme="cyber-nanobots"] .swarm-dot { background: #22d3ee; box-shadow: 0 0 12px #22d3ee; }
+
+body[data-swarm-theme="atelier"] .swarm-toolbar {
+  background: rgba(22, 13, 18, 0.96);
+  border: 1.5px dashed #e11d48;
+  box-shadow: 0 8px 24px rgba(225, 29, 72, 0.3);
+  font-family: Georgia, serif;
+}
+body[data-swarm-theme="atelier"] .swarm-dot { background: #f43f5e; box-shadow: 0 0 10px #f43f5e; }
+
+body[data-swarm-theme="warehouse"] .swarm-toolbar {
+  background: rgba(20, 18, 16, 0.96);
+  border: 2px solid #ea580c;
+  box-shadow: 0 8px 24px rgba(234, 88, 12, 0.35);
+  font-family: ui-monospace, monospace;
+  text-transform: uppercase;
+}
+body[data-swarm-theme="warehouse"] .swarm-dot { background: #ea580c; box-shadow: 0 0 10px #ea580c; border-radius: 0; }
+
+body[data-swarm-theme="voxel-craft"] .swarm-toolbar {
+  background: #0b130e;
+  border: 3px solid #16a34a;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 #000;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+}
+body[data-swarm-theme="voxel-craft"] .swarm-dot { background: #22c55e; border-radius: 0; width: 10px; height: 10px; }
+
+body[data-swarm-theme="kitchen"] .swarm-toolbar {
+  background: rgba(23, 15, 14, 0.96);
+  border: 1.5px solid #f43f5e;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.3);
+}
+body[data-swarm-theme="kitchen"] .swarm-dot { background: #fb7185; box-shadow: 0 0 10px #fb7185; }
+
+body[data-swarm-theme="street-art"] .swarm-toolbar {
+  background: rgba(17, 12, 22, 0.96);
+  border: 2px solid #ec4899;
+  box-shadow: 0 0 22px rgba(236, 72, 153, 0.45);
+  transform: translateX(-50%) translateY(0) rotate(-1deg);
+}
+body[data-swarm-theme="street-art"] .swarm-dot { background: #f472b6; box-shadow: 0 0 12px #ec4899; }
+
+body[data-swarm-theme="press-room"] .swarm-toolbar {
+  background: rgba(15, 20, 28, 0.96);
+  border: 1.5px solid #64748b;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  font-family: Georgia, serif;
+}
+body[data-swarm-theme="press-room"] .swarm-dot { background: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
+
+/* Responsive Mobile Swarm Overrides */
+@media (max-width: 640px) {
+  .swarm-toolbar {
+    bottom: 68px;
+    padding: 6px 11px;
+    gap: 6px;
+    font-size: 11.5px;
+    max-width: 95vw;
+  }
+  .swarm-status {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .swarm-theme-select {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  .swarm-agent {
+    transform: translate3d(0, 0, 0) scale(0.85);
+  }
+  .swarm-tag {
+    font-size: 9.5px !important;
+    padding: 1px 5px !important;
+  }
+  .swarm-badge {
+    font-size: 9px !important;
+  }
 }
 
 .swarm-dot {
@@ -247,8 +817,25 @@ body.swarm-active main {
 }
 
 .swarm-status {
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.01em;
+}
+
+.swarm-theme-select {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+.swarm-theme-select option {
+  background: #1e293b;
+  color: #ffffff;
 }
 
 .swarm-toolbar button {
@@ -256,7 +843,7 @@ body.swarm-active main {
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 4px 11px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -264,7 +851,7 @@ body.swarm-active main {
 }
 
 .swarm-toolbar button:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.24);
   transform: scale(1.04);
 }
 
@@ -273,29 +860,648 @@ body.swarm-active main {
 }
 
 .swarm-toolbar button[data-act="live"] {
-  background: var(--brand, #6d28d9);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #6366f1;
 }
 
-.swarm-toolbar button[data-act="live"]:hover {
-  background: #7c3aed;
+/* ================================================================== */
+/* Theme Choreography Enhancements: 11 Unique Construction Modes      */
+/* ================================================================== */
+
+/* 1. Scaffolding & Hydraulic Concrete Pour (construction) */
+.is-scaffold {
+  position: absolute;
+  border: 1px dashed rgba(245, 158, 11, 0.4);
+  pointer-events: none;
+  overflow: visible;
 }
 
-/* Nav Rebuild Button Enhancement */
-.rebuild-nav-btn {
-  position: relative;
+.swarm-scaffold-pole {
+  position: absolute;
+  width: 4px;
+  background: repeating-linear-gradient(180deg, #f59e0b 0 8px, #78350f 8px 16px);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+  bottom: 0;
+}
+
+.swarm-scaffold-pole.is-left { left: 0; }
+.swarm-scaffold-pole.is-right { right: 0; }
+
+.swarm-scaffold-ledger {
+  position: absolute;
+  height: 4px;
+  background: #f59e0b;
+  box-shadow: 0 0 6px #f59e0b;
+}
+
+.swarm-scaffold-ledger.is-top { top: 0; left: 0; }
+.swarm-scaffold-ledger.is-bottom { bottom: 0; left: 0; }
+
+.swarm-scaffold-brace {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, transparent calc(50% - 1.5px), #d97706 calc(50% - 1.5px), #d97706 calc(50% + 1.5px), transparent calc(50% + 1.5px)),
+    linear-gradient(45deg, transparent calc(50% - 1.5px), #d97706 calc(50% - 1.5px), #d97706 calc(50% + 1.5px), transparent calc(50% + 1.5px));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.swarm-concrete-pour {
+  animation: swarmConcretePour 0.28s ease-out forwards;
+}
+
+@keyframes swarmConcretePour {
+  0% { clip-path: inset(100% 0 0 0); filter: brightness(1.2); }
+  100% { clip-path: inset(0 0 0 0); filter: brightness(1); }
+}
+
+/* 2. Honeycomb Bloom & Propolis Honey Drips (beehive) */
+.is-honeycomb-bloom {
+  position: absolute;
+  pointer-events: none;
+}
+
+.swarm-hex-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(#d97706 18%, transparent 19%),
+    radial-gradient(#d97706 18%, transparent 19%);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+  border: 2px solid rgba(217, 119, 6, 0.7);
+  border-radius: 8px;
+  opacity: 0;
+  transform-origin: center center;
+  transition: opacity 0.2s ease;
+}
+
+.swarm-honey-drips {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10010;
+}
+
+.swarm-honey-drip {
+  position: absolute;
+  width: 8px;
+  height: 18px;
+  background: #f59e0b;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 0 8px #f59e0b;
+  animation: honeyDripFall 1.2s infinite ease-in;
+}
+
+@keyframes honeyDripFall {
+  0% { height: 4px; opacity: 0.8; transform: scaleX(1); }
+  50% { height: 20px; opacity: 1; transform: scaleX(0.8); }
+  100% { height: 26px; opacity: 0; transform: translateY(8px) scaleX(0.6); }
+}
+
+/* 3. Ant Colony Trench, Pheromone Line & Heavy Slab (ant-colony) */
+.is-ant-trench {
+  position: absolute;
+  pointer-events: none;
+  border: 2px dashed rgba(34, 197, 94, 0.7);
+  background: rgba(22, 101, 52, 0.08);
+  border-radius: 6px;
+}
+
+.swarm-pheromone-line {
+  position: absolute;
+  inset: -4px;
+  border: 1.5px dotted #22c55e;
+  border-radius: 8px;
+  animation: pheroPulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes pheroPulse {
+  from { opacity: 0.4; }
+  to { opacity: 0.9; }
+}
+
+.swarm-ant-heavy-slab {
+  position: absolute;
+  background: #14532d;
+  border: 2px solid #22c55e;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 10005;
+}
+
+.swarm-ant-slab-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #86efac;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+}
+
+.swarm-ant-heavy-slab.is-unlatched {
+  animation: slabUnlatch 0.3s forwards ease-out;
+}
+
+@keyframes slabUnlatch {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.04); opacity: 0; }
+}
+
+/* 4. Cyber Laser Scanbar, Solder Pads & Hologram Print (cyber-nanobots) */
+.is-cyber-hologram {
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  background: rgba(6, 182, 212, 0.04);
+}
+
+.swarm-laser-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #06b6d4;
+  box-shadow: 0 0 16px #06b6d4, 0 0 32px #22d3ee;
+  z-index: 10005;
+}
+
+.swarm-cyber-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(6, 182, 212, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.2) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.swarm-solder-pad {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #0e7490;
+  border: 1.5px solid #06b6d4;
+  box-shadow: 0 0 4px #06b6d4;
+  transition: all 0.2s ease;
+}
+
+.swarm-solder-pad.is-lit {
+  background: #22d3ee;
+  box-shadow: 0 0 12px #22d3ee;
+  transform: scale(1.3);
+}
+
+.swarm-cyber-glitch-in {
+  animation: glitchGlance 0.25s steps(3) forwards;
+}
+
+@keyframes glitchGlance {
+  0% { opacity: 0; filter: invert(0.8) hue-rotate(180deg); }
+  50% { opacity: 0.8; filter: hue-rotate(90deg); }
+  100% { opacity: 1; filter: none; }
+}
+
+.swarm-laser-print-wrap {
+  position: absolute;
+  border: 2px solid #06b6d4;
+  background: rgba(6, 182, 212, 0.12);
+  z-index: 10005;
+  overflow: hidden;
+}
+
+.swarm-laser-print-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #22d3ee;
+  box-shadow: 0 0 20px #22d3ee, 0 0 40px #06b6d4;
+}
+
+.swarm-laser-print-wrap.is-printed {
+  animation: laserPrintDissolve 0.3s forwards ease-out;
+}
+
+@keyframes laserPrintDissolve {
+  to { opacity: 0; transform: scale(1.02); }
+}
+
+/* 5. Atelier Fabric Bolt & Polaroid Pin (atelier) */
+.is-fabric-roll {
+  position: absolute;
+  pointer-events: none;
+}
+
+.swarm-fabric-cloth {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: repeating-linear-gradient(45deg, #e11d48 0 6px, #be123c 6px 12px);
+  opacity: 0.45;
+  border-radius: 4px;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.swarm-fabric-cylinder {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 14px;
+  background: linear-gradient(90deg, #9f1239, #f43f5e, #881337);
+  border-radius: 999px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.35);
+  transform: translateX(-50%);
+}
+
+.swarm-polaroid-frame {
+  position: absolute;
+  background: #fffdf5;
+  border: 3px solid #e2e8f0;
+  border-radius: 6px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  z-index: 10005;
+  transform-origin: top center;
+}
+
+.swarm-brass-pin {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* 6. Warehouse Kraft Tape & Forklift Pallet (warehouse) */
+.is-warehouse-box {
+  position: absolute;
+  pointer-events: none;
+  border: 2px dashed #ea580c;
+  background: rgba(234, 88, 12, 0.05);
+  border-radius: 4px;
+}
+
+.swarm-carton-body {
+  position: absolute;
+  inset: 0;
+  background: #78350f;
+  opacity: 0.3;
+  border-radius: 4px;
+}
+
+.swarm-kraft-tape {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 0;
+  height: 20px;
+  background: repeating-linear-gradient(90deg, #d97706 0 12px, #b45309 12px 24px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+
+.swarm-barcode-stamp {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  background: #dc2626;
+  color: #ffffff;
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transform: rotate(-5deg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.swarm-pallet-delivery {
+  position: absolute;
+  background: #854d0e;
+  border: 3px solid #ca8a04;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10005;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.swarm-pallet-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #fef08a;
+  font-family: monospace;
+}
+
+.swarm-pallet-delivery.is-unstrapped {
+  animation: palletUnstrap 0.3s forwards ease-out;
+}
+
+@keyframes palletUnstrap {
+  to { opacity: 0; transform: translateY(12px) scale(0.98); }
+}
+
+/* 7. Voxel Grid Bed & Pixel Tiles (voxel-craft) */
+.is-voxel-grid {
+  position: absolute;
+  pointer-events: none;
+}
+
+.swarm-voxel-bed {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(22, 163, 74, 0.3) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(22, 163, 74, 0.3) 2px, transparent 2px);
+  background-size: 16px 16px;
+  border: 3px solid #16a34a;
+  image-rendering: pixelated;
+  border-radius: 4px;
+}
+
+/* 8. Kitchen Dough Board, Rolling Pin & Caramelize (kitchen) */
+.is-dough-board {
+  position: absolute;
+  pointer-events: none;
+}
+
+.swarm-dough-blob {
+  position: absolute;
+  inset: 0;
+  background: #fef3c7;
+  border: 2px solid #f59e0b;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.2);
+  transition: border-radius 0.2s ease;
+}
+
+.swarm-rolling-pin {
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  width: 18px;
+  background: linear-gradient(90deg, #92400e, #d97706, #78350f);
+  border-radius: 999px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateX(-50%);
+}
+
+.swarm-caramelize {
+  animation: caramelizeWave 0.28s ease-in-out forwards;
+}
+
+@keyframes caramelizeWave {
+  0% { filter: brightness(1.5) contrast(1.2); }
+  100% { filter: brightness(1) contrast(1); }
+}
+
+/* 9. Street Art Wheatpaste Strokes, Spray Drips & Squeegee (street-art) */
+.is-wheatpaste-slab {
+  position: absolute;
+  pointer-events: none;
+}
+
+.swarm-wheat-stroke {
+  position: absolute;
+  background: rgba(236, 72, 153, 0.3);
+  border-radius: 999px;
+  height: 26px;
+  pointer-events: none;
+  transform-origin: left center;
+}
+
+.swarm-wheat-stroke.stroke-1 { top: 20%; left: 0; width: 90%; transform: rotate(-8deg); }
+.swarm-wheat-stroke.stroke-2 { top: 50%; right: 0; width: 90%; transform: rotate(10deg); }
+.swarm-wheat-stroke.stroke-3 { top: 75%; left: 10%; width: 80%; transform: rotate(-4deg); }
+
+.swarm-street-drips {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10010;
+}
+
+.swarm-paint-drip {
+  position: absolute;
+  width: 6px;
+  background: #ec4899;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 2px 8px rgba(236, 72, 153, 0.5);
+  animation: paintDripSlide 0.5s ease-out forwards;
+}
+
+@keyframes paintDripSlide {
+  from { transform: scaleY(0); transform-origin: top center; }
+  to { transform: scaleY(1); }
+}
+
+.swarm-squeegee-press {
+  animation: squeegeeWipe 0.25s ease-out forwards;
+}
+
+@keyframes squeegeeWipe {
+  0% { clip-path: inset(0 0 100% 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+/* 10. Press Room Chase Bars, CMYK Plates & Brayer Press (press-room) */
+.is-press-chase {
+  position: absolute;
+  pointer-events: none;
+  border: 2px solid #475569;
+}
+
+.swarm-chase-bar {
+  position: absolute;
+  background: #334155;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.swarm-chase-bar.is-top { top: 0; left: 0; right: 0; height: 4px; }
+.swarm-chase-bar.is-bottom { bottom: 0; left: 0; right: 0; height: 4px; }
+.swarm-chase-bar.is-left { left: 0; top: 0; bottom: 0; width: 4px; }
+.swarm-chase-bar.is-right { right: 0; top: 0; bottom: 0; width: 4px; }
+
+.swarm-crop-mark {
+  position: absolute;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 900;
+  color: #475569;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.swarm-crop-mark.is-tl { top: -8px; left: -8px; }
+.swarm-crop-mark.is-tr { top: -8px; right: -8px; }
+.swarm-crop-mark.is-bl { bottom: -8px; left: -8px; }
+.swarm-crop-mark.is-br { bottom: -8px; right: -8px; }
+
+.swarm-cmyk-wrap {
+  position: absolute;
+  z-index: 10005;
+  border: 1px dashed #64748b;
+}
+
+.swarm-cmyk-plate {
+  position: absolute;
+  inset: 0;
+  border: 2px solid;
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+  border-radius: 4px;
+  transition: transform 0.25s ease-out;
+}
+
+.swarm-cmyk-plate.is-c { border-color: #06b6d4; }
+.swarm-cmyk-plate.is-m { border-color: #ec4899; }
+.swarm-cmyk-plate.is-y { border-color: #eab308; }
+.swarm-cmyk-plate.is-k { border-color: #0f172a; }
+
+.swarm-cmyk-wrap.is-registered {
+  animation: cmykSnap 0.3s forwards ease-out;
+}
+
+@keyframes cmykSnap {
+  0% { transform: scale(1.02); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+.swarm-brayer-press {
+  animation: brayerRoll 0.25s ease-out forwards;
+}
+
+@keyframes brayerRoll {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+.is-typewriter-strike {
+  animation: strikeImpact 0.1s ease-out;
+}
+
+@keyframes strikeImpact {
+  0% { transform: scale(1.05); filter: brightness(1.3); }
+  100% { transform: scale(1); filter: none; }
+}
+
+
+
+/* Floating Bottom Dock (Theme Switcher) */
+.swarm-dock {
+  position: fixed;
+  bottom: 16px;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10025;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 5px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: calc(100vw - 32px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  animation: swarmDockIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.swarm-dock::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes swarmDockIn {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.swarm-dock-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  height: 38px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
   cursor: pointer;
-  border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  outline: none;
+  font-family: inherit;
 }
 
-.rebuild-nav-btn i {
-  color: var(--brand-2, #0891b2);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+.swarm-dock-chip:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
 }
 
-.rebuild-nav-btn:hover i {
-  color: var(--brand, #6d28d9);
-  transform: rotate(180deg) scale(1.15);
+.swarm-dock-chip.active {
+  background: #38bdf8;
+  color: #0b1120;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.35);
+  font-weight: 700;
+  transform: translateY(-2px);
+}
+
+.swarm-dock-icon {
+  font-size: 16px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swarm-dock-label {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transition: max-width 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  display: inline-block;
+  pointer-events: none;
+}
+
+.swarm-dock-chip:hover .swarm-dock-label,
+.swarm-dock-chip.active .swarm-dock-label {
+  max-width: 160px;
+  opacity: 1;
+  margin-left: 2px;
+}
+
+@media (max-width: 768px) {
+  .swarm-dock {
+    bottom: 12px;
+    max-width: calc(100vw - 16px);
+    padding: 4px 6px;
+    gap: 3px;
+  }
+  .swarm-dock-chip {
+    height: 34px;
+    padding: 0 8px;
+  }
+  .swarm-dock-icon {
+    font-size: 15px;
+  }
+  .swarm-dock-chip:hover .swarm-dock-label,
+  .swarm-dock-chip.active .swarm-dock-label {
+    max-width: 120px;
+    font-size: 11px;
+  }
 }
 
 /* Reduced Motion Override */
@@ -305,7 +1511,17 @@ body.swarm-active main {
   .swarm-pen,
   .swarm-text,
   .swarm-canvas,
-  .swarm-toolbar {
+  .swarm-toolbar,
+  .swarm-spark,
+  .swarm-pollen,
+  .swarm-dirt,
+  .swarm-steam,
+  .swarm-spray-dot,
+  .swarm-crate-wrap,
+  .swarm-wax-cover,
+  .swarm-cloche,
+  .swarm-chest,
+  .swarm-sticker {
     display: none !important;
   }
   .swarm-pending {

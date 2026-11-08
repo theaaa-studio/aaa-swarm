@@ -20,16 +20,18 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 
 ## ✨ Features
 
-- **🤖 Autonomous Multi-Agent Flocking**: Smooth physics-driven cursor motion with velocity damping, jitter reduction, and collision separation.
-- **📐 Blueprint Dot Grid Canvas**: Fixed-position background dot-matrix canvas (`z-index: 0`) that smoothly fades away once the site is complete.
-- **🛠️ Dynamic Tool Actions**:
-  - **Bounding Box Dragging**: Cursors draw dashed outlines with real-time dimension badges (e.g. `340 × 180`).
-  - **Border Pen Tracing**: Colored SVG pens trace cards, buttons, and container boundaries.
-  - **Typewriter Typography**: Cursors stamp headings, subtitles, and paragraphs character by character with active blinking carets.
+- **🎨 Multi-Theme Rebuild Framework**: Switch instantly between digital product UI design cursors (`default`) and heavy industrial builders (`construction`), or plug in custom themes with `Swarm.registerTheme()`.
+- **📐 CAD Blueprint & Hazard Stripe Canvas**: Authentic blueprint grid background with metric scales, technical stamps, and perimeter hazard warning stripes (`#f59e0b` / `#1e293b`).
+- **🛠️ 5 Complete Physical Assembly Phases (Radically Customized Across 11 Themes)**:
+  - **`dragBox` (Layout Framing)**: Rising scaffolding vertical poles (`construction`), figure-8 honeycomb wax bloom (`beehive`), pheromone trench haul (`ant-colony`), dual drone laser scanbar sweep (`cyber-nanobots`), fabric bolt unroll (`atelier`), kraft tape carton dispensing (`warehouse`), voxel tile pop (`voxel-craft`), rolling pin dough flattening (`kitchen`), diagonal wheatpaste strokes (`street-art`), movable-type chase frame clamp (`press-room`).
+  - **`traceBorder` (Perimeter Sealing)**: White-hot welder blowtorch sparks (`construction`), dripping amber honey droplets (`beehive`), marching ant mandible wall (`ant-colony`), PCB copper routing with solder pads (`cyber-nanobots`), needle running stitches with silk thread (`atelier`), barcode scanner sweep + FRAGILE stamp (`warehouse`), redstone wire glow (`voxel-craft`), fluted pastry cream piping (`kitchen`), aerosol neon spray with vertical paint runs (`street-art`), fountain pen ruling with corner crop-marks ┼ (`press-room`).
+  - **`fillBox` (Surface Solidify)**: Hydraulic wet concrete pour, liquid amber honey crystallization, leaf & soil tile packing, Matrix glitch voxel materialize, silk cloth drape down, 3D cardboard flaps folding, 16x16 pixel block stack, kitchen blowtorch caramelization, squeegee poster press, ink brayer roller sheet sweep.
+  - **`typeText` (Letterform Inscription)**: Matrix hex-decrypt character scrambler (`0x8F#$`), scout bee waggle dance depositing pollen, ant letter token delivery, monogram embroidery needle bob, chocolate syrup drizzle, mechanical typewriter hammer punch with ribbon flash, 8-bit RPG text ticker, industrial stencil spray.
+  - **`dropImage` (Media Unpacking)**: 11 distinct custom unpackers: tower crane wooden crate shatter, honeycomb wax cap unseal, 8-ant heavy cargo lift, laser 3D hologram sinter sweep, Polaroid moodboard photo + brass pushpin, forklift pallet delivery, pixel treasure chest with golden glow, silver cloche dome steam lift, slap-sticker angle slam & squeegee, CMYK 4-color halftone plate alignment.
 - **🎥 Guided Scroll-Follow Camera**: Automatically scrolls the viewport to each `<section>` as it begins construction, guaranteeing visitors never miss the animation offscreen.
 - **🔝 Automatic Glide Back to Top**: Once all sections are fully assembled, smoothly animates the camera back to `(0, 0)` so visitors can browse normally.
 - **⚡ Speed Toggle & Instant Skip**:
-  - Floating pill toolbar showing live status (e.g., *"Building Tech Stack..."*).
+  - Floating pill toolbar showing live status (e.g., *"Constructing Core Features..."*).
   - Speed toggle: `1×` / `2×` / `3×`.
   - Instant **Skip** button (`Esc` key) to unveil everything immediately without waiting.
   - **Replay** trigger (`Alt + Shift + S`) to restart the rebuild anytime.
@@ -147,7 +149,8 @@ Ensure your page sections are structured using `<section>` tags inside `<main>` 
     // Optional short delay (e.g. 100ms) to allow WebGL / fonts to settle baseline geometry
     setTimeout(function () {
       if (window.Swarm) {
-        window.Swarm.init({ root: "main", agents: 10 });
+        // Available themes: "default" | "construction"
+        window.Swarm.init({ root: "main", agents: 10, theme: "construction" });
       }
     }, 100);
   });
@@ -156,18 +159,32 @@ Ensure your page sections are structured using `<section>` tags inside `<main>` 
 
 ---
 
-## 🕹️ Public API
+## 🕹️ Public API & Configuration Options
 
-The engine attaches a global `window.Swarm` object:
+The engine attaches a global `window.Swarm` object and exports UMD/CJS modules:
 
-| Method | Parameters | Description |
-|---|---|---|
-| `Swarm.init(options)` | `{ root: "main", agents: 10 }` | Initializes run, snapshots DOM, starts guided scroll tour |
-| `Swarm.play(options)` | `{ root, agents }` | Alias for `init()` |
-| `Swarm.skip()` | *None* | Cancels tour, unveils all pending elements, restores regular browsing |
-| `Swarm.replay()` | *None* | Cleans up current run, scrolls to top, and runs fresh tour |
-| `Swarm.triggerSectionById(id)` | `sectionId` | Jumps tour directly to a specific section by element ID |
-| `Swarm.isRunning()` | *None* | Returns `true` if tour/rebuild is actively in progress |
+| Method / Option | Type | Default | Description |
+|---|---|---|---|
+| `Swarm.init(options)` | `Object` | `{}` | Initializes run, snapshots DOM, starts guided scroll tour. Returns `{ run, destroy }` |
+| `options.root` | `string \| HTMLElement` | `"main"` | Selector or DOM element (React `useRef.current` / Vue `ref.value`) |
+| `options.theme` | `string` | `"default"` | Active starting theme ID |
+| `options.themes` | `Array<string>` | `null` (All) | Array of enabled themes. **If only 1 theme, site is locked and theme switcher dock is hidden!** |
+| `options.showDock` | `boolean \| "auto"` | `"auto"` | Floating bottom icon dock (`true`, `false`, or `"auto"`: shown when >1 theme) |
+| `options.showToolbar` | `boolean` | `true` | Floating status / speed / skip pill |
+| `options.speed` | `1 \| 2 \| 3` | `1` | Initial speed multiplier |
+| `options.agents` | `number` | `8` (desk) / `4` (mob) | Worker cursor agents count |
+| `options.oncePerSession` | `boolean` | `false` | When `true`, saves completion in `sessionStorage` and skips on subsequent visits |
+| `options.sectionSelector` | `string` | `"section, [data-swarm-section]"` | Selector for tour sections |
+| `options.onComplete` | `Function` | `null` | Callback executed when tour returns to top |
+| `Swarm.destroy()` | `Function` | *None* | Tears down active run, removes overlays, canvases, docks, and event listeners |
+| `Swarm.play(options)` | `Function` | `opts` | Alias for `init(options)` |
+| `Swarm.setTheme(name)` | `Function` | `name` | Switches active theme and restarts tour |
+| `Swarm.getTheme()` | `Function` | *None* | Returns active theme identifier |
+| `Swarm.getThemes()` | `Function` | *None* | Returns array of available themes |
+| `Swarm.skip()` | `Function` | *None* | Cancels tour, unveils all pending elements, restores regular browsing |
+| `Swarm.replay(options)` | `Function` | `opts` | Cleans up current run, scrolls to top, and runs fresh tour with options |
+| `Swarm.triggerSectionById(id)` | `Function` | `sectionId` | Jumps tour directly to a specific section by element ID |
+| `Swarm.isRunning()` | `Function` | *None* | Returns `true` if tour/rebuild is actively in progress |
 
 ### ⌨️ Keyboard Shortcuts
 
