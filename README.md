@@ -10,11 +10,48 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 
 ## 🎬 Live Showcase
 
-> **Recorded live on [theaaa.pro.bd](https://theaaa.pro.bd)**
+Experience autonomous agent swarms assembling websites piece-by-piece in real time:
 
 ![AAA Swarm Guided Tour Preview](assets/swarm-preview.png)
 
-* **Interactive Live Demo**: Experience the full rebuild tour live at **[theaaa.pro.bd](https://theaaa.pro.bd)**.
+### 🛸 Floating Bottom Theme Switcher Dock
+Hover any icon to reveal its industry label; click to instantly rebuild the entire page in that theme's physical choreography:
+
+![Floating Bottom Theme Switcher Dock](assets/demo-theme-dock.png)
+
+* **Interactive Live Demo**: Open `index.html` locally or visit GitHub Pages.
+
+---
+
+## 🛠️ Interactive Configurator & Manual Builder Studio
+
+Want to customize themes or build manually? The demo includes a built-in interactive configurator studio (`#integration`) that generates copy-paste ready code for any stack:
+
+![Interactive Configurator & Framework Studio](assets/demo-builder-studio.png)
+
+- **1 or Many Themes Picker**: Toggle between **Single Locked Theme** (hides theme switcher for a pristine branded experience), **Multi-Theme Dock** (pick 2–11 themes), or **All 11 Themes**.
+- **Fine-Grained Runtime Options**: Toggle floating dock, status toolbar HUD, run once-per-session (`sessionStorage`), speed multipliers (1× / 2× / 3×), and agent worker count.
+- **6 Framework Code Generators**: Instant drop-in snippets for **Vanilla HTML / CDN**, **React / Next.js**, **Vue 3 / Nuxt 3**, **Svelte / SvelteKit**, **Astro**, and **🤖 AI Agent Prompt**.
+- **Test Live**: Click `▶️ Test Live` to immediately preview your custom options right on the demo page.
+- **1-Click Downloads**: Direct links to download standalone `swarm.js` and `swarm.css`.
+
+---
+
+## 🎨 11 Authentic Industry Themes
+
+Each theme features completely bespoke physical construction choreographies, custom vector tools, particle sparks, and sound effects:
+
+### 1. Heavy Construction & Engineering (`construction`)
+Scaffolding vertical poles, blowtorch welder sparks, hydraulic concrete pour, and crane cargo crate drops:
+![Heavy Construction Theme](assets/demo-theme-construction.png)
+
+### 2. AI, Cloud & Cybersecurity (`cyber-nanobots`)
+Micro-drones with dual vertical laser scanbars, PCB copper traces with solder pads, and Matrix hex decryption:
+![Cyber Nanobots Theme](assets/demo-theme-cyber.png)
+
+### 3. Voxel Craft & Gaming (`voxel-craft`)
+Pixelated pickaxes swinging as 16x16 voxel blocks snap with physics bounce, Redstone wire border glow, and treasure chest unpacks:
+![Voxel Craft Studio Theme](assets/demo-theme-voxel.png)
 
 ---
 
@@ -44,10 +81,17 @@ Zero external dependencies. Pure vanilla JavaScript and CSS.
 
 ```text
 aaa-swarm/
+├── index.html            # Production showcase demo & interactive builder studio
+├── .nojekyll             # Direct GitHub Pages static deployment guard
 ├── assets/
-│   ├── swarm-preview.png # Visual preview screenshot (197 KB)
-│   ├── swarm.css         # Core styles, blueprint grid, agent badges, toolbars (6.5 KB)
-│   └── swarm.js          # Vanilla JS engine (flocking, scheduler, tour, API) (26 KB)
+│   ├── swarm-preview.png # Live hero tour screenshot with multiplayer cursors
+│   ├── demo-builder-studio.png # Interactive manual builder & code generator
+│   ├── demo-theme-dock.png     # Floating bottom icon dock with hover reveal
+│   ├── demo-theme-construction.png # Scaffolding, blowtorches & crane mechanics
+│   ├── demo-theme-cyber.png        # Dual laser scanbars & Matrix hex decrypt
+│   ├── demo-theme-voxel.png        # 16x16 voxel snap, redstone wire & treasure chest
+│   ├── swarm.css         # Complete 11-theme stylesheets & CAD blueprint grid
+│   └── swarm.js          # UMD/SSR-safe tour engine & multi-agent physics
 ├── SKILL.md              # Open Agent Skills standard specification (Claude Code, Codex, Antigravity)
 ├── AGENTS.md             # Multi-agent guideline specification (OpenCode, Codex, Aider)
 └── README.md             # Project guide and documentation
