@@ -1,4 +1,4 @@
-/* Swarm Rebuild CSS — 11 Industry Themes */
+/* Swarm Rebuild CSS — 13 Industry Themes */
 
 body.swarm-active main {
   position: relative;
@@ -42,7 +42,7 @@ body.swarm-active main {
 }
 
 /* ================================================================== */
-/* Blueprint Canvases across 11 Themes                                */
+/* Blueprint Canvases across 13 Themes                                */
 /* ================================================================== */
 
 .swarm-canvas {
@@ -172,6 +172,50 @@ body.swarm-active main {
   background-image: 
     linear-gradient(rgba(203, 213, 225, 0.09) 1px, transparent 1px);
   background-size: 100% 24px;
+}
+
+/* 11. Molecular Science Lab Lattice */
+.swarm-canvas[data-theme="science"] {
+  background-color: #040d12;
+  background-image: 
+    linear-gradient(rgba(16, 185, 129, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.14) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.swarm-canvas[data-theme="science"]::after {
+  content: "HELIX-CORE // QUANTUM GENOMICS LAB [CRISPR-CAS9]";
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #10b981;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* 12. 16-Bit Pixel Studio Retro Grid */
+.swarm-canvas[data-theme="pixel"] {
+  background-color: #0b0614;
+  background-image: 
+    linear-gradient(rgba(244, 63, 94, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 204, 21, 0.16) 1px, transparent 1px);
+  background-size: 16px 16px;
+  image-rendering: pixelated;
+}
+.swarm-canvas[data-theme="pixel"]::after {
+  content: "SPRITEWORKS // 16-BIT RETRO ARCADE [INSERT COIN]";
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: #facc15;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* ================================================================== */
@@ -682,7 +726,7 @@ body[data-swarm-theme="cyber-nanobots"] .swarm-text {
   transform: translateX(-50%) translateY(20px);
 }
 
-/* 11 Theme Personalized Toolbar Styles */
+/* 13 Theme Personalized Toolbar Styles */
 body[data-swarm-theme="default"] .swarm-toolbar {
   background: rgba(15, 23, 42, 0.94);
   border-color: rgba(99, 102, 241, 0.45);
@@ -770,6 +814,24 @@ body[data-swarm-theme="press-room"] .swarm-toolbar {
   font-family: Georgia, serif;
 }
 body[data-swarm-theme="press-room"] .swarm-dot { background: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
+
+body[data-swarm-theme="science"] .swarm-toolbar {
+  background: rgba(6, 18, 24, 0.96);
+  border: 1.5px solid #10b981;
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.35);
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+body[data-swarm-theme="science"] .swarm-dot { background: #34d399; box-shadow: 0 0 12px #10b981; }
+
+body[data-swarm-theme="pixel"] .swarm-toolbar {
+  background: #0c0714;
+  border: 2px solid #f43f5e;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 #000, 0 0 16px rgba(244, 63, 94, 0.4);
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+}
+body[data-swarm-theme="pixel"] .swarm-dot { border-radius: 0; background: #facc15; box-shadow: 0 0 8px #facc15; }
 
 /* Responsive Mobile Swarm Overrides */
 @media (max-width: 640px) {
@@ -864,7 +926,7 @@ body[data-swarm-theme="press-room"] .swarm-dot { background: #38bdf8; box-shadow
 }
 
 /* ================================================================== */
-/* Theme Choreography Enhancements: 11 Unique Construction Modes      */
+/* Theme Choreography Enhancements: 13 Unique Construction Modes      */
 /* ================================================================== */
 
 /* 1. Scaffolding & Hydraulic Concrete Pour (construction) */
@@ -1388,6 +1450,146 @@ body[data-swarm-theme="press-room"] .swarm-dot { background: #38bdf8; box-shadow
 
 
 
+/* 11. Molecular Science Lab (science) */
+.is-science-lattice {
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.04);
+}
+
+.swarm-science-grid {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.swarm-dna-rung {
+  position: absolute;
+  top: 15%;
+  bottom: 15%;
+  width: 2px;
+  background: linear-gradient(180deg, #10b981, #06b6d4, #8b5cf6);
+  opacity: 0.6;
+  animation: dnaOscillate 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes dnaOscillate {
+  from { transform: scaleY(0.4) rotate(-5deg); opacity: 0.3; }
+  to { transform: scaleY(1) rotate(5deg); opacity: 0.8; }
+}
+
+.fill-science {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.1));
+  animation: titrationWave 0.35s ease-out forwards;
+}
+
+@keyframes titrationWave {
+  0% { clip-path: inset(100% 0 0 0); filter: brightness(1.5); }
+  100% { clip-path: inset(0 0 0 0); filter: brightness(1); }
+}
+
+.swarm-cryo-pod {
+  position: absolute;
+  border: 2px solid #06b6d4;
+  background: rgba(6, 182, 212, 0.08);
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px;
+  overflow: hidden;
+  animation: cryoFrost 0.3s forwards ease-out;
+}
+
+.cryo-header {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 11px;
+  color: #38bdf8;
+  letter-spacing: 0.08em;
+}
+
+.cryo-frost {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+.swarm-cryo-pod.is-unsealed {
+  animation: cryoUnseal 0.35s forwards ease-out;
+}
+
+@keyframes cryoUnseal {
+  0% { transform: scale(1); filter: blur(0px); }
+  50% { filter: blur(4px) brightness(1.4); }
+  100% { opacity: 0; transform: scale(1.03); }
+}
+
+/* 12. 16-Bit Pixel Studio (pixel) */
+.is-pixel-canvas {
+  position: absolute;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+.swarm-pixel-checker {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(45deg, #1c1427 25%, transparent 25%), 
+    linear-gradient(-45deg, #1c1427 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #1c1427 75%), 
+    linear-gradient(-45deg, transparent 75%, #1c1427 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  opacity: 0.7;
+  border: 2px dashed #f43f5e;
+}
+
+.is-pixel-badge {
+  font-family: "Courier New", monospace !important;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  border-radius: 0 !important;
+}
+
+.fill-pixel {
+  image-rendering: pixelated;
+  animation: pixelDitherIn 0.3s steps(4) forwards;
+}
+
+@keyframes pixelDitherIn {
+  0% { opacity: 0; filter: contrast(2) brightness(1.5); }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; filter: none; }
+}
+
+.swarm-rom-cartridge {
+  position: absolute;
+  background: #1e112a;
+  border: 3px solid #facc15;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #facc15;
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.swarm-rom-cartridge.is-slammed {
+  animation: romSnap 0.25s forwards steps(3);
+}
+
+@keyframes romSnap {
+  0% { transform: scale(1.04); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
 /* Floating Bottom Dock (Theme Switcher) */
 .swarm-dock {
   position: fixed;
@@ -1521,7 +1723,9 @@ body[data-swarm-theme="press-room"] .swarm-dot { background: #38bdf8; box-shadow
   .swarm-wax-cover,
   .swarm-cloche,
   .swarm-chest,
-  .swarm-sticker {
+  .swarm-sticker,
+  .swarm-cryo-pod,
+  .swarm-rom-cartridge {
     display: none !important;
   }
   .swarm-pending {

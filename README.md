@@ -29,7 +29,7 @@ Want to customize themes or build manually? The demo includes a built-in interac
 
 ![Interactive Configurator & Framework Studio](assets/demo-builder-studio.png)
 
-- **1 or Many Themes Picker**: Toggle between **Single Locked Theme** (hides theme switcher for a pristine branded experience), **Multi-Theme Dock** (pick 2–11 themes), or **All 11 Themes**.
+- **1 or Many Themes Picker**: Toggle between **Single Locked Theme** (hides theme switcher for a pristine branded experience), **Multi-Theme Dock** (pick 2–13 themes), or **All 13 Themes**.
 - **Fine-Grained Runtime Options**: Toggle floating dock, status toolbar HUD, run once-per-session (`sessionStorage`), speed multipliers (1× / 2× / 3×), and agent worker count.
 - **6 Framework Code Generators**: Instant drop-in snippets for **Vanilla HTML / CDN**, **React / Next.js**, **Vue 3 / Nuxt 3**, **Svelte / SvelteKit**, **Astro**, and **🤖 AI Agent Prompt**.
 - **Test Live**: Click `▶️ Test Live` to immediately preview your custom options right on the demo page.
@@ -37,7 +37,7 @@ Want to customize themes or build manually? The demo includes a built-in interac
 
 ---
 
-## 🎨 11 Authentic Industry Themes
+## 🎨 13 Authentic Industry Themes
 
 Each theme features completely bespoke physical construction choreographies, custom vector tools, particle sparks, and sound effects:
 
@@ -53,18 +53,44 @@ Micro-drones with dual vertical laser scanbars, PCB copper traces with solder pa
 Pixelated pickaxes swinging as 16x16 voxel blocks snap with physics bounce, Redstone wire border glow, and treasure chest unpacks:
 ![Voxel Craft Studio Theme](assets/demo-theme-voxel.png)
 
+### 4. Quantum & Molecular Science Lab (`science`)
+Expanding molecular double-helix DNA rungs, micropipette covalent bond perimeter with cyan particle emission, chemical titration waves, and cryo-stasis containment pod unsealing:
+![Quantum & Molecular Science Lab Theme](assets/demo-theme-science.png)
+
+### 5. 16-Bit Pixel Art & Retro Arcade (`pixel`)
+8×8 alpha checkerboard canvas, 1-bit stair-stepped pixel borders with 4px grid snapping, Bayer ordered dithering, and retro 8-bit ROM cartridge slams:
+![16-Bit Pixel Art & Retro Arcade Theme](assets/demo-theme-pixel.png)
+
+### Complete 13-Theme Physical Choreography Matrix
+
+| Theme ID | Industry Niche & Brand | 5-Phase Physical Choreography |
+|---|---|---|
+| `default` | SaaS, Digital Product Design (`AAA Studio`) | Blueprint bounding box, vector pen crosshairs, grid fade, terminal caret, crop frame |
+| `construction` | Heavy Civil & Structural Engineering (`APEX Structural`) | Scaffolding vertical poles, blowtorch welder sparks, wet concrete pour, crane wooden crate drop |
+| `beehive` | Organic Biotech, Honey & Apiculture (`Apis BioLabs`) | Figure-8 beeswax bloom, dripping amber honey drops, crystallization fill, scout bee waggle dance, honeycomb wax cap unseal |
+| `ant-colony` | Logistics, DevOps & Haulage (`Myrmex Logistics`) | Forager pheromone trench haul, mandible boundary wall, soil tile packing, ant letter delivery, 8-ant heavy cargo lift |
+| `cyber-nanobots` | AI, Cloud & Photolithography (`Nexus-9 AI`) | Quadcopter dual vertical laser scanbars, PCB copper routing with solder pads, Matrix hex decrypt, 3D laser sinter sweep |
+| `atelier` | Haute Couture & Luxury Tailoring (`Maison Lumière`) | Fabric bolt unroll, running needle bob stitches with silk thread, drape down, monogram embroidery, Polaroid brass pushpin |
+| `warehouse` | E-Commerce, AGV & Cross-Dock (`KivaFlow Logistics`) | Kraft tape carton dispensing, barcode scanner sweep + FRAGILE stamp, 3D cardboard flaps folding, forklift pallet delivery |
+| `voxel-craft` | 3D Voxel Gaming & EdTech (`BlockForge Engine`) | 16x16 voxel block snap with bounce, Redstone wire border glow, cubic block stack, 8-bit RPG text ticker, bouncing treasure chest |
+| `kitchen` | Artisanal Bakery & Grand Bistro (`L'Étoile Dorée`) | Rolling pin dough flattening, fluted pastry cream piping, blowtorch caramelization, chocolate syrup drizzle, silver cloche steam lift |
+| `street-art` | Urban Murals & Creative Agencies (`KRYLON Syndicate`) | Diagonal wheatpaste strokes, fat-cap aerosol spray with vertical paint runs, squeegee poster press, industrial stencil, slap-sticker slam |
+| `press-room` | Broadsheet Journalism & Legal/Finance (`The Daily Chronicle`) | Iron movable-type chase frame clamp ┼, ink brayer roller sweep, mechanical typewriter hammer punch, CMYK halftone plate alignment |
+| `science` | Quantum & Molecular Genomics (`HelixCore Labs`) | Molecular double-helix DNA rungs, micropipette covalent bond perimeter, chemical titration wave, periodic element symbols, cryo-stasis pod unseal |
+| `pixel` | 16-Bit Pixel Art & Retro Arcade (`SpriteWorks Studio`) | 8×8 alpha checkerboard, 1-bit stair-stepped pixel borders with 4px grid snap, Bayer ordered dither matrix, 4px block caret, 8-bit ROM cartridge slam |
+
 ---
 
 ## ✨ Features
 
 - **🎨 Multi-Theme Rebuild Framework**: Switch instantly between digital product UI design cursors (`default`) and heavy industrial builders (`construction`), or plug in custom themes with `Swarm.registerTheme()`.
 - **📐 CAD Blueprint & Hazard Stripe Canvas**: Authentic blueprint grid background with metric scales, technical stamps, and perimeter hazard warning stripes (`#f59e0b` / `#1e293b`).
-- **🛠️ 5 Complete Physical Assembly Phases (Radically Customized Across 11 Themes)**:
-  - **`dragBox` (Layout Framing)**: Rising scaffolding vertical poles (`construction`), figure-8 honeycomb wax bloom (`beehive`), pheromone trench haul (`ant-colony`), dual drone laser scanbar sweep (`cyber-nanobots`), fabric bolt unroll (`atelier`), kraft tape carton dispensing (`warehouse`), voxel tile pop (`voxel-craft`), rolling pin dough flattening (`kitchen`), diagonal wheatpaste strokes (`street-art`), movable-type chase frame clamp (`press-room`).
-  - **`traceBorder` (Perimeter Sealing)**: White-hot welder blowtorch sparks (`construction`), dripping amber honey droplets (`beehive`), marching ant mandible wall (`ant-colony`), PCB copper routing with solder pads (`cyber-nanobots`), needle running stitches with silk thread (`atelier`), barcode scanner sweep + FRAGILE stamp (`warehouse`), redstone wire glow (`voxel-craft`), fluted pastry cream piping (`kitchen`), aerosol neon spray with vertical paint runs (`street-art`), fountain pen ruling with corner crop-marks ┼ (`press-room`).
-  - **`fillBox` (Surface Solidify)**: Hydraulic wet concrete pour, liquid amber honey crystallization, leaf & soil tile packing, Matrix glitch voxel materialize, silk cloth drape down, 3D cardboard flaps folding, 16x16 pixel block stack, kitchen blowtorch caramelization, squeegee poster press, ink brayer roller sheet sweep.
-  - **`typeText` (Letterform Inscription)**: Matrix hex-decrypt character scrambler (`0x8F#$`), scout bee waggle dance depositing pollen, ant letter token delivery, monogram embroidery needle bob, chocolate syrup drizzle, mechanical typewriter hammer punch with ribbon flash, 8-bit RPG text ticker, industrial stencil spray.
-  - **`dropImage` (Media Unpacking)**: 11 distinct custom unpackers: tower crane wooden crate shatter, honeycomb wax cap unseal, 8-ant heavy cargo lift, laser 3D hologram sinter sweep, Polaroid moodboard photo + brass pushpin, forklift pallet delivery, pixel treasure chest with golden glow, silver cloche dome steam lift, slap-sticker angle slam & squeegee, CMYK 4-color halftone plate alignment.
+- **🛠️ 5 Complete Physical Assembly Phases (Radically Customized Across 13 Themes)**:
+  - **`dragBox` (Layout Framing)**: Rising scaffolding vertical poles (`construction`), figure-8 honeycomb wax bloom (`beehive`), pheromone trench haul (`ant-colony`), dual drone laser scanbar sweep (`cyber-nanobots`), fabric bolt unroll (`atelier`), kraft tape carton dispensing (`warehouse`), voxel tile pop (`voxel-craft`), rolling pin dough flattening (`kitchen`), diagonal wheatpaste strokes (`street-art`), movable-type chase frame clamp (`press-room`), oscillating DNA double-helix rungs (`science`), 8×8 alpha checkerboard with marching ants marquee (`pixel`).
+  - **`traceBorder` (Perimeter Sealing)**: White-hot welder blowtorch sparks (`construction`), dripping amber honey droplets (`beehive`), marching ant mandible wall (`ant-colony`), PCB copper routing with solder pads (`cyber-nanobots`), needle running stitches with silk thread (`atelier`), barcode scanner sweep + FRAGILE stamp (`warehouse`), redstone wire glow (`voxel-craft`), fluted pastry cream piping (`kitchen`), aerosol neon spray with vertical paint runs (`street-art`), fountain pen ruling with corner crop-marks ┼ (`press-room`), micropipette covalent bond perimeter with cyan particle emission (`science`), 1-bit stair-stepped pixel outline with 4px grid snapping (`pixel`).
+  - **`fillBox` (Surface Solidify)**: Hydraulic wet concrete pour, liquid amber honey crystallization, leaf & soil tile packing, Matrix glitch voxel materialize, silk cloth drape down, 3D cardboard flaps folding, 16x16 pixel block stack, kitchen blowtorch caramelization, squeegee poster press, ink brayer roller sheet sweep, chemical titration wave (`science`), Bayer ordered dither matrix (`pixel`).
+  - **`typeText` (Letterform Inscription)**: Matrix hex-decrypt character scrambler (`0x8F#$`), scout bee waggle dance depositing pollen, ant letter token delivery, monogram embroidery needle bob, chocolate syrup drizzle, mechanical typewriter hammer punch with ribbon flash, 8-bit RPG text ticker, industrial stencil spray, periodic element symbol scrambler (`H`, `He`, `ΔG`, `Ψ`, `λ`) (`science`), retro 4px grid-snapped block caret (`█`) (`pixel`).
+  - **`dropImage` (Media Unpacking)**: 13 distinct custom unpackers: tower crane wooden crate shatter, honeycomb wax cap unseal, 8-ant heavy cargo lift, laser 3D hologram sinter sweep, Polaroid moodboard photo + brass pushpin, forklift pallet delivery, pixel treasure chest with golden glow, silver cloche dome steam lift, slap-sticker angle slam & squeegee, CMYK 4-color halftone plate alignment, cryo-stasis containment pod unseal with liquid nitrogen vapor mist (`science`), and retro 8-bit ROM cartridge slam with gold pin flash (`pixel`).
 - **🎥 Guided Scroll-Follow Camera**: Automatically scrolls the viewport to each `<section>` as it begins construction, guaranteeing visitors never miss the animation offscreen.
 - **🔝 Automatic Glide Back to Top**: Once all sections are fully assembled, smoothly animates the camera back to `(0, 0)` so visitors can browse normally.
 - **⚡ Speed Toggle & Instant Skip**:
@@ -90,7 +116,9 @@ aaa-swarm/
 │   ├── demo-theme-construction.png # Scaffolding, blowtorches & crane mechanics
 │   ├── demo-theme-cyber.png        # Dual laser scanbars & Matrix hex decrypt
 │   ├── demo-theme-voxel.png        # 16x16 voxel snap, redstone wire & treasure chest
-│   ├── swarm.css         # Complete 11-theme stylesheets & CAD blueprint grid
+│   ├── demo-theme-science.png      # Molecular double-helix, micropipettes & cryo-pod
+│   ├── demo-theme-pixel.png        # 16-bit pixel art, Bayer dither & ROM cartridge
+│   ├── swarm.css         # Complete 13-theme stylesheets & CAD blueprint grid
 │   └── swarm.js          # UMD/SSR-safe tour engine & multi-agent physics
 ├── SKILL.md              # Open Agent Skills standard specification (Claude Code, Codex, Antigravity)
 ├── AGENTS.md             # Multi-agent guideline specification (OpenCode, Codex, Aider)

@@ -1,7 +1,9 @@
 /**
  * Swarm — Multiplayer Cursors & Builders "Rebuild the Page" Guided Tour Effect.
  *
- * 11 Full Industry Themes:
+ * 13 Full Industry Themes:
+ *   - "science": Quantum Lab & BioTech (Erlenmeyer flasks, Micropipettes, Double-helix DNA rungs, Chemical titration wave, Cryo-stasis pod)
+ *   - "pixel": 16-Bit Pixel Art & Arcade (Pixel pencils, Paint buckets, Alpha checkerboards, Bayer dithering, ROM cartridge slam)
  *   - "default": Software/Design (Flocking Designer/Dev Cursors, Wireframes, Typing)
  *   - "construction": Heavy Builders (Hardhats, Blowtorches with sparks, Concrete pour, Crane Crate drop)
  *   - "beehive": Eco/Organic/Agri (Bumblebees, Figure-8 wax drift, Amber honey drip, Waggle pollen text, Wax uncap)
@@ -153,10 +155,62 @@
       '<polygon points="16,10 23,3 20,8 19,13" fill="#e2e8f0" stroke="#0f172a" stroke-width="1"/>' +
       '<circle cx="19" cy="7" r="1" fill="#0284c7"/>' +
       '</svg>',
+
+    flask:
+      '<svg viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">' +
+      '<path d="M11 3h4v4l5 11a2 2 0 0 1-1.8 2.8H7.8A2 2 0 0 1 6 18L11 7V3z" fill="#064e3b" stroke="#10b981" stroke-width="1.6"/>' +
+      '<line x1="9.5" y1="3" x2="16.5" y2="3" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>' +
+      '<ellipse cx="13" cy="17" rx="4" ry="2" fill="#34d399"/>' +
+      '<circle cx="11" cy="13" r="1" fill="#6ee7b7"/>' +
+      '<circle cx="15" cy="11" r="1.3" fill="#a7f3d0"/>' +
+      '</svg>',
+
+    pipette:
+      '<svg viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">' +
+      '<path d="M18 4l4 4-2 2-2-2-7 7v3l-4 4-1-1 4-4H7l7-7-2-2 2-2z" fill="#0284c7" stroke="#38bdf8" stroke-width="1.4"/>' +
+      '<circle cx="6" cy="20" r="1.5" fill="#38bdf8"/>' +
+      '</svg>',
+
+    atom:
+      '<svg viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">' +
+      '<ellipse cx="13" cy="13" rx="10" ry="3.5" fill="none" stroke="#8b5cf6" stroke-width="1.4" transform="rotate(30 13 13)"/>' +
+      '<ellipse cx="13" cy="13" rx="10" ry="3.5" fill="none" stroke="#06b6d4" stroke-width="1.4" transform="rotate(-30 13 13)"/>' +
+      '<ellipse cx="13" cy="13" rx="10" ry="3.5" fill="none" stroke="#10b981" stroke-width="1.4" transform="rotate(90 13 13)"/>' +
+      '<circle cx="13" cy="13" r="2.5" fill="#a7f3d0" stroke="#059669" stroke-width="1"/>' +
+      '</svg>',
+
+    pixelPencil:
+      '<svg viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">' +
+      '<rect x="16" y="4" width="4" height="4" fill="#f43f5e"/>' +
+      '<rect x="12" y="8" width="4" height="4" fill="#facc15"/>' +
+      '<rect x="8" y="12" width="4" height="4" fill="#facc15"/>' +
+      '<rect x="4" y="16" width="4" height="4" fill="#e2e8f0"/>' +
+      '<rect x="2" y="20" width="3" height="3" fill="#0f172a"/>' +
+      '</svg>',
+
+    paintBucket:
+      '<svg viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">' +
+      '<rect x="6" y="8" width="12" height="12" transform="rotate(-25 12 14)" fill="#a855f7" stroke="#e2e8f0" stroke-width="1.5"/>' +
+      '<path d="M16 16 C20 18 22 22 23 25" stroke="#f43f5e" stroke-width="3" stroke-linecap="round" fill="none"/>' +
+      '<circle cx="23" cy="25" r="1.5" fill="#f43f5e"/>' +
+      '</svg>',
+
+    pixelSprite:
+      '<svg viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">' +
+      '<rect x="6" y="4" width="3" height="3" fill="#22d3ee"/>' +
+      '<rect x="17" y="4" width="3" height="3" fill="#22d3ee"/>' +
+      '<rect x="9" y="7" width="8" height="3" fill="#22d3ee"/>' +
+      '<rect x="6" y="10" width="14" height="6" fill="#22d3ee"/>' +
+      '<rect x="8" y="12" width="2" height="2" fill="#0c0714"/>' +
+      '<rect x="16" y="12" width="2" height="2" fill="#0c0714"/>' +
+      '<rect x="6" y="16" width="3" height="5" fill="#f43f5e"/>' +
+      '<rect x="17" y="16" width="3" height="5" fill="#f43f5e"/>' +
+      '<rect x="11" y="16" width="4" height="3" fill="#facc15"/>' +
+      '</svg>',
   };
 
   /* ------------------------------------------------------------------ */
-  /* Theme Registry Definition (11 Unique Industries)                  */
+  /* Theme Registry Definition (13 Unique Industries)                  */
   /* ------------------------------------------------------------------ */
 
   const THEMES = {
@@ -402,9 +456,53 @@
       boxClass: "is-chase",
       fillClass: "is-roller-fill",
     },
+    science: {
+      id: "science",
+      mechanics: {
+        "layout": "Double-helix molecular lattice expands with sine-wave rungs",
+        "border": "Micropipette dispenses glowing reagent drops linking covalent bonds",
+        "fill": "Chemical titration wave rises with effervescent micro-bubbles",
+        "text": "Periodic element symbols & isotopic formulae cycle and resolve",
+        "media": "Cryo-stasis containment pod unlatches with liquid nitrogen mist"
+      },
+      label: "Molecular Science Lab",
+      emoji: "🧬",
+      subtitle: "BioTech, Genomics & Quantum",
+      names: ["Biochemist", "Quantum-01", "CRISPR-Cas9", "Spectrometer", "Pipette-A", "Geneticist", "Collider", "Synthesizer", "Microscope", "Catalyst", "Isotope", "LabTech"],
+      colors: ["#10b981", "#06b6d4", "#8b5cf6", "#059669", "#0891b2", "#7c3aed", "#34d399", "#22d3ee", "#a78bfa", "#047857", "#0284c7", "#6d28d9"],
+      renderIcon: (t) => (t === "pen" ? ICONS.pipette : t === "crate" ? ICONS.atom : ICONS.flask),
+      dimensionUnit: (w, h) => `🔬 ${(w / 100).toFixed(2)}μm × ${(h / 100).toFixed(2)}μm [MOLAR]`,
+      statusPrefix: "Synthesizing",
+      speedScale: 0.85,
+      rotateToVelocity: false,
+      boxClass: "is-science-lattice",
+      fillClass: "is-titration-fill",
+    },
+    pixel: {
+      id: "pixel",
+      mechanics: {
+        "layout": "8×8 transparent alpha checkerboard with marching ants selection marquee",
+        "border": "1-bit stair-stepped pixel outline with 4-color indexed palette swatch",
+        "fill": "Paint bucket flood with Bayer matrix dither wipe & scanlines",
+        "text": "16-bit arcade score blitter with blinking block cursor & 1UP popup",
+        "media": "8-bit ROM cartridge slam unseals multi-pass pixelation resolve"
+      },
+      label: "16-Bit Pixel Studio",
+      emoji: "👾",
+      subtitle: "Pixel Art, Retro Gaming & Arcade",
+      names: ["SpriteArtist", "P1-InsertCoin", "DitherKing", "PaletteSwap", "CRT-Shader", "Chiptune", "Aseprite-01", "BitBlitter", "Scanline", "TileMapper", "SubPixel", "GameBoy"],
+      colors: ["#f43f5e", "#facc15", "#22d3ee", "#a855f7", "#ec4899", "#eab308", "#06b6d4", "#9333ea", "#fb7185", "#fde047", "#67e8f9", "#c084fc"],
+      renderIcon: (t) => (t === "pen" ? ICONS.pixelPencil : t === "crate" ? ICONS.pixelSprite : ICONS.paintBucket),
+      dimensionUnit: (w, h) => `👾 ${Math.round(w / 4)}px × ${Math.round(h / 4)}px @4x [SPRITE]`,
+      statusPrefix: "Blitting",
+      speedScale: 0.8,
+      rotateToVelocity: false,
+      boxClass: "is-pixel-canvas",
+      fillClass: "is-dither-fill",
+    },
   };
 
-  let activeTheme = localStorage.getItem("swarmTheme") || "default";
+  let activeTheme = (typeof localStorage !== "undefined" ? localStorage.getItem("swarmTheme") : null) || "default";
   if (!THEMES[activeTheme]) activeTheme = "default";
 
   /* ------------------------------------------------------------------ */
@@ -881,6 +979,8 @@
       case "kitchen": return dragBoxKitchen(r, a, t);
       case "street-art": return dragBoxStreetArt(r, a, t);
       case "press-room": return dragBoxPressRoom(r, a, t);
+      case "science": return dragBoxScience(r, a, t);
+      case "pixel": return dragBoxPixel(r, a, t);
       default: return dragBoxDefault(r, a, t);
     }
   }
@@ -1267,6 +1367,8 @@
       case "kitchen": return traceBorderKitchen(r, a, t);
       case "street-art": return traceBorderStreetArt(r, a, t);
       case "press-room": return traceBorderPressRoom(r, a, t);
+      case "science": return traceBorderScience(r, a, t);
+      case "pixel": return traceBorderPixel(r, a, t);
       default: return traceBorderDefault(r, a, t);
     }
   }
@@ -1507,7 +1609,47 @@
     a.setTool("");
   }
 
-  // 2.11 Default: Standard Vector Pen
+  // 2.11 Science: Micropipette Reagent Drops & Covalent Bond Chain
+  async function traceBorderScience(r, a, t) {
+    const { rect, len } = createSvgBorder(r, t, "pen-science", "#10b981");
+    rect.style.strokeWidth = "2.5px";
+    rect.style.filter = "drop-shadow(0 0 6px #10b981)";
+    a.setTool("pipette");
+
+    const corners = [[t.x, t.y], [t.x + t.w, t.y], [t.x + t.w, t.y + t.h], [t.x, t.y + t.h], [t.x, t.y]];
+    const per = 2 * (t.w + t.h);
+    const dur = Math.min(320, 150 + per * 0.07);
+
+    await r.tween(dur, (p) => {
+      rect.style.strokeDashoffset = len * (1 - p);
+      const cur = getPerimeterCoord(corners, per, p);
+      a.place(cur.x, cur.y);
+      if (Math.random() < 0.45) emitParticles(r, cur.x, cur.y, "#06b6d4");
+    });
+    a.setTool("");
+  }
+
+  // 2.12 Pixel: 1-Bit Stair-Stepped Pixel Outline & Palette Swatch
+  async function traceBorderPixel(r, a, t) {
+    const { rect, len } = createSvgBorder(r, t, "pen-pixel", "#f43f5e");
+    rect.style.strokeWidth = "3px";
+    rect.style.strokeDasharray = "4 4";
+    a.setTool("pencil");
+
+    const corners = [[t.x, t.y], [t.x + t.w, t.y], [t.x + t.w, t.y + t.h], [t.x, t.y + t.h], [t.x, t.y]];
+    const per = 2 * (t.w + t.h);
+    const dur = Math.min(300, 140 + per * 0.06);
+
+    await r.tween(dur, (p) => {
+      rect.style.strokeDashoffset = len * (1 - p);
+      const cur = getPerimeterCoord(corners, per, p);
+      a.place(Math.round(cur.x / 4) * 4, Math.round(cur.y / 4) * 4);
+      if (Math.random() < 0.35) emitParticles(r, cur.x, cur.y, "#facc15");
+    });
+    a.setTool("");
+  }
+
+  // 2.13 Default: Standard Vector Pen
   async function traceBorderDefault(r, a, t) {
     const { rect, len } = createSvgBorder(r, t, "pen-default", a.color);
     a.setTool("pen");
@@ -1590,7 +1732,10 @@
     const isBeehive = theme.id === "beehive";
     const isAtelier = theme.id === "atelier";
     const isPress = theme.id === "press-room";
+    const isScience = theme.id === "science";
+    const isPixel = theme.id === "pixel";
     const glyphs = "01#$@%&<>~*+=0x8F";
+    const scienceGlyphs = ["H", "He", "Li", "C", "N", "O", "ΔG", "Ψ", "λ", "Ω", "μ"];
 
     let shown = 0;
     await r.tween(total, (_p, raw) => {
@@ -1603,6 +1748,14 @@
             .concat(Array.from({ length: Math.min(3, chars.length - n) }, () => glyphs[Math.floor(Math.random() * glyphs.length)]))
             .join("");
           span.textContent = scramble;
+        } else if (isScience && n < chars.length) {
+          const scramble = chars
+            .slice(0, n)
+            .concat(Array.from({ length: Math.min(2, chars.length - n) }, () => scienceGlyphs[Math.floor(Math.random() * scienceGlyphs.length)]))
+            .join("");
+          span.textContent = scramble;
+        } else if (isPixel) {
+          span.textContent = chars.slice(0, n).join("") + (n < chars.length ? "█" : "");
         } else {
           span.textContent = chars.slice(0, n).join("");
         }
@@ -1618,7 +1771,7 @@
   }
 
   /* ================================================================== */
-  /* Build Operation 5: dropImage (All 11 Custom Media Unpackers)       */
+  /* Build Operation 5: dropImage (All 13 Custom Media Unpackers)       */
   /* ================================================================== */
 
   async function dropImage(r, a, t) {
@@ -1784,8 +1937,35 @@
       });
       cmykWrap.classList.add("is-registered");
       await r.wait(120);
+    } else if (themeId === "science") {
+      // 11. Cryo-Stasis Containment Pod Unseal + Nitrogen Mist
+      await a.goto(t.x + t.w / 2, t.y + t.h / 2);
+      const pod = el("div", "swarm-cryo-pod", r.layer);
+      pod.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;`;
+      pod.innerHTML = '<div class="cryo-header">🧬 CRYO-ISOLATION POD</div><div class="cryo-frost"></div>';
+      t.ghost = pod;
+      await r.wait(140);
+      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#06b6d4");
+      pod.classList.add("is-unsealed");
+      await r.wait(180);
+    } else if (themeId === "pixel") {
+      // 12. Retro 8-Bit ROM Cartridge Slam & Mosaic Pass
+      const startY = t.y - 100;
+      await a.goto(t.x + t.w / 2, startY);
+      const cart = el("div", "swarm-rom-cartridge", r.layer);
+      cart.style.cssText = `left:${t.x}px;top:${startY}px;width:${t.w}px;height:${t.h}px;`;
+      cart.innerHTML = '<div class="rom-label">ROM-CARTRIDGE v1.0 [INSERTED]</div>';
+      t.ghost = cart;
+      await r.tween(200, (p) => {
+        const curY = startY + (t.y - startY) * p;
+        cart.style.top = `${curY}px`;
+        a.place(t.x + t.w / 2, curY);
+      });
+      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#facc15");
+      cart.classList.add("is-slammed");
+      await r.wait(150);
     } else {
-      // 11. Default & Standard Image Reveal
+      // 13. Default & Standard Image Reveal
       await dragBox(r, a, t);
       t.ghost.classList.add("is-image");
       await r.wait(70);
