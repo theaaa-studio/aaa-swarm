@@ -1287,7 +1287,65 @@
     a.setTool("");
   }
 
-  // 1.11 Default: Precision Wireframe Drag
+  // 1.11 Science: Expanding Molecular Double-Helix Lattice
+  async function dragBoxScience(r, a, t) {
+    const ghost = el("div", "swarm-ghost is-science-lattice", r.layer);
+    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:0;height:0;--c:#10b981;`;
+    const grid = el("div", "swarm-science-grid", ghost);
+    const rungCount = Math.max(2, Math.min(6, Math.floor(t.w / 60)));
+    for (let i = 0; i < rungCount; i++) {
+      const rung = el("div", "swarm-dna-rung", grid);
+      rung.style.left = `${((i + 1) / (rungCount + 1)) * 100}%`;
+      rung.style.animationDelay = `${i * 0.15}s`;
+    }
+    const badge = el("span", "swarm-badge", ghost);
+    badge.style.background = "#10b981";
+    t.ghost = ghost;
+
+    a.setTool("pen");
+    await a.goto(t.x, t.y);
+
+    const dur = Math.min(300, 120 + (t.w + t.h) * 0.08);
+    await r.tween(dur, (p) => {
+      const w = t.w * p;
+      const h = t.h * p;
+      ghost.style.width = w + "px";
+      ghost.style.height = h + "px";
+      badge.textContent = r.theme.dimensionUnit(w, h);
+      a.place(t.x + w, t.y + h);
+      if (Math.random() < 0.25) emitParticles(r, a.x, a.y, "#06b6d4");
+    });
+    a.setTool("");
+  }
+
+  // 1.12 Pixel: 8x8 Alpha Checkerboard Canvas with Marching Ants Marquee
+  async function dragBoxPixel(r, a, t) {
+    const ghost = el("div", "swarm-ghost is-pixel-canvas", r.layer);
+    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:0;height:0;--c:#f43f5e;`;
+    el("div", "swarm-pixel-checker", ghost);
+    const badge = el("span", "swarm-badge is-pixel-badge", ghost);
+    badge.style.background = "#f43f5e";
+    t.ghost = ghost;
+
+    a.setTool("pen");
+    await a.goto(t.x, t.y);
+
+    const dur = Math.min(300, 120 + (t.w + t.h) * 0.08);
+    await r.tween(dur, (p) => {
+      const rawW = t.w * p;
+      const rawH = t.h * p;
+      const w = Math.max(4, Math.round(rawW / 4) * 4);
+      const h = Math.max(4, Math.round(rawH / 4) * 4);
+      ghost.style.width = w + "px";
+      ghost.style.height = h + "px";
+      badge.textContent = r.theme.dimensionUnit(w, h);
+      a.place(t.x + w, t.y + h);
+      if (Math.random() < 0.25) emitParticles(r, a.x, a.y, "#facc15");
+    });
+    a.setTool("");
+  }
+
+  // 1.13 Default: Precision Wireframe Drag
   async function dragBoxDefault(r, a, t) {
     const ghost = el("div", "swarm-ghost is-wireframe", r.layer);
     ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:0;height:0;--c:${a.color}`;
@@ -1614,7 +1672,7 @@
     const { rect, len } = createSvgBorder(r, t, "pen-science", "#10b981");
     rect.style.strokeWidth = "2.5px";
     rect.style.filter = "drop-shadow(0 0 6px #10b981)";
-    a.setTool("pipette");
+    a.setTool("pen");
 
     const corners = [[t.x, t.y], [t.x + t.w, t.y], [t.x + t.w, t.y + t.h], [t.x, t.y + t.h], [t.x, t.y]];
     const per = 2 * (t.w + t.h);
@@ -1633,8 +1691,9 @@
   async function traceBorderPixel(r, a, t) {
     const { rect, len } = createSvgBorder(r, t, "pen-pixel", "#f43f5e");
     rect.style.strokeWidth = "3px";
-    rect.style.strokeDasharray = "4 4";
-    a.setTool("pencil");
+    rect.style.strokeLinecap = "square";
+    rect.style.filter = "drop-shadow(0 0 6px #f43f5e)";
+    a.setTool("pen");
 
     const corners = [[t.x, t.y], [t.x + t.w, t.y], [t.x + t.w, t.y + t.h], [t.x, t.y + t.h], [t.x, t.y]];
     const per = 2 * (t.w + t.h);
@@ -1698,6 +1757,10 @@
     } else if (themeId === "press-room") {
       g.classList.add("swarm-brayer-press");
       await r.wait(100);
+    } else if (themeId === "science") {
+      await r.wait(100);
+    } else if (themeId === "pixel") {
+      await r.wait(90);
     } else {
       await r.wait(80);
     }
@@ -1767,6 +1830,7 @@
         a.place(c.left + window.scrollX + 2, c.bottom + window.scrollY + oy);
       }
     });
+    span.textContent = t.text;
     a.setTool("");
   }
 
