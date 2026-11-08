@@ -7,6 +7,7 @@ description: Implements or ports the multiplayer cursors 'Swarm Rebuild' guided 
 
 ## Overview
 `aaa-swarm` drops an interactive, high-impact multiplayer cursor rebuild experience into any website. A flock of labeled agent cursors collaborates to assemble the web page element by element before the visitor's eyes:
+- **Live Demo**: [https://theaaa-studio.github.io/aaa-swarm/](https://theaaa-studio.github.io/aaa-swarm/)
 - **12 Industry Themes**: Authentic visual building mechanics for software, construction, eco-beehives, ant colonies, cyber nanobots, fashion ateliers, warehouse logistics, voxel craft, kitchens, street art, vintage press rooms, and molecular science labs.
 - **Blueprint Grid**: Themed blueprint/matrix canvas sits behind the content (`z-index: 0`).
 - **Autonomous Agent Flocking**: Multi-cursor physics with velocity smoothing, optional velocity-rotation (`rotateToVelocity`), collision separation, and tool states (`cross`, `pen`, `text`, `crate`).

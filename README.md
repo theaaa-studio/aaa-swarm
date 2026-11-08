@@ -1,11 +1,14 @@
 # AAA Swarm 🐝 — Multiplayer "Page Rebuild" Guided Tour
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-theaaa--studio.github.io%2Faaa--swarm-success.svg)](https://theaaa-studio.github.io/aaa-swarm/)
 [![Agent Skill Compatible](https://img.shields.io/badge/Agent%20Skill-Claude%20Code%20%7C%20Codex%20%7C%20Antigravity%20%7C%20Cursor-purple.svg)](SKILL.md)
 [![Themes](https://img.shields.io/badge/Themes-12%20Authentic%20Industries-blue.svg)](#-12-authentic-industry-themes)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero%20(Pure%20Vanilla%20JS%2FCSS)-green.svg)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An interactive, high-impact multiplayer cursor rebuild experience for modern web applications, inspired by Dhvanil Patel's iconic portfolio tour. 
+
+> 🚀 **Live Demo**: Experience the guided tour and test all 12 themes live at **[https://theaaa-studio.github.io/aaa-swarm/](https://theaaa-studio.github.io/aaa-swarm/)**
 
 A collaborative flock of labeled agent cursors (`Designer`, `Dev`, `AAA`, `Artist`, `PM`, `3D`, `Biochemist`, etc.) works in real time to assemble your web page piece by piece over an authentic blueprint or themed matrix background. The camera smoothly guides visitors down section by section as each is physically constructed, then glides back to the top once finished.
 
@@ -33,7 +36,7 @@ Hover any icon to reveal its industry label; click to instantly rebuild the enti
 
 ![Floating Bottom Theme Switcher Dock](assets/demo-theme-dock.png)
 
-* **Interactive Live Demo**: Open `index.html` locally or deploy directly to GitHub Pages (`.nojekyll` included).
+* **🌐 Live Interactive Demo**: Visit **[https://theaaa-studio.github.io/aaa-swarm/](https://theaaa-studio.github.io/aaa-swarm/)** to test all 12 themes, guided tours, and the manual builder studio live in your browser.
 
 ---
 
