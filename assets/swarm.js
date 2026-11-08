@@ -1,9 +1,8 @@
 /**
  * Swarm — Multiplayer Cursors & Builders "Rebuild the Page" Guided Tour Effect.
  *
- * 13 Full Industry Themes:
+ * 12 Full Industry Themes:
  *   - "science": Quantum Lab & BioTech (Erlenmeyer flasks, Micropipettes, Double-helix DNA rungs, Chemical titration wave, Cryo-stasis pod)
- *   - "pixel": Piskel Animated Sprite Studio (Piskel canvas grid, Fat pixel blocks, Bresenham pen, 8-color palette swatches, Onion-skinning flood fill, 12 FPS preview)
  *   - "default": Software/Design (Flocking Designer/Dev Cursors, Wireframes, Typing)
  *   - "construction": Heavy Builders (Hardhats, Blowtorches with sparks, Concrete pour, Crane Crate drop)
  *   - "beehive": Eco/Organic/Agri (Bumblebees, Figure-8 wax drift, Amber honey drip, Waggle pollen text, Wax uncap)
@@ -486,28 +485,6 @@
       boxClass: "is-science-discovery",
       fillClass: "is-titration-fill",
     },
-    pixel: {
-      id: "pixel",
-      mechanics: {
-        "layout": "Piskel sprite canvas grid expands as fat pixel blocks are stamped in real-time",
-        "border": "Bresenham stair-stepped pixel pen stroke with trailing 8-color palette swatches",
-        "fill": "Piskel paint bucket flood fill with radial pixel expansion & onion skinning",
-        "text": "8-bit bitmap font stamping with blinking yellow square pixel caret █",
-        "media": "Multi-frame Piskel sprite strip [FRAME 1-3] unrolls & resolves into animated artwork"
-      },
-      label: "Piskel Sprite Studio",
-      emoji: "🖌️",
-      subtitle: "Animated Pixel Art & Sprite Creation (Piskel Style)",
-      names: ["PiskelArtist", "PixelPen", "PaintBucket", "PaletteMaster", "FrameAnimator", "OnionSkinner", "Ditherer", "Bresenham", "SpriteBaker", "PixelPusher", "ColorIndex", "12FPS-Looper"],
-      colors: ["#facc15", "#f43f5e", "#06b6d4", "#22c55e", "#a855f7", "#fb923c", "#38bdf8", "#4ade80", "#ffffff", "#e11d48", "#eab308", "#0891b2"],
-      renderIcon: (t) => (t === "pen" ? ICONS.pixelPencil : t === "crate" ? ICONS.pixelSprite : ICONS.paintBucket),
-      dimensionUnit: (w, h) => `🖌️ PISKEL [${Math.max(8, Math.round(w / 12))}×${Math.max(8, Math.round(h / 12))} px] @8x`,
-      statusPrefix: "Drawing Sprites in",
-      speedScale: 0.8,
-      rotateToVelocity: false,
-      boxClass: "is-piskel-canvas",
-      fillClass: "is-piskel-flood",
-    },
   };
 
   let activeTheme = (typeof localStorage !== "undefined" ? localStorage.getItem("swarmTheme") : null) || "default";
@@ -988,7 +965,6 @@
       case "street-art": return dragBoxStreetArt(r, a, t);
       case "press-room": return dragBoxPressRoom(r, a, t);
       case "science": return dragBoxScience(r, a, t);
-      case "pixel": return dragBoxPixel(r, a, t);
       default: return dragBoxDefault(r, a, t);
     }
   }
@@ -1358,87 +1334,7 @@
     a.setTool("");
   }
 
-  // 1.12 Pixel: Piskel Canvas Grid & Stamped Fat Pixel Blocks
-  async function dragBoxPixel(r, a, t) {
-    const ghost = el("div", "swarm-ghost is-piskel-canvas", r.layer);
-    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;--c:#facc15;`;
-
-    // Authentic dark Piskel alpha checkerboard (#1e1e1e / #282828)
-    el("div", "piskel-checkerboard", ghost);
-    el("div", "piskel-grid-overlay", ghost);
-
-    // Stamped fat pixel blocks layer
-    const pixelField = el("div", "piskel-pixel-field", ghost);
-
-    // Top-right floating 12 FPS live animated sprite preview window
-    const preview = el("div", "piskel-preview-window", ghost);
-    preview.innerHTML = 
-      '<div class="piskel-preview-header"><span>PREVIEW</span><span class="piskel-fps">12 FPS</span></div>' +
-      '<div class="piskel-preview-box"><div class="piskel-preview-sprite"></div></div>';
-
-    // Pixel blocks along contour
-    const pSize = 10;
-    const cols = Math.max(4, Math.min(10, Math.floor(t.w / (pSize * 2.2))));
-    const rows = Math.max(3, Math.min(8, Math.floor(t.h / (pSize * 2.2))));
-    const PALETTE = ["#facc15", "#f43f5e", "#06b6d4", "#22c55e", "#a855f7", "#ffffff", "#fb923c"];
-    const blocks = [];
-
-    // Generate artistic pixel blocks stamping in along contour
-    const totalBlocks = cols * 2 + rows * 2;
-    for (let i = 0; i < totalBlocks; i++) {
-      const b = el("span", "piskel-pixel-block", pixelField);
-      let bx, by;
-      if (i < cols) {
-        bx = i * (t.w / cols);
-        by = 4;
-      } else if (i < cols + rows) {
-        bx = t.w - pSize - 4;
-        by = (i - cols) * (t.h / rows);
-      } else if (i < cols * 2 + rows) {
-        bx = t.w - (i - (cols + rows)) * (t.w / cols);
-        by = t.h - pSize - 4;
-      } else {
-        bx = 4;
-        by = t.h - (i - (cols * 2 + rows)) * (t.h / rows);
-      }
-      b.style.left = `${Math.round(bx / 4) * 4}px`;
-      b.style.top = `${Math.round(by / 4) * 4}px`;
-      b.style.width = `${pSize}px`;
-      b.style.height = `${pSize}px`;
-      b.style.backgroundColor = PALETTE[i % PALETTE.length];
-      b.style.opacity = "0";
-      blocks.push(b);
-    }
-
-    const badge = el("span", "swarm-badge is-piskel-badge", ghost);
-    badge.style.background = "#facc15";
-    badge.style.color = "#0f172a";
-    t.ghost = ghost;
-
-    a.setTool("pen"); // Piskel pen
-    await a.goto(t.x + 8, t.y + 8);
-
-    const dur = Math.min(380, 180 + (t.w + t.h) * 0.09);
-    await r.tween(dur, (p) => {
-      const activeIdx = Math.floor(p * blocks.length);
-      for (let j = 0; j <= activeIdx && j < blocks.length; j++) {
-        blocks[j].style.opacity = "1";
-        blocks[j].style.transform = "scale(1)";
-      }
-
-      const curBlock = blocks[Math.min(activeIdx, blocks.length - 1)];
-      const bx = curBlock ? parseFloat(curBlock.style.left) : t.w / 2;
-      const by = curBlock ? parseFloat(curBlock.style.top) : t.h / 2;
-
-      badge.textContent = `🖌️ PISKEL [32×32] X:${Math.round(bx / 4)} Y:${Math.round(by / 4)} • 12 FPS`;
-
-      a.place(t.x + bx + pSize / 2, t.y + by + pSize / 2);
-      if (Math.random() < 0.35) emitParticles(r, a.x, a.y, PALETTE[activeIdx % PALETTE.length]);
-    });
-    a.setTool("");
-  }
-
-  // 1.13 Default: Precision Wireframe Drag
+  // 1.12 Default: Precision Wireframe Drag
   async function dragBoxDefault(r, a, t) {
     const ghost = el("div", "swarm-ghost is-wireframe", r.layer);
     ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:0;height:0;--c:${a.color}`;
@@ -1519,7 +1415,6 @@
       case "street-art": return traceBorderStreetArt(r, a, t);
       case "press-room": return traceBorderPressRoom(r, a, t);
       case "science": return traceBorderScience(r, a, t);
-      case "pixel": return traceBorderPixel(r, a, t);
       default: return traceBorderDefault(r, a, t);
     }
   }
@@ -1780,48 +1675,7 @@
     a.setTool("");
   }
 
-  // 2.12 Pixel: 1-Bit Bresenham Stepped Border & Trailing Palette Swatch Bar
-  async function traceBorderPixel(r, a, t) {
-    const { rect, len } = createSvgBorder(r, t, "pen-pixel", "#facc15");
-    rect.style.strokeWidth = "3px";
-    rect.style.strokeLinecap = "square";
-    rect.style.filter = "drop-shadow(0 0 6px #facc15)";
-
-    // Floating 8-color indexed palette swatch bar following pen
-    const paletteBar = el("div", "piskel-palette-bar", r.layer);
-    paletteBar.innerHTML = 
-      '<span class="piskel-swatch" style="background:#000000"></span>' +
-      '<span class="piskel-swatch" style="background:#ffffff"></span>' +
-      '<span class="piskel-swatch" style="background:#f43f5e"></span>' +
-      '<span class="piskel-swatch" style="background:#facc15"></span>' +
-      '<span class="piskel-swatch" style="background:#22c55e"></span>' +
-      '<span class="piskel-swatch" style="background:#06b6d4"></span>' +
-      '<span class="piskel-swatch" style="background:#a855f7"></span>' +
-      '<span class="piskel-swatch" style="background:#fb923c"></span>';
-
-    a.setTool("pen");
-
-    const corners = [[t.x, t.y], [t.x + t.w, t.y], [t.x + t.w, t.y + t.h], [t.x, t.y + t.h], [t.x, t.y]];
-    const per = 2 * (t.w + t.h);
-    const dur = Math.min(300, 140 + per * 0.06);
-
-    await r.tween(dur, (p) => {
-      rect.style.strokeDashoffset = len * (1 - p);
-      const cur = getPerimeterCoord(corners, per, p);
-      const snappedX = Math.round(cur.x / 4) * 4;
-      const snappedY = Math.round(cur.y / 4) * 4;
-      a.place(snappedX, snappedY);
-
-      paletteBar.style.left = `${snappedX + 18}px`;
-      paletteBar.style.top = `${snappedY - 18}px`;
-
-      if (Math.random() < 0.35) emitParticles(r, snappedX, snappedY, "#facc15");
-    });
-    paletteBar.remove();
-    a.setTool("");
-  }
-
-  // 2.13 Default: Standard Vector Pen
+  // 2.12 Default: Standard Vector Pen
   async function traceBorderDefault(r, a, t) {
     const { rect, len } = createSvgBorder(r, t, "pen-default", a.color);
     a.setTool("pen");
@@ -1879,10 +1733,6 @@
         b.style.animationDelay = `${i * 0.08}s`;
       }
       await r.wait(130);
-    } else if (themeId === "pixel") {
-      g.classList.add("swarm-piskel-flood");
-      const onion = el("div", "piskel-onion-skin", g);
-      await r.wait(120);
     } else {
       await r.wait(80);
     }
@@ -1918,7 +1768,6 @@
     const isAtelier = theme.id === "atelier";
     const isPress = theme.id === "press-room";
     const isScience = theme.id === "science";
-    const isPixel = theme.id === "pixel";
     const glyphs = "01#$@%&<>~*+=0x8F";
     const scienceGlyphs = ["H", "He", "Li", "C", "N", "O", "ΔG", "Ψ", "λ", "Ω", "μ"];
 
@@ -1939,8 +1788,6 @@
             .concat(Array.from({ length: Math.min(2, chars.length - n) }, () => scienceGlyphs[Math.floor(Math.random() * scienceGlyphs.length)]))
             .join("");
           span.textContent = scramble;
-        } else if (isPixel) {
-          span.textContent = chars.slice(0, n).join("") + (n < chars.length ? "█" : "");
         } else {
           span.textContent = chars.slice(0, n).join("");
         }
@@ -1957,7 +1804,7 @@
   }
 
   /* ================================================================== */
-  /* Build Operation 5: dropImage (All 13 Custom Media Unpackers)       */
+  /* Build Operation 5: dropImage (All 12 Custom Media Unpackers)       */
   /* ================================================================== */
 
   async function dropImage(r, a, t) {
@@ -2138,33 +1985,8 @@
       emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#10b981");
       pod.classList.add("is-unsealed");
       await r.wait(180);
-    } else if (themeId === "pixel") {
-      // 12. Piskel Multi-Frame Sprite Strip Unroll & Onion Skin Merge
-      await a.goto(t.x + t.w / 2, t.y);
-      const strip = el("div", "piskel-frame-strip", r.layer);
-      strip.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;`;
-      strip.innerHTML = 
-        '<div class="piskel-strip-header">🎞️ PISKEL ANIMATION STRIP (12 FPS)</div>' +
-        '<div class="piskel-frames-row">' +
-        '  <div class="piskel-frame-card f1"><span class="f-num">F1</span><div class="f-sprite s1"></div></div>' +
-        '  <div class="piskel-frame-card f2"><span class="f-num">F2</span><div class="f-sprite s2"></div></div>' +
-        '  <div class="piskel-frame-card f3"><span class="f-num">F3</span><div class="f-sprite s3"></div></div>' +
-        '</div>';
-      t.ghost = strip;
-
-      await r.tween(220, (p) => {
-        strip.style.opacity = String(Math.min(1, p * 2));
-        a.place(t.x + t.w * p, t.y + Math.sin(p * 12) * 8);
-        if (Math.random() < 0.3) emitParticles(r, a.x, a.y, "#facc15");
-      });
-
-      strip.classList.add("is-onion-merged");
-      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#facc15");
-      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#06b6d4");
-      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#f43f5e");
-      await r.wait(160);
     } else {
-      // 13. Default & Standard Image Reveal
+      // 12. Default & Standard Image Reveal
       await dragBox(r, a, t);
       t.ghost.classList.add("is-image");
       await r.wait(70);

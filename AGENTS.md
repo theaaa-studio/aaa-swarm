@@ -1,6 +1,6 @@
 # Agent Guidelines: AAA Swarm
 
-`aaa-swarm` is a universal AI agent skill for implementing or porting the multiplayer cursors "Swarm Rebuild" guided tour effect (inspired by Dhvanil Patel) into web applications, featuring **13 authentic industry themes**.
+`aaa-swarm` is a universal AI agent skill for implementing or porting the multiplayer cursors "Swarm Rebuild" guided tour effect (inspired by Dhvanil Patel) into web applications, featuring **12 authentic industry themes**.
 
 ## Compatibility
 This skill adheres to the open **Agent Skills specification** and is compatible with:
@@ -41,7 +41,6 @@ When an agent is asked to integrate `aaa-swarm` into a web project:
    - `"street-art"`: Creative Agencies, Streetwear, Music (Paint roller diagonal wheatpaste strokes, fat-cap aerosol spray with vertical paint runs & squeegeed slap-stickers)
    - `"press-room"`: Finance, Legal, News, Academia (Iron movable-type chase frame clamping ┼, ink brayer roller sweep, mechanical typewriter hammer strikes & CMYK halftone plate alignment)
    - `"science"`: BioTech, Medical, Pharmaceuticals, Quantum (Quantum collider discovery beam, spinning electron orbital shells & molecular formulas, effervescent titration & cryo-pod unseals)
-   - `"pixel"`: Animated Pixel Art, Sprites, Indie Game Studio (Piskel canvas grid, stamping fat pixel blocks, live 12 FPS preview window, trailing 8-color palette swatches, onion-skin flood fill & multi-frame sprite strip)
 
 4. **Initialize with Target Options**:
    - Verify page sections use `<section>` or `[data-swarm-section]` inside `<main>` or container root.

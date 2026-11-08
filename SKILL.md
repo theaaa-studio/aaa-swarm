@@ -1,13 +1,13 @@
 ---
 name: aaa-swarm
-description: Implements or ports the multiplayer cursors 'Swarm Rebuild' guided tour effect (Dhvanil Patel style) to any web project. Features 13 authentic industry themes (software, construction, beehive, ant-colony, cyber-nanobots, couture atelier, warehouse, voxel-craft, bistro kitchen, street-art, vintage press-room, molecular science lab, and 16-bit pixel studio) with custom agent physics, blueprint backgrounds, wireframe pens, and media unpack animations.
+description: Implements or ports the multiplayer cursors 'Swarm Rebuild' guided tour effect (Dhvanil Patel style) to any web project. Features 12 authentic industry themes (software, construction, beehive, ant-colony, cyber-nanobots, couture atelier, warehouse, voxel-craft, bistro kitchen, street-art, vintage press-room, and molecular science lab) with custom agent physics, blueprint backgrounds, wireframe pens, and media unpack animations.
 ---
 
 # AAA Swarm — Multiplayer Rebuild Guided Tour
 
 ## Overview
 `aaa-swarm` drops an interactive, high-impact multiplayer cursor rebuild experience into any website. A flock of labeled agent cursors collaborates to assemble the web page element by element before the visitor's eyes:
-- **13 Industry Themes**: Authentic visual building mechanics for software, construction, eco-beehives, ant colonies, cyber nanobots, fashion ateliers, warehouse logistics, voxel craft, kitchens, street art, vintage press rooms, molecular science labs, and 16-bit pixel art studios.
+- **12 Industry Themes**: Authentic visual building mechanics for software, construction, eco-beehives, ant colonies, cyber nanobots, fashion ateliers, warehouse logistics, voxel craft, kitchens, street art, vintage press rooms, and molecular science labs.
 - **Blueprint Grid**: Themed blueprint/matrix canvas sits behind the content (`z-index: 0`).
 - **Autonomous Agent Flocking**: Multi-cursor physics with velocity smoothing, optional velocity-rotation (`rotateToVelocity`), collision separation, and tool states (`cross`, `pen`, `text`, `crate`).
 - **Guided Scroll-Follow Tour**: Automatically smooth-scrolls the viewport down to each section as it begins construction, guaranteeing visitors never miss the animation offscreen.
@@ -16,7 +16,7 @@ description: Implements or ports the multiplayer cursors 'Swarm Rebuild' guided 
 
 ---
 
-## 13 Supported Themes & Industry Mapping
+## 12 Supported Themes & Industry Mapping
 
 | Theme Key | Industry / Business Type | Agent Avatar & Physics | Physical Rebuild Dynamics |
 |---|---|---|---|
@@ -32,7 +32,6 @@ description: Implements or ports the multiplayer cursors 'Swarm Rebuild' guided 
 | `street-art` | Creative Studio, Streetwear, Music | Aerosol Spray Cans (idle shake), Rollers | Paint roller diagonal wheatpaste strokes, fat-cap aerosol spray with vertical oozing paint drips, squeegee poster press, chisel-tip marker slashes, slap-sticker slam & squeegee |
 | `press-room` | Finance, Legal, Publishing, Academia | Fountain Pens, Brayer Rollers, Wax Seals | Movable-type iron chase frame clamp `┼`, drafting pen ruling lines with crop-marks, ink brayer roller press, mechanical typewriter hammer strikes, CMYK 4-color halftone plate alignment |
 | `science` | BioTech, Pharmaceuticals, Quantum, DeepTech | Erlenmeyer Flasks, Micropipettes, Atoms | Quantum particle collider discovery sweep beam, spinning electron orbital shells & molecular formula tags, exothermic effervescent titration reaction, genetic base-pair sequencer, cryo-stasis mist pod with reticle focus |
-| `pixel` | Animated Pixel Art, Sprites, Indie Game Studio | Piskel Pens, Paint Buckets, Pixel Sprites | Authentic Piskel sprite studio canvas: 1px crisp grid overlay with alpha checkerboard, stamping fat square pixel blocks in real time, live 12 FPS top-right preview box cycling sprite loop, trailing 8-color indexed palette swatch bar, paint bucket flood fill with onion-skinning, multi-frame sprite strip |
 
 ---
 
@@ -238,7 +237,7 @@ The engine exposes `window.Swarm` (and UMD module exports):
 |---|---|---|---|
 | `Swarm.init(opts)` | `Object` | `{}` | Initializes run, snapshots DOM, starts guided scroll tour. Returns `{ run, destroy }` |
 | `opts.root` | `string \| HTMLElement` | `"main"` | Container selector or DOM node (supports React `useRef.current`) |
-| `opts.theme` | `string` | `"default"` | Initial starting theme key (from 13 themes) |
+| `opts.theme` | `string` | `"default"` | Initial starting theme key (from 12 themes) |
 | `opts.themes` | `Array<string>` | `null` (All) | Array of allowed theme keys. **If 1 theme, locks site and hides theme switcher UI!** |
 | `opts.showDock` | `boolean \| "auto"` | `"auto"` | Floating bottom icon dock (`true`, `false`, or `"auto"`: on when >1 theme) |
 | `opts.showToolbar` | `boolean` | `true` | Floating status / speed / skip pill |
