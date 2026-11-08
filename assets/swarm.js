@@ -207,6 +207,14 @@
       '<rect x="17" y="16" width="3" height="5" fill="#f43f5e"/>' +
       '<rect x="11" y="16" width="4" height="3" fill="#facc15"/>' +
       '</svg>',
+
+    tetromino:
+      '<svg viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">' +
+      '<rect x="3" y="6" width="6" height="6" fill="#f43f5e" stroke="#1c1427" stroke-width="1"/>' +
+      '<rect x="9" y="6" width="6" height="6" fill="#06b6d4" stroke="#1c1427" stroke-width="1"/>' +
+      '<rect x="15" y="6" width="6" height="6" fill="#facc15" stroke="#1c1427" stroke-width="1"/>' +
+      '<rect x="9" y="12" width="6" height="6" fill="#a855f7" stroke="#1c1427" stroke-width="1"/>' +
+      '</svg>',
   };
 
   /* ------------------------------------------------------------------ */
@@ -459,45 +467,45 @@
     science: {
       id: "science",
       mechanics: {
-        "layout": "Double-helix molecular lattice expands with sine-wave rungs",
-        "border": "Micropipette dispenses glowing reagent drops linking covalent bonds",
-        "fill": "Chemical titration wave rises with effervescent micro-bubbles",
-        "text": "Periodic element symbols & isotopic formulae cycle and resolve",
-        "media": "Cryo-stasis containment pod unlatches with liquid nitrogen mist"
+        "layout": "Quantum collider discovery beam sweeps across, generating molecular synthesis reaction",
+        "border": "Spectrometer ion laser perimeter with snapping atomic orbital nodes",
+        "fill": "Effervescent bubbling titration reaction discovering synthesized compound",
+        "text": "Genetic base-pair (A-T-C-G) & isotopic formula sequencer decryption",
+        "media": "Pressurized cryo-specimen containment pod with electron microscope reticle focus"
       },
-      label: "Molecular Science Lab",
+      label: "Discovery Science Lab",
       emoji: "🧬",
-      subtitle: "BioTech, Genomics & Quantum",
+      subtitle: "Creation, Discovery & Quantum Molecular Synthesis",
       names: ["Biochemist", "Quantum-01", "CRISPR-Cas9", "Spectrometer", "Pipette-A", "Geneticist", "Collider", "Synthesizer", "Microscope", "Catalyst", "Isotope", "LabTech"],
       colors: ["#10b981", "#06b6d4", "#8b5cf6", "#059669", "#0891b2", "#7c3aed", "#34d399", "#22d3ee", "#a78bfa", "#047857", "#0284c7", "#6d28d9"],
       renderIcon: (t) => (t === "pen" ? ICONS.pipette : t === "crate" ? ICONS.atom : ICONS.flask),
-      dimensionUnit: (w, h) => `🔬 ${(w / 100).toFixed(2)}μm × ${(h / 100).toFixed(2)}μm [MOLAR]`,
-      statusPrefix: "Synthesizing",
+      dimensionUnit: (w, h) => `🔬 ${((w * h) / 1000).toFixed(1)}k Å [DISCOVERY YIELD]`,
+      statusPrefix: "Discovering",
       speedScale: 0.85,
       rotateToVelocity: false,
-      boxClass: "is-science-lattice",
+      boxClass: "is-science-discovery",
       fillClass: "is-titration-fill",
     },
     pixel: {
       id: "pixel",
       mechanics: {
-        "layout": "8×8 transparent alpha checkerboard with marching ants selection marquee",
-        "border": "1-bit stair-stepped pixel outline with 4-color indexed palette swatch",
-        "fill": "Paint bucket flood with Bayer matrix dither wipe & scanlines",
-        "text": "16-bit arcade score blitter with blinking block cursor & 1UP popup",
-        "media": "8-bit ROM cartridge slam unseals multi-pass pixelation resolve"
+        "layout": "Tetris tetromino polyominoes rain down, stack into rows & trigger 4-line clear flash",
+        "border": "1-bit stepped arcade pixel outline with retro corner brackets ┌ ┐ └ ┘",
+        "fill": "CRT raster electron beam wipe with Bayer matrix 4x4 dither flood",
+        "text": "Retro 8-bit arcade high score ticker with blinking block cursor & 1UP popup",
+        "media": "Giant golden Tetris block drops, rotates 90° & slams with arcade star explosion"
       },
-      label: "16-Bit Pixel Studio",
-      emoji: "👾",
-      subtitle: "Pixel Art, Retro Gaming & Arcade",
-      names: ["SpriteArtist", "P1-InsertCoin", "DitherKing", "PaletteSwap", "CRT-Shader", "Chiptune", "Aseprite-01", "BitBlitter", "Scanline", "TileMapper", "SubPixel", "GameBoy"],
-      colors: ["#f43f5e", "#facc15", "#22d3ee", "#a855f7", "#ec4899", "#eab308", "#06b6d4", "#9333ea", "#fb7185", "#fde047", "#67e8f9", "#c084fc"],
-      renderIcon: (t) => (t === "pen" ? ICONS.pixelPencil : t === "crate" ? ICONS.pixelSprite : ICONS.paintBucket),
-      dimensionUnit: (w, h) => `👾 ${Math.round(w / 4)}px × ${Math.round(h / 4)}px @4x [SPRITE]`,
-      statusPrefix: "Blitting",
+      label: "Tetris Arcade 8-Bit",
+      emoji: "🕹️",
+      subtitle: "Falling Tetromino Polyominoes & 4-Line Clears",
+      names: ["Tetris-P1", "Tetromino-I", "LineClear", "HighScore", "ArcadeMaster", "CRT-Raster", "ScoreBlitter", "DitherKing", "PixelPencil", "SubPixel", "Chiptune", "1UP-Bonus"],
+      colors: ["#06b6d4", "#a855f7", "#f97316", "#facc15", "#ef4444", "#22c55e", "#f43f5e", "#38bdf8", "#c084fc", "#fb923c", "#fde047", "#4ade80"],
+      renderIcon: (t) => (t === "pen" ? ICONS.pixelPencil : t === "crate" ? ICONS.tetromino : ICONS.paintBucket),
+      dimensionUnit: (w, h) => `🕹️ TETRIS: 4-LINES [${Math.round((w * h) / 10)} PTS]`,
+      statusPrefix: "Dropping Tetrominoes in",
       speedScale: 0.8,
       rotateToVelocity: false,
-      boxClass: "is-pixel-canvas",
+      boxClass: "is-tetris-matrix",
       fillClass: "is-dither-fill",
     },
   };
@@ -1287,60 +1295,153 @@
     a.setTool("");
   }
 
-  // 1.11 Science: Expanding Molecular Double-Helix Lattice
+  // 1.11 Science: Quantum Collider Discovery Beam & Molecular Synthesis Reaction
   async function dragBoxScience(r, a, t) {
-    const ghost = el("div", "swarm-ghost is-science-lattice", r.layer);
-    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:0;height:0;--c:#10b981;`;
-    const grid = el("div", "swarm-science-grid", ghost);
-    const rungCount = Math.max(2, Math.min(6, Math.floor(t.w / 60)));
-    for (let i = 0; i < rungCount; i++) {
-      const rung = el("div", "swarm-dna-rung", grid);
-      rung.style.left = `${((i + 1) / (rungCount + 1)) * 100}%`;
-      rung.style.animationDelay = `${i * 0.15}s`;
+    const ghost = el("div", "swarm-ghost is-science-discovery", r.layer);
+    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;--c:#10b981;`;
+
+    // Active molecular discovery chamber
+    const chamber = el("div", "swarm-discovery-chamber", ghost);
+
+    // Orbital electron shell
+    const atom = el("div", "swarm-atom-orbital", chamber);
+    el("div", "swarm-atom-nucleus", atom);
+    el("div", "swarm-orbital-ring ring-1", atom);
+    el("div", "swarm-orbital-ring ring-2", atom);
+    el("div", "swarm-orbital-ring ring-3", atom);
+
+    // Molecular discovery formula tags
+    const formulas = ["[C₆H₁₂O₆]", "[ATP-SYNTH]", "[CRISPR-Cas9]", "[DNA-5']", "[H₂O-ION]"];
+    const nodeCount = Math.max(2, Math.min(4, Math.floor(t.w / 110)));
+    const nodes = [];
+    for (let i = 0; i < nodeCount; i++) {
+      const node = el("div", "swarm-discovery-node", chamber);
+      node.style.left = `${12 + (i * 72) / nodeCount}%`;
+      node.style.top = `${28 + (i % 2 === 0 ? -12 : 18)}%`;
+      node.textContent = formulas[i % formulas.length];
+      nodes.push(node);
     }
-    const badge = el("span", "swarm-badge", ghost);
+
+    // High-energy quantum collider sweep beam
+    const beam = el("div", "swarm-discovery-beam", ghost);
+
+    const badge = el("span", "swarm-badge is-science-badge", ghost);
     badge.style.background = "#10b981";
     t.ghost = ghost;
 
-    a.setTool("pen");
-    await a.goto(t.x, t.y);
+    a.setTool("pen"); // holds pipette
+    await a.goto(t.x, t.y + t.h / 2);
 
-    const dur = Math.min(300, 120 + (t.w + t.h) * 0.08);
+    const dur = Math.min(360, 160 + (t.w + t.h) * 0.08);
     await r.tween(dur, (p) => {
-      const w = t.w * p;
-      const h = t.h * p;
-      ghost.style.width = w + "px";
-      ghost.style.height = h + "px";
-      badge.textContent = r.theme.dimensionUnit(w, h);
-      a.place(t.x + w, t.y + h);
-      if (Math.random() < 0.25) emitParticles(r, a.x, a.y, "#06b6d4");
+      const beamX = t.w * p;
+      beam.style.left = `${beamX}px`;
+      beam.style.opacity = p < 0.9 ? "1" : String((1 - p) * 10);
+
+      // Chamber reveals as beam sweeps
+      chamber.style.clipPath = `inset(0 ${Math.max(0, (1 - p) * 100)}% 0 0)`;
+      chamber.style.opacity = String(Math.min(1, p * 1.5));
+
+      nodes.forEach((n, idx) => {
+        if (p >= (idx + 1) / (nodeCount + 1)) {
+          n.classList.add("is-discovered");
+        }
+      });
+
+      badge.textContent = p < 0.88
+        ? `🔬 DISCOVERING: ${Math.round(p * 100)}% YIELD [Å]`
+        : `⚛️ MOLECULAR BREAKTHROUGH!`;
+
+      a.place(t.x + beamX, t.y + t.h / 2 + Math.sin(p * 14) * 16);
+      if (Math.random() < 0.35) emitParticles(r, a.x, a.y, "#06b6d4");
     });
     a.setTool("");
   }
 
-  // 1.12 Pixel: 8x8 Alpha Checkerboard Canvas with Marching Ants Marquee
+  // 1.12 Pixel: 8-Bit Arcade Tetris Polyomino Rain & 4-Line Clear Flash
   async function dragBoxPixel(r, a, t) {
-    const ghost = el("div", "swarm-ghost is-pixel-canvas", r.layer);
-    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:0;height:0;--c:#f43f5e;`;
+    const ghost = el("div", "swarm-ghost is-tetris-matrix", r.layer);
+    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;--c:#06b6d4;`;
+
+    // Retro 8x8 checkerboard background
     el("div", "swarm-pixel-checker", ghost);
-    const badge = el("span", "swarm-badge is-pixel-badge", ghost);
-    badge.style.background = "#f43f5e";
+
+    // Falling Tetrominoes container
+    const field = el("div", "swarm-tetris-field", ghost);
+
+    const TETROMINOES = [
+      { type: "I", color: "#06b6d4", blocks: [[0,0], [1,0], [2,0], [3,0]] },
+      { type: "T", color: "#a855f7", blocks: [[0,0], [1,0], [2,0], [1,1]] },
+      { type: "L", color: "#f97316", blocks: [[0,0], [0,1], [0,2], [1,2]] },
+      { type: "O", color: "#facc15", blocks: [[0,0], [1,0], [0,1], [1,1]] },
+      { type: "Z", color: "#ef4444", blocks: [[0,0], [1,0], [1,1], [2,1]] },
+      { type: "S", color: "#22c55e", blocks: [[1,0], [2,0], [0,1], [1,1]] },
+    ];
+
+    const blockSize = 12;
+    const pieceCount = Math.max(3, Math.min(6, Math.floor(t.w / 75)));
+    const pieces = [];
+
+    for (let i = 0; i < pieceCount; i++) {
+      const proto = TETROMINOES[i % TETROMINOES.length];
+      const pEl = el("div", `swarm-tetromino piece-${proto.type}`, field);
+      const targetX = Math.round(((i + 0.3) / pieceCount) * Math.max(10, t.w - 48));
+      const targetY = Math.round(Math.max(8, t.h - 36 - (i % 2) * 24));
+
+      proto.blocks.forEach(([bx, by]) => {
+        const b = el("span", "tetris-block", pEl);
+        b.style.left = `${bx * blockSize}px`;
+        b.style.top = `${by * blockSize}px`;
+        b.style.width = `${blockSize - 1}px`;
+        b.style.height = `${blockSize - 1}px`;
+        b.style.backgroundColor = proto.color;
+      });
+
+      pieces.push({ el: pEl, targetX, targetY, delay: i * 0.14 });
+    }
+
+    // Line clear white-cyan flash bar
+    const flashBar = el("div", "swarm-tetris-flash", ghost);
+
+    // Arcade floating score popup
+    const scorePopup = el("div", "swarm-score-popup", ghost);
+    scorePopup.textContent = "⭐ TETRIS! +800 PTS ⭐";
+
+    const badge = el("span", "swarm-badge is-tetris-badge", ghost);
+    badge.style.background = "#06b6d4";
     t.ghost = ghost;
 
-    a.setTool("pen");
-    await a.goto(t.x, t.y);
+    a.setTool("crate"); // holds tetromino icon!
+    await a.goto(t.x + t.w / 2, t.y - 25);
 
-    const dur = Math.min(300, 120 + (t.w + t.h) * 0.08);
+    const dur = Math.min(380, 180 + (t.w + t.h) * 0.09);
     await r.tween(dur, (p) => {
-      const rawW = t.w * p;
-      const rawH = t.h * p;
-      const w = Math.max(4, Math.round(rawW / 4) * 4);
-      const h = Math.max(4, Math.round(rawH / 4) * 4);
-      ghost.style.width = w + "px";
-      ghost.style.height = h + "px";
-      badge.textContent = r.theme.dimensionUnit(w, h);
-      a.place(t.x + w, t.y + h);
-      if (Math.random() < 0.25) emitParticles(r, a.x, a.y, "#facc15");
+      // Animate tetrominoes falling and locking into place
+      pieces.forEach((piece, idx) => {
+        const startP = piece.delay;
+        const progress = Math.max(0, Math.min(1, (p - startP) / (1 - startP || 0.01)));
+        const currentY = -45 + (piece.targetY + 45) * Math.min(1, progress * 1.35);
+        const rot = (1 - progress) * (idx % 2 === 0 ? 90 : -90);
+        piece.el.style.transform = `translate3d(${piece.targetX}px, ${currentY}px, 0) rotate(${rot}deg)`;
+        piece.el.style.opacity = progress > 0 ? "1" : "0";
+      });
+
+      // Tetris line clear flash near end
+      if (p >= 0.8) {
+        const fp = (p - 0.8) / 0.2;
+        flashBar.style.opacity = String(Math.sin(fp * Math.PI));
+        scorePopup.style.opacity = "1";
+        scorePopup.style.transform = `translate(-50%, ${-fp * 28}px) scale(${1 + fp * 0.2})`;
+      }
+
+      badge.textContent = p < 0.8
+        ? `🕹️ TETRIS: DROPPING #${Math.floor(p * pieceCount) + 1} ...`
+        : `⭐ 4-LINE CLEAR! [${Math.round(p * 12800)} PTS]`;
+
+      const activeIdx = Math.min(pieceCount - 1, Math.floor(p * pieceCount));
+      const activeX = pieces[activeIdx] ? pieces[activeIdx].targetX + 20 : t.w / 2;
+      a.place(t.x + activeX, t.y - 12 + Math.sin(p * 16) * 6);
+      if (Math.random() < 0.3) emitParticles(r, a.x, a.y, "#facc15");
     });
     a.setTool("");
   }
@@ -1758,9 +1859,18 @@
       g.classList.add("swarm-brayer-press");
       await r.wait(100);
     } else if (themeId === "science") {
-      await r.wait(100);
+      g.classList.add("swarm-titration-reaction");
+      const bubbleCount = Math.max(3, Math.min(6, Math.floor(t.w / 55)));
+      for (let i = 0; i < bubbleCount; i++) {
+        const b = el("span", "swarm-bubble", g);
+        b.style.left = `${12 + Math.random() * 76}%`;
+        b.style.animationDelay = `${i * 0.08}s`;
+      }
+      await r.wait(130);
     } else if (themeId === "pixel") {
-      await r.wait(90);
+      g.classList.add("swarm-crt-dither");
+      el("div", "swarm-crt-beam", g);
+      await r.wait(110);
     } else {
       await r.wait(80);
     }
@@ -2002,32 +2112,43 @@
       cmykWrap.classList.add("is-registered");
       await r.wait(120);
     } else if (themeId === "science") {
-      // 11. Cryo-Stasis Containment Pod Unseal + Nitrogen Mist
+      // 11. Cryo-Stasis Specimen Discovery Chamber Unseal
       await a.goto(t.x + t.w / 2, t.y + t.h / 2);
       const pod = el("div", "swarm-cryo-pod", r.layer);
       pod.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;`;
-      pod.innerHTML = '<div class="cryo-header">🧬 CRYO-ISOLATION POD</div><div class="cryo-frost"></div>';
+      pod.innerHTML =
+        '<div class="cryo-header">🔬 SPECIMEN DISCOVERY CHAMBER</div>' +
+        '<div class="cryo-reticle">⊕</div>' +
+        '<div class="cryo-frost"></div>';
       t.ghost = pod;
       await r.wait(140);
       emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#06b6d4");
+      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#10b981");
       pod.classList.add("is-unsealed");
       await r.wait(180);
     } else if (themeId === "pixel") {
-      // 12. Retro 8-Bit ROM Cartridge Slam & Mosaic Pass
-      const startY = t.y - 100;
+      // 12. Giant 16-Bit Tetris Polyomino Block Slam
+      const startY = t.y - 120;
       await a.goto(t.x + t.w / 2, startY);
-      const cart = el("div", "swarm-rom-cartridge", r.layer);
+      const cart = el("div", "swarm-tetris-cartridge", r.layer);
       cart.style.cssText = `left:${t.x}px;top:${startY}px;width:${t.w}px;height:${t.h}px;`;
-      cart.innerHTML = '<div class="rom-label">ROM-CARTRIDGE v1.0 [INSERTED]</div>';
+      cart.innerHTML =
+        '<div class="tetris-label">🕹️ TETRIS TETROMINO SLAM</div>' +
+        '<div class="tetris-score">+1200 PTS</div>';
       t.ghost = cart;
-      await r.tween(200, (p) => {
+      await r.tween(240, (p) => {
         const curY = startY + (t.y - startY) * p;
+        const rot = (1 - p) * 90;
+        cart.style.transform = `rotate(${rot}deg)`;
         cart.style.top = `${curY}px`;
         a.place(t.x + t.w / 2, curY);
       });
+      cart.style.transform = "rotate(0deg)";
       emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#facc15");
-      cart.classList.add("is-slammed");
-      await r.wait(150);
+      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#ef4444");
+      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#06b6d4");
+      cart.classList.add("is-tetris-slam");
+      await r.wait(160);
     } else {
       // 13. Default & Standard Image Reveal
       await dragBox(r, a, t);

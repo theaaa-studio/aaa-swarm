@@ -183,7 +183,7 @@ body.swarm-active main {
   background-size: 32px 32px;
 }
 .swarm-canvas[data-theme="science"]::after {
-  content: "HELIX-CORE // QUANTUM GENOMICS LAB [CRISPR-CAS9]";
+  content: "EUREKABIO // QUANTUM DISCOVERY & MOLECULAR SYNTHESIS LAB";
   position: absolute;
   top: 14px;
   left: 20px;
@@ -205,7 +205,7 @@ body.swarm-active main {
   image-rendering: pixelated;
 }
 .swarm-canvas[data-theme="pixel"]::after {
-  content: "SPRITEWORKS // 16-BIT RETRO ARCADE [INSERT COIN]";
+  content: "TETRIS-ARCADE // 8-BIT POLYOMINO ENGINE [LINES: 004]";
   position: absolute;
   top: 14px;
   left: 20px;
@@ -1450,38 +1450,129 @@ body[data-swarm-theme="pixel"] .swarm-dot { border-radius: 0; background: #facc1
 
 
 
-/* 11. Molecular Science Lab (science) */
-.is-science-lattice {
+/* 11. Quantum Creation & Molecular Discovery Lab (science) */
+.is-science-discovery {
   position: absolute;
   pointer-events: none;
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  background: rgba(16, 185, 129, 0.04);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  background: rgba(6, 13, 20, 0.75);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25), inset 0 0 15px rgba(6, 182, 212, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.swarm-science-grid {
+.swarm-discovery-beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #10b981, #06b6d4, #a7f3d0);
+  box-shadow: 0 0 16px #06b6d4, 0 0 32px #10b981;
+  pointer-events: none;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.swarm-discovery-chamber {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, transparent 80%);
+  transition: clip-path 0.05s linear;
+}
+
+.swarm-atom-orbital {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+}
+
+.swarm-atom-nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 12px #10b981;
+}
+
+.swarm-orbital-ring {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(6, 182, 212, 0.5);
+  border-radius: 50%;
+}
+.swarm-orbital-ring.ring-1 {
+  transform: rotate(30deg) scaleY(0.4);
+  animation: orbitalSpin 2s linear infinite;
+}
+.swarm-orbital-ring.ring-2 {
+  transform: rotate(-30deg) scaleY(0.4);
+  animation: orbitalSpin 2.5s linear infinite reverse;
+}
+.swarm-orbital-ring.ring-3 {
+  transform: rotate(90deg) scaleY(0.4);
+  animation: orbitalSpin 3s linear infinite;
+}
+
+@keyframes orbitalSpin {
+  from { transform: rotate(0deg) scaleY(0.4); }
+  to { transform: rotate(360deg) scaleY(0.4); }
+}
+
+.swarm-discovery-node {
+  position: absolute;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #a7f3d0;
+  background: rgba(6, 78, 59, 0.85);
+  border: 1px solid #10b981;
+  padding: 2px 6px;
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.35);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.25s ease-out;
+}
+
+.swarm-discovery-node.is-discovered {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fill-science {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.18), rgba(6, 182, 212, 0.12));
+  animation: titrationWave 0.35s ease-out forwards;
+}
+
+.swarm-titration-reaction {
   position: absolute;
   inset: 0;
   overflow: hidden;
 }
 
-.swarm-dna-rung {
+.swarm-bubble {
   position: absolute;
-  top: 15%;
-  bottom: 15%;
-  width: 2px;
-  background: linear-gradient(180deg, #10b981, #06b6d4, #8b5cf6);
-  opacity: 0.6;
-  animation: dnaOscillate 0.8s ease-in-out infinite alternate;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(52, 211, 153, 0.75);
+  box-shadow: 0 0 6px #34d399;
+  animation: bubbleRise 0.5s ease-out forwards;
 }
 
-@keyframes dnaOscillate {
-  from { transform: scaleY(0.4) rotate(-5deg); opacity: 0.3; }
-  to { transform: scaleY(1) rotate(5deg); opacity: 0.8; }
-}
-
-.fill-science {
-  background: linear-gradient(180deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.1));
-  animation: titrationWave 0.35s ease-out forwards;
+@keyframes bubbleRise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0.9; }
+  100% { transform: translateY(-75px) scale(1.4); opacity: 0; }
 }
 
 @keyframes titrationWave {
@@ -1492,9 +1583,9 @@ body[data-swarm-theme="pixel"] .swarm-dot { border-radius: 0; background: #facc1
 .swarm-cryo-pod {
   position: absolute;
   border: 2px solid #06b6d4;
-  background: rgba(6, 182, 212, 0.08);
+  background: rgba(6, 182, 212, 0.12);
   border-radius: 6px;
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 24px rgba(6, 182, 212, 0.4);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1506,8 +1597,24 @@ body[data-swarm-theme="pixel"] .swarm-dot { border-radius: 0; background: #facc1
 .cryo-header {
   font-family: ui-monospace, SFMono-Regular, monospace;
   font-size: 11px;
+  font-weight: 700;
   color: #38bdf8;
   letter-spacing: 0.08em;
+}
+
+.cryo-reticle {
+  font-size: 26px;
+  font-weight: 300;
+  color: #10b981;
+  text-align: center;
+  margin: auto;
+  animation: reticlePulse 0.4s ease-in-out infinite alternate;
+  text-shadow: 0 0 12px #10b981;
+}
+
+@keyframes reticlePulse {
+  from { transform: scale(0.9); opacity: 0.7; }
+  to { transform: scale(1.15); opacity: 1; }
 }
 
 .cryo-frost {
@@ -1527,11 +1634,67 @@ body[data-swarm-theme="pixel"] .swarm-dot { border-radius: 0; background: #facc1
   100% { opacity: 0; transform: scale(1.03); }
 }
 
-/* 12. 16-Bit Pixel Studio (pixel) */
-.is-pixel-canvas {
+/* 12. 8-Bit Arcade Tetris Polyomino Engine (pixel) */
+.is-tetris-matrix {
   position: absolute;
   pointer-events: none;
+  border: 2px solid #06b6d4;
+  background: rgba(12, 7, 20, 0.9);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.45), inset 0 0 14px rgba(6, 182, 212, 0.2);
+  overflow: hidden;
   image-rendering: pixelated;
+}
+
+.swarm-tetris-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.swarm-tetromino {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.tetris-block {
+  position: absolute;
+  border-top: 2px solid rgba(255, 255, 255, 0.55);
+  border-left: 2px solid rgba(255, 255, 255, 0.45);
+  border-right: 2px solid rgba(0, 0, 0, 0.55);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.65);
+  box-sizing: border-box;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.swarm-tetris-flash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28px;
+  bottom: 20px;
+  background: linear-gradient(90deg, transparent, #fff, #38bdf8, #fff, transparent);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 0 24px #fff, 0 0 40px #06b6d4;
+}
+
+.swarm-score-popup {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 900;
+  color: #facc15;
+  text-shadow: 0 0 8px #f59e0b, 2px 2px 0 #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  white-space: nowrap;
 }
 
 .swarm-pixel-checker {
@@ -1544,20 +1707,42 @@ body[data-swarm-theme="pixel"] .swarm-dot { border-radius: 0; background: #facc1
     linear-gradient(-45deg, transparent 75%, #1c1427 75%);
   background-size: 16px 16px;
   background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
-  opacity: 0.7;
-  border: 2px dashed #f43f5e;
+  opacity: 0.55;
+  border: 1px dashed rgba(244, 63, 94, 0.5);
 }
 
-.is-pixel-badge {
+.is-tetris-badge {
   font-family: "Courier New", monospace !important;
-  font-weight: bold;
+  font-weight: 900;
   letter-spacing: 0.06em;
   border-radius: 0 !important;
+  box-shadow: 2px 2px 0 #000 !important;
 }
 
 .fill-pixel {
   image-rendering: pixelated;
   animation: pixelDitherIn 0.3s steps(4) forwards;
+}
+
+.swarm-crt-dither {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.swarm-crt-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.95), rgba(244, 63, 94, 0.95), transparent);
+  box-shadow: 0 0 16px #06b6d4;
+  animation: crtBeamSweep 0.28s linear forwards;
+}
+
+@keyframes crtBeamSweep {
+  0% { top: 0%; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
 
 @keyframes pixelDitherIn {
@@ -1566,28 +1751,47 @@ body[data-swarm-theme="pixel"] .swarm-dot { border-radius: 0; background: #facc1
   100% { opacity: 1; filter: none; }
 }
 
-.swarm-rom-cartridge {
+.swarm-tetris-cartridge {
   position: absolute;
-  background: #1e112a;
   border: 3px solid #facc15;
-  border-radius: 4px;
-  box-shadow: 4px 4px 0 #000;
+  background: #1c1427;
+  border-radius: 2px;
+  box-shadow: 0 0 24px rgba(250, 204, 21, 0.6), inset 0 0 14px rgba(250, 204, 21, 0.25);
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  color: #facc15;
+  align-items: center;
+  padding: 10px;
+  color: #fff;
   font-family: "Courier New", monospace;
+  overflow: hidden;
+}
+
+.tetris-label {
   font-size: 11px;
-  font-weight: bold;
+  font-weight: 900;
+  color: #facc15;
+  letter-spacing: 0.08em;
+  text-shadow: 2px 2px 0 #000;
 }
 
-.swarm-rom-cartridge.is-slammed {
-  animation: romSnap 0.25s forwards steps(3);
+.tetris-score {
+  font-size: 15px;
+  font-weight: 900;
+  color: #22d3ee;
+  margin-top: 4px;
+  text-shadow: 2px 2px 0 #000;
 }
 
-@keyframes romSnap {
-  0% { transform: scale(1.04); }
-  100% { opacity: 0; transform: scale(1); }
+.swarm-tetris-cartridge.is-tetris-slam {
+  animation: tetrisSlam 0.35s ease-out forwards;
+}
+
+@keyframes tetrisSlam {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.06) translate(-3px, 3px); }
+  50% { transform: scale(0.96) translate(3px, -2px); }
+  100% { transform: scale(1); opacity: 0; }
 }
 
 /* Floating Bottom Dock (Theme Switcher) */
