@@ -32,7 +32,7 @@ description: Implements or ports the multiplayer cursors 'Swarm Rebuild' guided 
 | `street-art` | Creative Studio, Streetwear, Music | Aerosol Spray Cans (idle shake), Rollers | Paint roller diagonal wheatpaste strokes, fat-cap aerosol spray with vertical oozing paint drips, squeegee poster press, chisel-tip marker slashes, slap-sticker slam & squeegee |
 | `press-room` | Finance, Legal, Publishing, Academia | Fountain Pens, Brayer Rollers, Wax Seals | Movable-type iron chase frame clamp `┼`, drafting pen ruling lines with crop-marks, ink brayer roller press, mechanical typewriter hammer strikes, CMYK 4-color halftone plate alignment |
 | `science` | BioTech, Pharmaceuticals, Quantum, DeepTech | Erlenmeyer Flasks, Micropipettes, Atoms | Quantum particle collider discovery sweep beam, spinning electron orbital shells & molecular formula tags, exothermic effervescent titration reaction, genetic base-pair sequencer, cryo-stasis mist pod with reticle focus |
-| `pixel` | Retro Gaming, Tetris Arcade, Chiptune, 8-Bit | Pixel Pencils, Paint Buckets, Tetrominoes | Authentic falling Tetris tetromino polyominoes (I, T, L, O, Z, S) dropping with gravity into rows, 4-line clear arcade white flash, floating +800 PTS score popup, 1-bit stepped border ┌ ┐ └ ┘, CRT raster beam & heavy block slam |
+| `pixel` | Animated Pixel Art, Sprites, Indie Game Studio | Piskel Pens, Paint Buckets, Pixel Sprites | Authentic Piskel sprite studio canvas: 1px crisp grid overlay with alpha checkerboard, stamping fat square pixel blocks in real time, live 12 FPS top-right preview box cycling sprite loop, trailing 8-color indexed palette swatch bar, paint bucket flood fill with onion-skinning, multi-frame sprite strip |
 
 ---
 

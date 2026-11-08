@@ -3,7 +3,7 @@
  *
  * 13 Full Industry Themes:
  *   - "science": Quantum Lab & BioTech (Erlenmeyer flasks, Micropipettes, Double-helix DNA rungs, Chemical titration wave, Cryo-stasis pod)
- *   - "pixel": 16-Bit Pixel Art & Arcade (Pixel pencils, Paint buckets, Alpha checkerboards, Bayer dithering, ROM cartridge slam)
+ *   - "pixel": Piskel Animated Sprite Studio (Piskel canvas grid, Fat pixel blocks, Bresenham pen, 8-color palette swatches, Onion-skinning flood fill, 12 FPS preview)
  *   - "default": Software/Design (Flocking Designer/Dev Cursors, Wireframes, Typing)
  *   - "construction": Heavy Builders (Hardhats, Blowtorches with sparks, Concrete pour, Crane Crate drop)
  *   - "beehive": Eco/Organic/Agri (Bumblebees, Figure-8 wax drift, Amber honey drip, Waggle pollen text, Wax uncap)
@@ -489,24 +489,24 @@
     pixel: {
       id: "pixel",
       mechanics: {
-        "layout": "Tetris tetromino polyominoes rain down, stack into rows & trigger 4-line clear flash",
-        "border": "1-bit stepped arcade pixel outline with retro corner brackets ┌ ┐ └ ┘",
-        "fill": "CRT raster electron beam wipe with Bayer matrix 4x4 dither flood",
-        "text": "Retro 8-bit arcade high score ticker with blinking block cursor & 1UP popup",
-        "media": "Giant golden Tetris block drops, rotates 90° & slams with arcade star explosion"
+        "layout": "Piskel sprite canvas grid expands as fat pixel blocks are stamped in real-time",
+        "border": "Bresenham stair-stepped pixel pen stroke with trailing 8-color palette swatches",
+        "fill": "Piskel paint bucket flood fill with radial pixel expansion & onion skinning",
+        "text": "8-bit bitmap font stamping with blinking yellow square pixel caret █",
+        "media": "Multi-frame Piskel sprite strip [FRAME 1-3] unrolls & resolves into animated artwork"
       },
-      label: "Tetris Arcade 8-Bit",
-      emoji: "🕹️",
-      subtitle: "Falling Tetromino Polyominoes & 4-Line Clears",
-      names: ["Tetris-P1", "Tetromino-I", "LineClear", "HighScore", "ArcadeMaster", "CRT-Raster", "ScoreBlitter", "DitherKing", "PixelPencil", "SubPixel", "Chiptune", "1UP-Bonus"],
-      colors: ["#06b6d4", "#a855f7", "#f97316", "#facc15", "#ef4444", "#22c55e", "#f43f5e", "#38bdf8", "#c084fc", "#fb923c", "#fde047", "#4ade80"],
-      renderIcon: (t) => (t === "pen" ? ICONS.pixelPencil : t === "crate" ? ICONS.tetromino : ICONS.paintBucket),
-      dimensionUnit: (w, h) => `🕹️ TETRIS: 4-LINES [${Math.round((w * h) / 10)} PTS]`,
-      statusPrefix: "Dropping Tetrominoes in",
+      label: "Piskel Sprite Studio",
+      emoji: "🖌️",
+      subtitle: "Animated Pixel Art & Sprite Creation (Piskel Style)",
+      names: ["PiskelArtist", "PixelPen", "PaintBucket", "PaletteMaster", "FrameAnimator", "OnionSkinner", "Ditherer", "Bresenham", "SpriteBaker", "PixelPusher", "ColorIndex", "12FPS-Looper"],
+      colors: ["#facc15", "#f43f5e", "#06b6d4", "#22c55e", "#a855f7", "#fb923c", "#38bdf8", "#4ade80", "#ffffff", "#e11d48", "#eab308", "#0891b2"],
+      renderIcon: (t) => (t === "pen" ? ICONS.pixelPencil : t === "crate" ? ICONS.pixelSprite : ICONS.paintBucket),
+      dimensionUnit: (w, h) => `🖌️ PISKEL [${Math.max(8, Math.round(w / 12))}×${Math.max(8, Math.round(h / 12))} px] @8x`,
+      statusPrefix: "Drawing Sprites in",
       speedScale: 0.8,
       rotateToVelocity: false,
-      boxClass: "is-tetris-matrix",
-      fillClass: "is-dither-fill",
+      boxClass: "is-piskel-canvas",
+      fillClass: "is-piskel-flood",
     },
   };
 
@@ -1358,90 +1358,82 @@
     a.setTool("");
   }
 
-  // 1.12 Pixel: 8-Bit Arcade Tetris Polyomino Rain & 4-Line Clear Flash
+  // 1.12 Pixel: Piskel Canvas Grid & Stamped Fat Pixel Blocks
   async function dragBoxPixel(r, a, t) {
-    const ghost = el("div", "swarm-ghost is-tetris-matrix", r.layer);
-    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;--c:#06b6d4;`;
+    const ghost = el("div", "swarm-ghost is-piskel-canvas", r.layer);
+    ghost.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;--c:#facc15;`;
 
-    // Retro 8x8 checkerboard background
-    el("div", "swarm-pixel-checker", ghost);
+    // Authentic dark Piskel alpha checkerboard (#1e1e1e / #282828)
+    el("div", "piskel-checkerboard", ghost);
+    el("div", "piskel-grid-overlay", ghost);
 
-    // Falling Tetrominoes container
-    const field = el("div", "swarm-tetris-field", ghost);
+    // Stamped fat pixel blocks layer
+    const pixelField = el("div", "piskel-pixel-field", ghost);
 
-    const TETROMINOES = [
-      { type: "I", color: "#06b6d4", blocks: [[0,0], [1,0], [2,0], [3,0]] },
-      { type: "T", color: "#a855f7", blocks: [[0,0], [1,0], [2,0], [1,1]] },
-      { type: "L", color: "#f97316", blocks: [[0,0], [0,1], [0,2], [1,2]] },
-      { type: "O", color: "#facc15", blocks: [[0,0], [1,0], [0,1], [1,1]] },
-      { type: "Z", color: "#ef4444", blocks: [[0,0], [1,0], [1,1], [2,1]] },
-      { type: "S", color: "#22c55e", blocks: [[1,0], [2,0], [0,1], [1,1]] },
-    ];
+    // Top-right floating 12 FPS live animated sprite preview window
+    const preview = el("div", "piskel-preview-window", ghost);
+    preview.innerHTML = 
+      '<div class="piskel-preview-header"><span>PREVIEW</span><span class="piskel-fps">12 FPS</span></div>' +
+      '<div class="piskel-preview-box"><div class="piskel-preview-sprite"></div></div>';
 
-    const blockSize = 12;
-    const pieceCount = Math.max(3, Math.min(6, Math.floor(t.w / 75)));
-    const pieces = [];
+    // Pixel blocks along contour
+    const pSize = 10;
+    const cols = Math.max(4, Math.min(10, Math.floor(t.w / (pSize * 2.2))));
+    const rows = Math.max(3, Math.min(8, Math.floor(t.h / (pSize * 2.2))));
+    const PALETTE = ["#facc15", "#f43f5e", "#06b6d4", "#22c55e", "#a855f7", "#ffffff", "#fb923c"];
+    const blocks = [];
 
-    for (let i = 0; i < pieceCount; i++) {
-      const proto = TETROMINOES[i % TETROMINOES.length];
-      const pEl = el("div", `swarm-tetromino piece-${proto.type}`, field);
-      const targetX = Math.round(((i + 0.3) / pieceCount) * Math.max(10, t.w - 48));
-      const targetY = Math.round(Math.max(8, t.h - 36 - (i % 2) * 24));
-
-      proto.blocks.forEach(([bx, by]) => {
-        const b = el("span", "tetris-block", pEl);
-        b.style.left = `${bx * blockSize}px`;
-        b.style.top = `${by * blockSize}px`;
-        b.style.width = `${blockSize - 1}px`;
-        b.style.height = `${blockSize - 1}px`;
-        b.style.backgroundColor = proto.color;
-      });
-
-      pieces.push({ el: pEl, targetX, targetY, delay: i * 0.14 });
+    // Generate artistic pixel blocks stamping in along contour
+    const totalBlocks = cols * 2 + rows * 2;
+    for (let i = 0; i < totalBlocks; i++) {
+      const b = el("span", "piskel-pixel-block", pixelField);
+      let bx, by;
+      if (i < cols) {
+        bx = i * (t.w / cols);
+        by = 4;
+      } else if (i < cols + rows) {
+        bx = t.w - pSize - 4;
+        by = (i - cols) * (t.h / rows);
+      } else if (i < cols * 2 + rows) {
+        bx = t.w - (i - (cols + rows)) * (t.w / cols);
+        by = t.h - pSize - 4;
+      } else {
+        bx = 4;
+        by = t.h - (i - (cols * 2 + rows)) * (t.h / rows);
+      }
+      b.style.left = `${Math.round(bx / 4) * 4}px`;
+      b.style.top = `${Math.round(by / 4) * 4}px`;
+      b.style.width = `${pSize}px`;
+      b.style.height = `${pSize}px`;
+      b.style.backgroundColor = PALETTE[i % PALETTE.length];
+      b.style.opacity = "0";
+      blocks.push(b);
     }
 
-    // Line clear white-cyan flash bar
-    const flashBar = el("div", "swarm-tetris-flash", ghost);
-
-    // Arcade floating score popup
-    const scorePopup = el("div", "swarm-score-popup", ghost);
-    scorePopup.textContent = "⭐ TETRIS! +800 PTS ⭐";
-
-    const badge = el("span", "swarm-badge is-tetris-badge", ghost);
-    badge.style.background = "#06b6d4";
+    const badge = el("span", "swarm-badge is-piskel-badge", ghost);
+    badge.style.background = "#facc15";
+    badge.style.color = "#0f172a";
     t.ghost = ghost;
 
-    a.setTool("crate"); // holds tetromino icon!
-    await a.goto(t.x + t.w / 2, t.y - 25);
+    a.setTool("pen"); // Piskel pen
+    await a.goto(t.x + 8, t.y + 8);
 
     const dur = Math.min(380, 180 + (t.w + t.h) * 0.09);
     await r.tween(dur, (p) => {
-      // Animate tetrominoes falling and locking into place
-      pieces.forEach((piece, idx) => {
-        const startP = piece.delay;
-        const progress = Math.max(0, Math.min(1, (p - startP) / (1 - startP || 0.01)));
-        const currentY = -45 + (piece.targetY + 45) * Math.min(1, progress * 1.35);
-        const rot = (1 - progress) * (idx % 2 === 0 ? 90 : -90);
-        piece.el.style.transform = `translate3d(${piece.targetX}px, ${currentY}px, 0) rotate(${rot}deg)`;
-        piece.el.style.opacity = progress > 0 ? "1" : "0";
-      });
-
-      // Tetris line clear flash near end
-      if (p >= 0.8) {
-        const fp = (p - 0.8) / 0.2;
-        flashBar.style.opacity = String(Math.sin(fp * Math.PI));
-        scorePopup.style.opacity = "1";
-        scorePopup.style.transform = `translate(-50%, ${-fp * 28}px) scale(${1 + fp * 0.2})`;
+      const activeIdx = Math.floor(p * blocks.length);
+      for (let j = 0; j <= activeIdx && j < blocks.length; j++) {
+        blocks[j].style.opacity = "1";
+        blocks[j].style.transform = "scale(1)";
       }
 
-      badge.textContent = p < 0.8
-        ? `🕹️ TETRIS: DROPPING #${Math.floor(p * pieceCount) + 1} ...`
-        : `⭐ 4-LINE CLEAR! [${Math.round(p * 12800)} PTS]`;
+      const curBlock = blocks[Math.min(activeIdx, blocks.length - 1)];
+      const bx = curBlock ? parseFloat(curBlock.style.left) : t.w / 2;
+      const by = curBlock ? parseFloat(curBlock.style.top) : t.h / 2;
 
-      const activeIdx = Math.min(pieceCount - 1, Math.floor(p * pieceCount));
-      const activeX = pieces[activeIdx] ? pieces[activeIdx].targetX + 20 : t.w / 2;
-      a.place(t.x + activeX, t.y - 12 + Math.sin(p * 16) * 6);
-      if (Math.random() < 0.3) emitParticles(r, a.x, a.y, "#facc15");
+      badge.textContent = `🖌️ PISKEL [32×32] X:${Math.round(bx / 4)} Y:${Math.round(by / 4)} • 12 FPS`;
+
+      a.place(t.x + bx + pSize / 2, t.y + by + pSize / 2);
+      if (Math.random() < 0.35) emitParticles(r, a.x, a.y, PALETTE[activeIdx % PALETTE.length]);
     });
     a.setTool("");
   }
@@ -1788,12 +1780,25 @@
     a.setTool("");
   }
 
-  // 2.12 Pixel: 1-Bit Stair-Stepped Pixel Outline & Palette Swatch
+  // 2.12 Pixel: 1-Bit Bresenham Stepped Border & Trailing Palette Swatch Bar
   async function traceBorderPixel(r, a, t) {
-    const { rect, len } = createSvgBorder(r, t, "pen-pixel", "#f43f5e");
+    const { rect, len } = createSvgBorder(r, t, "pen-pixel", "#facc15");
     rect.style.strokeWidth = "3px";
     rect.style.strokeLinecap = "square";
-    rect.style.filter = "drop-shadow(0 0 6px #f43f5e)";
+    rect.style.filter = "drop-shadow(0 0 6px #facc15)";
+
+    // Floating 8-color indexed palette swatch bar following pen
+    const paletteBar = el("div", "piskel-palette-bar", r.layer);
+    paletteBar.innerHTML = 
+      '<span class="piskel-swatch" style="background:#000000"></span>' +
+      '<span class="piskel-swatch" style="background:#ffffff"></span>' +
+      '<span class="piskel-swatch" style="background:#f43f5e"></span>' +
+      '<span class="piskel-swatch" style="background:#facc15"></span>' +
+      '<span class="piskel-swatch" style="background:#22c55e"></span>' +
+      '<span class="piskel-swatch" style="background:#06b6d4"></span>' +
+      '<span class="piskel-swatch" style="background:#a855f7"></span>' +
+      '<span class="piskel-swatch" style="background:#fb923c"></span>';
+
     a.setTool("pen");
 
     const corners = [[t.x, t.y], [t.x + t.w, t.y], [t.x + t.w, t.y + t.h], [t.x, t.y + t.h], [t.x, t.y]];
@@ -1803,9 +1808,16 @@
     await r.tween(dur, (p) => {
       rect.style.strokeDashoffset = len * (1 - p);
       const cur = getPerimeterCoord(corners, per, p);
-      a.place(Math.round(cur.x / 4) * 4, Math.round(cur.y / 4) * 4);
-      if (Math.random() < 0.35) emitParticles(r, cur.x, cur.y, "#facc15");
+      const snappedX = Math.round(cur.x / 4) * 4;
+      const snappedY = Math.round(cur.y / 4) * 4;
+      a.place(snappedX, snappedY);
+
+      paletteBar.style.left = `${snappedX + 18}px`;
+      paletteBar.style.top = `${snappedY - 18}px`;
+
+      if (Math.random() < 0.35) emitParticles(r, snappedX, snappedY, "#facc15");
     });
+    paletteBar.remove();
     a.setTool("");
   }
 
@@ -1868,9 +1880,9 @@
       }
       await r.wait(130);
     } else if (themeId === "pixel") {
-      g.classList.add("swarm-crt-dither");
-      el("div", "swarm-crt-beam", g);
-      await r.wait(110);
+      g.classList.add("swarm-piskel-flood");
+      const onion = el("div", "piskel-onion-skin", g);
+      await r.wait(120);
     } else {
       await r.wait(80);
     }
@@ -2127,27 +2139,29 @@
       pod.classList.add("is-unsealed");
       await r.wait(180);
     } else if (themeId === "pixel") {
-      // 12. Giant 16-Bit Tetris Polyomino Block Slam
-      const startY = t.y - 120;
-      await a.goto(t.x + t.w / 2, startY);
-      const cart = el("div", "swarm-tetris-cartridge", r.layer);
-      cart.style.cssText = `left:${t.x}px;top:${startY}px;width:${t.w}px;height:${t.h}px;`;
-      cart.innerHTML =
-        '<div class="tetris-label">🕹️ TETRIS TETROMINO SLAM</div>' +
-        '<div class="tetris-score">+1200 PTS</div>';
-      t.ghost = cart;
-      await r.tween(240, (p) => {
-        const curY = startY + (t.y - startY) * p;
-        const rot = (1 - p) * 90;
-        cart.style.transform = `rotate(${rot}deg)`;
-        cart.style.top = `${curY}px`;
-        a.place(t.x + t.w / 2, curY);
+      // 12. Piskel Multi-Frame Sprite Strip Unroll & Onion Skin Merge
+      await a.goto(t.x + t.w / 2, t.y);
+      const strip = el("div", "piskel-frame-strip", r.layer);
+      strip.style.cssText = `left:${t.x}px;top:${t.y}px;width:${t.w}px;height:${t.h}px;`;
+      strip.innerHTML = 
+        '<div class="piskel-strip-header">🎞️ PISKEL ANIMATION STRIP (12 FPS)</div>' +
+        '<div class="piskel-frames-row">' +
+        '  <div class="piskel-frame-card f1"><span class="f-num">F1</span><div class="f-sprite s1"></div></div>' +
+        '  <div class="piskel-frame-card f2"><span class="f-num">F2</span><div class="f-sprite s2"></div></div>' +
+        '  <div class="piskel-frame-card f3"><span class="f-num">F3</span><div class="f-sprite s3"></div></div>' +
+        '</div>';
+      t.ghost = strip;
+
+      await r.tween(220, (p) => {
+        strip.style.opacity = String(Math.min(1, p * 2));
+        a.place(t.x + t.w * p, t.y + Math.sin(p * 12) * 8);
+        if (Math.random() < 0.3) emitParticles(r, a.x, a.y, "#facc15");
       });
-      cart.style.transform = "rotate(0deg)";
+
+      strip.classList.add("is-onion-merged");
       emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#facc15");
-      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#ef4444");
       emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#06b6d4");
-      cart.classList.add("is-tetris-slam");
+      emitParticles(r, t.x + t.w / 2, t.y + t.h / 2, "#f43f5e");
       await r.wait(160);
     } else {
       // 13. Default & Standard Image Reveal
