@@ -1,16 +1,30 @@
 # AAA Swarm 🐝 — Multiplayer "Page Rebuild" Guided Tour
 
-An interactive, high-impact multiplayer cursor rebuild experience for websites, inspired by Dhvanil Patel's iconic portfolio tour. 
+[![Agent Skill Compatible](https://img.shields.io/badge/Agent%20Skill-Claude%20Code%20%7C%20Codex%20%7C%20Antigravity%20%7C%20Cursor-purple.svg)](SKILL.md)
+[![Themes](https://img.shields.io/badge/Themes-12%20Authentic%20Industries-blue.svg)](#-12-authentic-industry-themes)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero%20(Pure%20Vanilla%20JS%2FCSS)-green.svg)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A collaborative flock of labeled agent cursors (`Designer`, `Dev`, `AAA`, `Artist`, `PM`, `3D`, `XR`, etc.) works in real time to assemble your web page piece by piece over a blueprint dot matrix background. The camera smoothly guides visitors down section by section as each is constructed, then glides back to the top once finished.
+An interactive, high-impact multiplayer cursor rebuild experience for modern web applications, inspired by Dhvanil Patel's iconic portfolio tour. 
 
-Zero external dependencies. Pure vanilla JavaScript and CSS.
+A collaborative flock of labeled agent cursors (`Designer`, `Dev`, `AAA`, `Artist`, `PM`, `3D`, `Biochemist`, etc.) works in real time to assemble your web page piece by piece over an authentic blueprint or themed matrix background. The camera smoothly guides visitors down section by section as each is physically constructed, then glides back to the top once finished.
+
+**Zero external dependencies. Pure vanilla JavaScript and CSS.**
+
+---
+
+## 💡 Two Ways to Add Swarm to Your Site
+
+You can integrate AAA Swarm into your website in two ways:
+
+1. [🤖 **As an AI Agent Skill (Automated & Recommended)**](#-way-1-use-as-an-ai-agent-skill-fastest--easiest) — If you use Claude Code, OpenAI Codex, Google Antigravity, Cursor, Windsurf, or OpenCode, the agent installs, configures, and tests the tour in your project automatically.
+2. [🛠️ **Manual Integration with Advanced Options**](#-way-2-manual-integration--advanced-developer-guide) — If you are building manually without an agent or need advanced programmatic control, lifecycle hooks, custom themes, or framework integrations.
 
 ---
 
 ## 🎬 Live Showcase
 
-Experience autonomous agent swarms assembling websites piece-by-piece in real time:
+Experience autonomous agent swarms assembling modern websites live across 12 authentic industry themes:
 
 ![AAA Swarm Guided Tour Preview](assets/swarm-preview.png)
 
@@ -19,21 +33,401 @@ Hover any icon to reveal its industry label; click to instantly rebuild the enti
 
 ![Floating Bottom Theme Switcher Dock](assets/demo-theme-dock.png)
 
-* **Interactive Live Demo**: Open `index.html` locally or visit GitHub Pages.
+* **Interactive Live Demo**: Open `index.html` locally or deploy directly to GitHub Pages (`.nojekyll` included).
 
 ---
 
-## 🛠️ Interactive Configurator & Manual Builder Studio
+## 🤖 Way 1: Use as an AI Agent Skill (Fastest & Easiest)
 
-Want to customize themes or build manually? The demo includes a built-in interactive configurator studio (`#integration`) that generates copy-paste ready code for any stack:
+`aaa-swarm` is formatted as an open **Agent Skill** (`SKILL.md` & `AGENTS.md`). Any AI coding assistant reading your repository can automatically inspect your HTML/React/Vue/Svelte code and install the effect in seconds.
+
+### 1. Install the Skill into Your Agent
+
+Install globally so the skill is available in any terminal or project:
+
+```bash
+# Claude Code (Anthropic)
+git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.claude/skills/aaa-swarm
+
+# OpenAI Codex
+git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.codex/skills/aaa-swarm
+
+# Google Antigravity / Gemini
+git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.gemini/config/skills/aaa-swarm
+
+# OpenCode / OpenHands / Generic Agents
+git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.agents/skills/aaa-swarm
+```
+
+Or copy the `aaa-swarm/` folder into your project's local `.claude/skills/`, `.codex/skills/`, or `.agents/skills/` directory.
+
+### 2. Prompt Your AI Agent
+
+Simply ask your agent:
+
+> *"Add the aaa-swarm guided tour to my website. Use the cyber-nanobots theme locked to my brand and run it once per session."*
+
+### 3. Agent Confirmation Protocol (Mandatory Step 0)
+When invoked, the skill instructs your AI assistant to confirm your preferences before touching any code:
+- **Theme Choice**: Single locked theme (e.g. `cyber-nanobots` for AI, `construction` for hardware, `kitchen` for dining) vs. Multi-Theme Dock with floating bottom switcher vs. Mixed themes per section (`data-swarm-theme`).
+- **Trigger & Frequency**: Run automatically on load, run once per session (`oncePerSession: true`), or trigger on button click.
+- **Framework**: Vanilla HTML, React/Next.js, Vue/Nuxt, Svelte/SvelteKit, or Astro.
+
+The agent copies `assets/swarm.js` and `assets/swarm.css`, links them with proper SSR/hydration guards, and verifies the tour runs smoothly with zero layout reflow.
+
+---
+
+## 🛠️ Way 2: Manual Integration & Advanced Developer Guide
+
+If you prefer to integrate Swarm manually without an AI agent, or require advanced customizations, follow this complete developer reference.
+
+### 1. Copy Assets into Your Project
+
+Download or copy `assets/swarm.css` and `assets/swarm.js` into your project:
+
+```bash
+my-project/
+├── css/
+│   └── swarm.css     # Swarm visual styles & 12 theme themes
+├── js/
+│   └── swarm.js      # UMD/SSR-safe tour engine
+└── index.html        # Your page
+```
+
+### 2. Include in Your HTML / Template
+
+Include `swarm.css` in your `<head>`:
+```html
+<link rel="stylesheet" href="css/swarm.css">
+```
+
+Include `swarm.js` before the closing `</body>`:
+```html
+<script defer src="js/swarm.js"></script>
+```
+
+### 3. Mark Sections for Guided Tour
+
+Ensure the content you want reconstructed is wrapped inside `<section>` elements (or elements with `data-swarm-section`):
+
+```html
+<main id="main">
+  <section id="hero">
+    <h1>Autonomous Guided Tour</h1>
+    <p>Watch your page construct in real time.</p>
+  </section>
+
+  <section id="features">
+    <h2>Core Features</h2>
+    <div class="card">Feature 1</div>
+    <div class="card">Feature 2</div>
+  </section>
+
+  <section id="pricing">
+    <h2>Simple Pricing</h2>
+    <div class="pricing-card">Pro Plan - $29/mo</div>
+  </section>
+</main>
+```
+
+### 4. Basic Initialization
+
+```javascript
+window.addEventListener("DOMContentLoaded", () => {
+  // Allow fonts and WebGL / layout to settle baseline geometry
+  setTimeout(() => {
+    if (window.Swarm) {
+      window.Swarm.init({
+        root: "main",
+        theme: "cyber-nanobots",
+        themes: ["cyber-nanobots"], // Locking to 1 theme hides switcher dock
+        oncePerSession: true        // Don't interrupt returning visitors
+      });
+    }
+  }, 100);
+});
+```
+
+---
+
+## ⚙️ Advanced Configuration Options & Full API
+
+The engine exposes a global `window.Swarm` object (also exported as a UMD / CommonJS / ES-compatible module):
+
+```typescript
+const instance = window.Swarm.init(options);
+```
+
+### Full Options Reference
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `root` | `string \| HTMLElement` | `"main"` | Selector or DOM element to snapshot (supports React `ref.current` / Vue `ref.value`). |
+| `theme` | `string` | `"default"` | Active initial theme ID (e.g. `"cyber-nanobots"`, `"construction"`, `"science"`). |
+| `themes` | `Array<string>` | `null` (All) | Whitelist of allowed themes. **Passing an array with 1 theme locks the site and completely hides the theme switcher UI.** |
+| `showDock` | `boolean \| "auto"` | `"auto"` | Controls the floating bottom icon dock (`true`, `false`, or `"auto"`: visible when >1 theme). |
+| `showToolbar` | `boolean` | `true` | Controls floating status HUD pill with speed toggle, live step counter, and skip button. |
+| `speed` | `1 \| 2 \| 3` | `1` | Initial speed multiplier (`1×`, `2×`, or `3×`). |
+| `agents` | `number` | `8` (desk) / `4` (mob) | Concurrent worker cursors (`3` to `12`). Automatically scales down on screens `<= 640px`. |
+| `oncePerSession` | `boolean` | `false` | When `true`, records completion in `sessionStorage` and skips rebuild on subsequent navigations. |
+| `sectionSelector` | `string` | `"section, [data-swarm-section]"` | CSS selector identifying tour stops. |
+| `onComplete` | `Function` | `null` | Callback executed when all sections finish assembling and camera glides back to `(0,0)`. |
+
+### Advanced Methods & Programmatic Lifecycle
+
+```javascript
+// 1. Check if rebuild is actively in progress
+if (window.Swarm.isRunning()) {
+  console.log("Tour active!");
+}
+
+// 2. Skip tour instantly (unveils all pending DOM elements immediately)
+window.Swarm.skip();
+
+// 3. Replay tour with custom runtime options
+window.Swarm.replay({
+  theme: "construction",
+  speed: 2,
+  agents: 10
+});
+
+// 4. Switch theme dynamically at runtime
+window.Swarm.setTheme("science");
+
+// 5. Jump tour directly to a specific section by element ID
+window.Swarm.triggerSectionById("pricing");
+
+// 6. Complete cleanup (tears down canvases, overlays, docks, and event listeners)
+window.Swarm.destroy();
+```
+
+---
+
+## 🎨 Advanced Customization Techniques
+
+### 1. Mixed Themes Per Section (`data-swarm-theme`)
+You can mix themes across sections! Add `data-swarm-theme` to any section to override the global theme for that specific part of your page:
+
+```html
+<main id="main">
+  <!-- Hero constructs with AI Cyber Nanobots -->
+  <section id="hero" data-swarm-theme="cyber-nanobots">
+    <h1>Next-Gen Cloud AI</h1>
+  </section>
+
+  <!-- Architecture constructs with Scaffolding & Blowtorches -->
+  <section id="infra" data-swarm-theme="construction">
+    <h2>Heavy Infrastructure</h2>
+  </section>
+
+  <!-- Research constructs with Molecular Discovery Titration -->
+  <section id="research" data-swarm-theme="science">
+    <h2>Biotech Research</h2>
+  </section>
+</main>
+```
+
+### 2. Register Custom Brand Themes (`Swarm.registerTheme`)
+Define your own fully branded theme with custom cursor names, palette colors, tools, and dimensions without editing library source files:
+
+```javascript
+window.Swarm.registerTheme("my-fintech", {
+  id: "my-fintech",
+  label: "Apex Fintech",
+  emoji: "💳",
+  subtitle: "High-Frequency Blockchain Settlement",
+  names: ["Ledger-01", "Validator", "SmartContract", "SecOps"],
+  colors: ["#10b981", "#06b6d4", "#3b82f6", "#6366f1"],
+  renderIcon: (tool) => tool === "pen" ? "🖋️" : "💼",
+  dimensionUnit: (w, h) => `💰 $${Math.round(w * h * 12)} [VOLUME]`,
+  statusPrefix: "Auditing & Minting",
+  speedScale: 0.9,
+  boxClass: "is-wireframe"
+});
+
+// Initialize with your new theme
+window.Swarm.init({ theme: "my-fintech", themes: ["my-fintech"] });
+```
+
+### 3. Exclude Fixed Headers, Modals & Audio Players
+Elements that should remain visible and un-snapshotted during the rebuild (such as fixed navigation headers, floating chats, or background audio widgets) can either:
+- Be placed **outside** the `<main>` container root.
+- Or carry the class `.swarm-no-tour`:
+
+```html
+<header class="navbar swarm-no-tour">
+  <a href="/">Brand Logo</a>
+  <button onclick="window.Swarm.replay()">🔄 Replay Tour</button>
+</header>
+```
+
+### 4. Custom Section Labels in Status HUD
+By default, the status pill derives section names from their `id` or headings. You can explicitly set friendly names via `aria-label`:
+
+```html
+<section id="sec-3" aria-label="Enterprise Security Architecture">
+  <!-- The status HUD will display: "Constructing Enterprise Security Architecture..." -->
+</section>
+```
+
+---
+
+## ⚛️ Framework Integration Recipes
+
+### React 18 / 19 & Next.js (App Router or Pages)
+
+```tsx
+"use client";
+
+import { useEffect, useRef } from "react";
+import Script from "next/script";
+
+export default function LandingPage() {
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    let tourInstance: any = null;
+
+    const startTour = () => {
+      if (typeof window !== "undefined" && (window as any).Swarm && mainRef.current) {
+        tourInstance = (window as any).Swarm.init({
+          root: mainRef.current,
+          theme: "cyber-nanobots",
+          themes: ["cyber-nanobots"],
+          oncePerSession: true
+        });
+      }
+    };
+
+    if (document.readyState === "complete") {
+      startTour();
+    } else {
+      window.addEventListener("DOMContentLoaded", startTour);
+    }
+
+    return () => {
+      if (tourInstance) tourInstance.destroy();
+      else if ((window as any).Swarm) (window as any).Swarm.destroy();
+    };
+  }, []);
+
+  return (
+    <>
+      <link rel="stylesheet" href="/css/swarm.css" />
+      <Script src="/js/swarm.js" strategy="afterInteractive" />
+
+      <main ref={mainRef}>
+        <section id="hero">...</section>
+        <section id="features">...</section>
+      </main>
+    </>
+  );
+}
+```
+
+### Vue 3 & Nuxt 3 (Composition API)
+
+```vue
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+
+const mainRoot = ref(null);
+let tour = null;
+
+onMounted(() => {
+  if (typeof window !== "undefined" && window.Swarm && mainRoot.value) {
+    tour = window.Swarm.init({
+      root: mainRoot.value,
+      theme: "construction",
+      themes: ["construction"],
+      oncePerSession: true
+    });
+  }
+});
+
+onBeforeUnmount(() => {
+  if (tour) tour.destroy();
+});
+</script>
+
+<template>
+  <main ref="mainRoot">
+    <section id="hero">...</section>
+    <section id="showcase">...</section>
+  </main>
+</template>
+```
+
+### Svelte 5 / SvelteKit
+
+```svelte
+<script>
+  import { onMount, onDestroy } from "svelte";
+
+  let mainRoot;
+  let tour;
+
+  onMount(() => {
+    if (typeof window !== "undefined" && window.Swarm && mainRoot) {
+      tour = window.Swarm.init({
+        root: mainRoot,
+        theme: "science",
+        themes: ["science"]
+      });
+    }
+  });
+
+  onDestroy(() => {
+    if (tour) tour.destroy();
+  });
+</script>
+
+<svelte:head>
+  <link rel="stylesheet" href="/css/swarm.css" />
+  <script defer src="/js/swarm.js"></script>
+</svelte:head>
+
+<main bind:this={mainRoot}>
+  <section id="hero">...</section>
+  <section id="discovery">...</section>
+</main>
+```
+
+### Astro
+
+```astro
+---
+// src/pages/index.astro
+---
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/css/swarm.css" />
+  </head>
+  <body>
+    <main id="main">
+      <section id="hero">...</section>
+      <section id="pricing">...</section>
+    </main>
+
+    <script is:inline src="/js/swarm.js"></script>
+    <script is:inline>
+      window.addEventListener("DOMContentLoaded", () => {
+        if (window.Swarm) {
+          window.Swarm.init({ root: "main", theme: "cyber-nanobots" });
+        }
+      });
+    </script>
+  </body>
+</html>
+```
+
+---
+
+## 🛠️ Interactive Configurator Studio
+
+Need an instant snippet for your stack? The demo page includes an interactive **Configurator & Framework Studio** (`#integration`) that lets you configure options, test them live, and copy production-ready code:
 
 ![Interactive Configurator & Framework Studio](assets/demo-builder-studio.png)
-
-- **1 or Many Themes Picker**: Toggle between **Single Locked Theme** (hides theme switcher for a pristine branded experience), **Multi-Theme Dock** (pick 2–12 themes), or **All 12 Themes**.
-- **Fine-Grained Runtime Options**: Toggle floating dock, status toolbar HUD, run once-per-session (`sessionStorage`), speed multipliers (1× / 2× / 3×), and agent worker count.
-- **6 Framework Code Generators**: Instant drop-in snippets for **Vanilla HTML / CDN**, **React / Next.js**, **Vue 3 / Nuxt 3**, **Svelte / SvelteKit**, **Astro**, and **🤖 AI Agent Prompt**.
-- **Test Live**: Click `▶️ Test Live` to immediately preview your custom options right on the demo page.
-- **1-Click Downloads**: Direct links to download standalone `swarm.js` and `swarm.css`.
 
 ---
 
@@ -76,9 +470,8 @@ Quantum collider discovery beam sweeps across, generating molecular synthesis re
 
 ---
 
-## ✨ Features
+## ✨ Features & Architecture Guardrails
 
-- **🎨 Multi-Theme Rebuild Framework**: Switch instantly between digital product UI design cursors (`default`) and heavy industrial builders (`construction`), or plug in custom themes with `Swarm.registerTheme()`.
 - **📐 CAD Blueprint & Hazard Stripe Canvas**: Authentic blueprint grid background with metric scales, technical stamps, and perimeter hazard warning stripes (`#f59e0b` / `#1e293b`).
 - **🛠️ 5 Complete Physical Assembly Phases (Radically Customized Across 12 Themes)**:
   - **`dragBox` (Layout Framing)**: Rising scaffolding vertical poles (`construction`), figure-8 honeycomb wax bloom (`beehive`), pheromone trench haul (`ant-colony`), dual drone laser scanbar sweep (`cyber-nanobots`), fabric bolt unroll (`atelier`), kraft tape carton dispensing (`warehouse`), voxel tile pop (`voxel-craft`), rolling pin dough flattening (`kitchen`), diagonal wheatpaste strokes (`street-art`), movable-type chase frame clamp (`press-room`), quantum collider discovery sweep with electron orbital rings (`science`).
@@ -116,298 +509,8 @@ aaa-swarm/
 │   └── swarm.js          # UMD/SSR-safe tour engine & multi-agent physics
 ├── SKILL.md              # Open Agent Skills standard specification (Claude Code, Codex, Antigravity)
 ├── AGENTS.md             # Multi-agent guideline specification (OpenCode, Codex, Aider)
-└── README.md             # Project guide and documentation
+└── README.md             # Comprehensive guide, skill usage & advanced manual reference
 ```
-
----
-
-## 🤖 Universal AI Agent Compatibility
-
-`aaa-swarm` is built on the open **Agent Skills specification** (`SKILL.md` format), making it natively cross-compatible with all major AI coding agents:
-
-| AI Coding Assistant | Configuration Location | How to Invoke |
-|---|---|---|
-| **Claude Code** (Anthropic) | `~/.claude/skills/aaa-swarm` or `.claude/skills/` | Type `/aaa-swarm` or ask Claude to "add swarm guided tour" |
-| **Codex** (OpenAI) | `~/.codex/skills/aaa-swarm` or `.codex/skills/` | Prompt Codex to "implement swarm guided rebuild tour" |
-| **OpenCode & OpenHands** | `~/.agents/skills/aaa-swarm` or reads `AGENTS.md` | Auto-detected via skill loader or `AGENTS.md` |
-| **Google Antigravity / Gemini** | `~/.gemini/config/skills/aaa-swarm` | Type `/aaa-swarm` |
-| **Cursor & Windsurf** | Referenced in `.cursorrules` or `.windsurfrules` | Prompt Composer/Cascade: "implement aaa-swarm tour" |
-
-### ⚡ 1-Liner Installation Across Any Agent
-
-Install globally for your favorite agent:
-
-```bash
-# Claude Code (Anthropic)
-git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.claude/skills/aaa-swarm
-
-# OpenAI Codex
-git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.codex/skills/aaa-swarm
-
-# Google Antigravity / Gemini
-git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.gemini/config/skills/aaa-swarm
-
-# OpenCode / OpenHands / Generic Agents
-git clone https://github.com/theaaa-studio/aaa-swarm.git ~/.agents/skills/aaa-swarm
-```
-
-For project-level skills, drop `aaa-swarm/` into your project's `.claude/skills/`, `.codex/skills/`, or `.agents/skills/` folder. Any AI agent reading your repository will immediately know how to inspect, adapt, and build the tour!
-
----
-
-## 🚀 Quick Start (2 Minutes)
-
-### 1. Copy Assets into Your Project
-
-Copy `assets/swarm.css` and `assets/swarm.js` into your project's static assets directory:
-
-```bash
-# Example directory layout
-my-website/
-├── css/
-│   └── swarm.css
-├── js/
-│   └── swarm.js
-└── index.html
-```
-
-### 2. Link in HTML
-
-Include `swarm.css` in your `<head>`:
-
-```html
-<!-- Swarm Rebuild Stylesheet -->
-<link rel="stylesheet" href="css/swarm.css">
-```
-
-Include `swarm.js` before the closing `</body>`:
-
-```html
-<!-- Swarm Rebuild Engine -->
-<script defer src="js/swarm.js"></script>
-```
-
-### 3. Initialize on DOM Ready
-
-Ensure your page sections are structured using `<section>` tags inside `<main>` (or another container root):
-
-```html
-<main id="main">
-  <section id="hero">
-    <h1>Welcome to My Site</h1>
-    <p>Designing modern digital experiences.</p>
-  </section>
-
-  <section id="about">
-    <h2>About Me</h2>
-    <div class="card">UX / UI Designer based in Dhaka</div>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project-card">Project One</div>
-    <div class="project-card">Project Two</div>
-  </section>
-</main>
-
-<script>
-  window.addEventListener("DOMContentLoaded", function () {
-    // Optional short delay (e.g. 100ms) to allow WebGL / fonts to settle baseline geometry
-    setTimeout(function () {
-      if (window.Swarm) {
-        // Available themes: "default" | "construction"
-        window.Swarm.init({ root: "main", agents: 10, theme: "construction" });
-      }
-    }, 100);
-  });
-</script>
-```
-
----
-
-## 🕹️ Public API & Configuration Options
-
-The engine attaches a global `window.Swarm` object and exports UMD/CJS modules:
-
-| Method / Option | Type | Default | Description |
-|---|---|---|---|
-| `Swarm.init(options)` | `Object` | `{}` | Initializes run, snapshots DOM, starts guided scroll tour. Returns `{ run, destroy }` |
-| `options.root` | `string \| HTMLElement` | `"main"` | Selector or DOM element (React `useRef.current` / Vue `ref.value`) |
-| `options.theme` | `string` | `"default"` | Active starting theme ID |
-| `options.themes` | `Array<string>` | `null` (All) | Array of enabled themes. **If only 1 theme, site is locked and theme switcher dock is hidden!** |
-| `options.showDock` | `boolean \| "auto"` | `"auto"` | Floating bottom icon dock (`true`, `false`, or `"auto"`: shown when >1 theme) |
-| `options.showToolbar` | `boolean` | `true` | Floating status / speed / skip pill |
-| `options.speed` | `1 \| 2 \| 3` | `1` | Initial speed multiplier |
-| `options.agents` | `number` | `8` (desk) / `4` (mob) | Worker cursor agents count |
-| `options.oncePerSession` | `boolean` | `false` | When `true`, saves completion in `sessionStorage` and skips on subsequent visits |
-| `options.sectionSelector` | `string` | `"section, [data-swarm-section]"` | Selector for tour sections |
-| `options.onComplete` | `Function` | `null` | Callback executed when tour returns to top |
-| `Swarm.destroy()` | `Function` | *None* | Tears down active run, removes overlays, canvases, docks, and event listeners |
-| `Swarm.play(options)` | `Function` | `opts` | Alias for `init(options)` |
-| `Swarm.setTheme(name)` | `Function` | `name` | Switches active theme and restarts tour |
-| `Swarm.getTheme()` | `Function` | *None* | Returns active theme identifier |
-| `Swarm.getThemes()` | `Function` | *None* | Returns array of available themes |
-| `Swarm.skip()` | `Function` | *None* | Cancels tour, unveils all pending elements, restores regular browsing |
-| `Swarm.replay(options)` | `Function` | `opts` | Cleans up current run, scrolls to top, and runs fresh tour with options |
-| `Swarm.triggerSectionById(id)` | `Function` | `sectionId` | Jumps tour directly to a specific section by element ID |
-| `Swarm.isRunning()` | `Function` | *None* | Returns `true` if tour/rebuild is actively in progress |
-
-### ⌨️ Keyboard Shortcuts
-
-- **`Escape`**: Instantly skips the animation and unveils all sections.
-- **`Alt + Shift + S`**: Restarts the rebuild tour from the top.
-
----
-
-## 🔄 Adding a "Rebuild Tour" Button
-
-You can place a replay button anywhere in your navigation dock, mobile menu, or footer:
-
-```html
-<!-- Header Navigation or Footer Replay Button -->
-<button type="button" class="btn-rebuild" onclick="window.Swarm && window.Swarm.replay()" title="Rebuild Guided Tour (Alt+Shift+S)">
-  <i class="fas fa-magic"></i> Rebuild Tour
-</button>
-```
-
----
-
-## ⚙️ Customization
-
-### 1. Custom Agent Names and Colors
-
-Open `assets/swarm.js` and modify the `NAMES` and `COLORS` arrays at lines 23–24:
-
-```javascript
-const NAMES = [
-  "Designer", "Dev", "AAA", "Artist", "XR", 
-  "QA", "Tech Art", "PM", "Frontend", "3D"
-];
-
-const COLORS = [
-  "#6d28d9", // Purple
-  "#0891b2", // Cyan
-  "#e11d48", // Rose
-  "#16a34a", // Green
-  "#f59e0b", // Amber
-  "#2563eb"  // Blue
-];
-```
-
-### 2. Friendly Section Names in the Status Pill
-
-`swarm.js` includes a `friendlyName(section)` helper that determines what text appears in the floating progress pill (e.g. *"Building About..."*).
-
-It automatically checks:
-1. Hardcoded ID lookups (`home` → *"Hero"*, `technology` → *"Tech Stack"*).
-2. The section's `aria-label` attribute.
-3. The first `<h1>`, `<h2>`, or `<h3>` heading inside the section.
-4. Falls back to formatting the element ID.
-
-You can add custom aliases directly:
-
-```javascript
-function friendlyName(section) {
-  const id = section.id || "";
-  if (id === "case-studies") return "Client Case Studies";
-  if (id === "pricing") return "Plans & Pricing";
-  // ...
-}
-```
-
-### 3. Exclude Specific Elements from Being Hidden
-
-If there are elements that must **always** remain visible during the tour (e.g., a sticky navigation bar or fixed background audio player), ensure they live **outside** the `<main>` root passed to `Swarm.init({ root: "main" })`, or add CSS:
-
-```css
-.my-fixed-navbar {
-  z-index: 10001 !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-```
-
----
-
-## ⚛️ Framework Integration
-
-### React / Next.js (App Router or Pages)
-
-```tsx
-"use client";
-
-import { useEffect } from "react";
-import Script from "next/script";
-
-export default function Page() {
-  useEffect(() => {
-    const handleLoaded = () => {
-      if (typeof window !== "undefined" && (window as any).Swarm) {
-        (window as any).Swarm.init({ root: "main", agents: 8 });
-      }
-    };
-
-    window.addEventListener("DOMContentLoaded", handleLoaded);
-    // If already loaded:
-    if (document.readyState === "complete") handleLoaded();
-
-    return () => {
-      if (typeof window !== "undefined" && (window as any).Swarm?.isRunning()) {
-        (window as any).Swarm.skip();
-      }
-    };
-  }, []);
-
-  return (
-    <>
-      <link rel="stylesheet" href="/css/swarm.css" />
-      <Script src="/js/swarm.js" strategy="afterInteractive" />
-
-      <main id="main">
-        <section id="hero">...</section>
-        <section id="work">...</section>
-      </main>
-    </>
-  );
-}
-```
-
-### Vue 3 / Nuxt
-
-```vue
-<script setup>
-import { onMounted, onBeforeUnmount } from "vue";
-
-onMounted(() => {
-  if (window.Swarm) {
-    window.Swarm.init({ root: "main" });
-  }
-});
-
-onBeforeUnmount(() => {
-  if (window.Swarm?.isRunning()) {
-    window.Swarm.skip();
-  }
-});
-</script>
-```
-
----
-
-## 🧠 Architectural Principles
-
-When extending or maintaining this project:
-
-1. **Sequential Guided Scroll vs Blind Viewport Queueing**:
-   - `runTour()` sequentially scrolls each `<section>` into view, waits for the viewport arrival transition (`~400ms`), and only then builds that section.
-   - Never use blind `IntersectionObserver` triggers with auto-scroll: tall screens (1440p+) or fast monitors would trigger lower sections prematurely before the viewer scrolls down.
-2. **Exclude Layout Containers**:
-   - Container elements (`.container`, `.row`, `.col`, `.grid`, `.wrapper`) are omitted from snapshot card-drawing to avoid drawing massive empty frames that block child components.
-3. **Pacing and Velocity**:
-   - Agent travel speed is scaled: `2200px/s * getSpeed()`.
-   - Box drag duration: `90ms - 190ms`.
-   - Pen border duration: `100ms - 210ms`.
-   - Typewriter typing duration: `65ms - 250ms`.
 
 ---
 
